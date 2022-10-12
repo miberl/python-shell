@@ -3,10 +3,11 @@ import sys
 import os
 from collections import deque
 from glob import glob
-import apps.apps as apps
 
-appList = {'pwd': apps.pwd, 'cd': apps.cd, 'echo': apps.echo, 'ls': apps.ls,
-           'cat': apps.cat, 'head': apps.head, 'tail': apps.tail, 'grep': apps.grep}
+from apps import he
+
+# appList = {'pwd': Pwd(), 'cd': Cd(), 'echo': Echo(), 'ls': Ls(),
+#            'cat': Cat(), 'head': Head(), 'tail': apps.tail, 'grep': apps}
 
 
 def eval(cmdline, out):
