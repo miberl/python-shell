@@ -4,10 +4,8 @@ import os
 from collections import deque
 from glob import glob
 
-from apps import he
-
-# appList = {'pwd': Pwd(), 'cd': Cd(), 'echo': Echo(), 'ls': Ls(),
-#            'cat': Cat(), 'head': Head(), 'tail': apps.tail, 'grep': apps}
+appList = {'pwd': Pwd(), 'cd': Cd(), 'echo': Echo(), 'ls': Ls(),
+           'cat': Cat(), 'head': Head(), 'tail': apps.tail, 'grep': apps}
 
 
 def eval(cmdline, out):
