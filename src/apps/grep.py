@@ -1,4 +1,5 @@
 from application import Application
+from re import match
 
 
 class Grep(Application):
@@ -11,7 +12,7 @@ class Grep(Application):
             with open(file) as f:
                 lines = f.readlines()
                 for line in lines:
-                    if re.match(pattern, line):
+                    if match(pattern, line):
                         if len(files) > 1:
                             out.append(f"{file}:{line}")
                         else:

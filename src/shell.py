@@ -1,11 +1,13 @@
 import re
 import sys
-import os
+from os import getcwd, listdir, path
 from collections import deque
 from glob import glob
 
-appList = {'pwd': Pwd(), 'cd': Cd(), 'echo': Echo(), 'ls': Ls(),
-           'cat': Cat(), 'head': Head(), 'tail': apps.tail, 'grep': apps}
+from apps import cat, cd, echo, grep, head, ls, pwd, tail
+
+appList = {'cat': cat.Cat(), 'cd': cd.Cd(), 'echo': echo.Echo(), 'grep': grep.Grep(
+), 'head': head.Head(), 'ls': ls.Ls(), 'pwd': pwd.Pwd(), 'tail': tail.Tail}
 
 
 def eval(cmdline, out):
@@ -29,7 +31,7 @@ def eval(cmdline, out):
         args = tokens[1:]
 
         if app in appList:
-            appList[app](args, out)
+            appList[app].run(args, out)
         else:
             raise ValueError(f"unsupported application {app}")
 
@@ -37,17 +39,17 @@ def eval(cmdline, out):
 if __name__ == "__main__":
     args_num = len(sys.argv) - 1
     if args_num > 0:
+        out = deque()
         if args_num != 2:
             raise ValueError("wrong number of command line arguments")
         if sys.argv[1] != "-c":
             raise ValueError(f"unexpected command line argument {sys.argv[1]}")
-        out = deque()
         eval(sys.argv[2], out)
         while len(out) > 0:
             print(out.popleft(), end="")
     else:
         while True:
-            print(os.getcwd() + "> ", end="")
+            print(getcwd() + "> ", end="")
             cmdline = input()
             out = deque()
             eval(cmdline, out)

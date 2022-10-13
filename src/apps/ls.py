@@ -1,10 +1,11 @@
 from application import Application
+from os import listdir, getcwd
 
 
 class Ls(Application):
     def run(self, args, out) -> None:
         if len(args) == 0:
-            ls_dir = os.getcwd()
+            ls_dir = getcwd()
         elif len(args) > 1:
             raise ValueError("wrong number of command line arguments")
         else:
