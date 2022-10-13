@@ -19,7 +19,8 @@ jobs:
   build:
     env:    
       PYTHONPATH: src:test
-   
+      DOCKER_TEST_IMAGE_TAG: comp0010-test-image
+      
     runs-on: ubuntu-latest
 
     steps:
@@ -33,10 +34,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Context
-        run: echo $(ls)
-      - name: Docker check
-        run: echo $(docker --version)
+      - name: Build Testing Image
+        run: docker build -t $DOCKER_TEST_IMAGE_TAG .
       - name: Test
         run: |
           pytest test/
