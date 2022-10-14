@@ -7,7 +7,7 @@ from glob import glob
 from apps import cat, cd, echo, grep, head, ls, pwd, tail
 
 appList = {'cat': cat.Cat(), 'cd': cd.Cd(), 'echo': echo.Echo(), 'grep': grep.Grep(
-), 'head': head.Head(), 'ls': ls.Ls(), 'pwd': pwd.Pwd(), 'tail': tail.Tail}
+), 'head': head.Head(), 'ls': ls.Ls(), 'pwd': pwd.Pwd(), 'tail': tail.Tail()}
 
 
 def eval(cmdline, out):
