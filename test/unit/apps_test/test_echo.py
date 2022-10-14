@@ -57,6 +57,16 @@ class TestEcho(unittest.TestCase):
         self.assertEqual(self.out.popleft(), "foo bar bar foo\n")
         self.assertEqual(len(self.out), 0)
 
+    def test_echo_multiple_doublespace_separated_args(self):
+        self.echo.run(["foo  bar", "bar  foo"], self.out)
+        self.assertEqual(self.out.popleft(), "foo  bar bar  foo\n")
+        self.assertEqual(len(self.out), 0)
+
+    def test_echo_multiple_space_and_doublespace_separated_args(self):
+        self.echo.run(["foo bar", "bar  foo"], self.out)
+        self.assertEqual(self.out.popleft(), "foo bar bar  foo\n")
+        self.assertEqual(len(self.out), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

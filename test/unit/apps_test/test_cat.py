@@ -25,6 +25,13 @@ class TestCat(TestSetup):
         res = [str(x) for x in range(1, 21)]
         self.run_test("cat dir1/longfile.txt", res)
 
+    def test_cat_hidden(self):
+        self.run_test("cat dir1/subdir/.hidden", ["secret"])
+
+    def test_cat_hidden_2(self):
+        self.run_test("cat dir1/subdir/.hidden dir1/file1.txt",
+                      ["secret", "AAA", "BBB", "AAA"])
+
 
 if __name__ == "__main__":
     unittest.main()

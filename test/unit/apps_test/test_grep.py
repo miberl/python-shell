@@ -26,3 +26,9 @@ class TestGrep(TestSetup):
 
     def test_grep_no_matches_multiple_files(self):
         self.run_test("grep DDD dir1/file1.txt dir1/file2.txt", [""])
+
+    def test_grep_no_matches_subdir(self):
+        self.run_test("grep DDD dir2/subdir/file.txt", [""])
+
+    def test_grep_no_matches_subdir_multiple_files(self):
+        self.run_test("grep DDD dir1/file1.txt dir2/subdir/file.txt", [""])
