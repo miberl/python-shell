@@ -6,11 +6,6 @@ from apps.cat import Cat
 
 
 class TestCat(TestSetup):
-    def setUp(self):
-        super().setUp()
-        self.cat = Cat()
-        self.out = deque()
-
     def test_cat(self):
         self.run_test("cat dir1/file1.txt dir1/file2.txt",
                       ["AAA", "BBB", "AAA", "CCC"])
