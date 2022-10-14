@@ -1,5 +1,6 @@
 import unittest
 
+from setup_test import TestSetup
 from collections import deque
 from apps.echo import Echo
 
@@ -10,8 +11,7 @@ class TestEcho(unittest.TestCase):
         self.echo = Echo()
 
     def test_echo_empty_args(self):
-        echo = Echo()
-        echo.run([""], self.out)
+        self.echo.run([""], self.out)
         self.assertEqual(self.out.popleft(), "\n")
         self.assertEqual(len(self.out), 0)
 
