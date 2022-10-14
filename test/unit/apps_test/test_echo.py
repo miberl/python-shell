@@ -10,7 +10,8 @@ class TestEcho(unittest.TestCase):
         self.echo = Echo()
 
     def test_echo_empty_args(self):
-        self.echo.run([""], self.out)
+        echo = Echo()
+        echo.run([""], self.out)
         self.assertEqual(self.out.popleft(), "\n")
         self.assertEqual(len(self.out), 0)
 
