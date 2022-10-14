@@ -56,6 +56,7 @@ class TestSetup(unittest.TestCase):
                 "echo aaa >> dir2/subdir/file.txt",
                 "echo AAA >> dir2/subdir/file.txt",
                 "echo secret >> dir1/subdir/.hidden",
+                "echo secret >> dir1/subdir/normal",
             ]
         )
         self.eval(filesystem_setup, shell="/bin/bash")
