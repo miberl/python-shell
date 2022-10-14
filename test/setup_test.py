@@ -67,3 +67,8 @@ class TestSetup(unittest.TestCase):
         if p.returncode != 0:
             print("error: failed to remove test volume")
             exit(1)
+
+    def run_test(self, cmd, result):
+        stdout = self.eval(cmd)
+        res = stdout.strip().split("\n")
+        self.assertEqual(res, result)
