@@ -1,8 +1,6 @@
 import unittest
 
 from setup_test import TestSetup
-from collections import deque
-from apps.cat import Cat
 
 
 class TestCat(TestSetup):
