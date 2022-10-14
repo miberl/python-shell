@@ -17,10 +17,10 @@ permissions: read-all
 
 jobs:
   build:
-    env:    
+    env:
       PYTHONPATH: src:test
-      DOCKER_TEST_IMAGE_TAG: comp0010-test-image
-      
+      DOCKER_TEST_IMAGE_TAG: comp0010-test
+
     runs-on: ubuntu-latest
 
     steps:
@@ -36,6 +36,6 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build Testing Image
         run: docker build -t $DOCKER_TEST_IMAGE_TAG .
-      - name: Test
+      - name: Run tests
         run: |
           pytest test/
