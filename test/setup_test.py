@@ -45,7 +45,7 @@ class TestSetup(unittest.TestCase):
         filesystem_setup = ";".join(
             [
                 "echo \"''\" > test.txt",
-                "mkdir dir1",
+                "mkdir -p dir1/subdir",
                 "mkdir -p dir2/subdir",
                 "echo AAA > dir1/file1.txt",
                 "echo BBB >> dir1/file1.txt",
@@ -55,7 +55,7 @@ class TestSetup(unittest.TestCase):
                 "echo AAA > dir2/subdir/file.txt",
                 "echo aaa >> dir2/subdir/file.txt",
                 "echo AAA >> dir2/subdir/file.txt",
-                "touch dir1/subdir/.hidden",
+                "echo secret >> dir1/subdir/.hidden",
             ]
         )
         self.eval(filesystem_setup, shell="/bin/bash")
