@@ -68,7 +68,12 @@ class TestSetup(unittest.TestCase):
             print("error: failed to remove test volume")
             exit(1)
 
-    def run_test(self, cmd, result):
+    def run_test(self, cmd, result, split_on_newline=False):
         stdout = self.eval(cmd)
-        res = stdout.strip().split("\n")
+        res = stdout.strip()
+        if split_on_newline:
+            res = res.split('\n')
         self.assertEqual(res, result)
+
+    def run_test_expect_exception(self, cmd, exception=RuntimeError):
+        self.assertRaises(exception, self.eval(cmd))

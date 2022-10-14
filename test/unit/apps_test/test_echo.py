@@ -6,6 +6,8 @@ from apps.echo import Echo
 
 
 class TestEcho(unittest.TestCase):
+    # HAPPY PATHS
+
     def setUp(self) -> None:
         self.out = deque()
         self.echo = Echo()
