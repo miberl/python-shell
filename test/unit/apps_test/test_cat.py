@@ -8,22 +8,22 @@ class TestCat(TestSetup):
 
     def test_cat(self):
         self.run_test("cat dir1/file1.txt",
-                      ["AAA", "BBB", "AAA"], split_on_newline=True)
+                      ["AAA", "BBB", "AAA"])
 
     def test_cat_2(self):
-        self.run_test("cat dir1/file2.txt", ["CCC"], split_on_newline=True)
+        self.run_test("cat dir1/file2.txt", ["CCC"])
 
     def test_cat_multiple_args(self):
         self.run_test("cat dir1/file1.txt dir1/file2.txt",
-                      ["AAA", "BBB", "AAA", "CCC"], split_on_newline=True)
+                      ["AAA", "BBB", "AAA", "CCC"])
 
     def test_cat_subdir(self):
         self.run_test("cat dir2/subdir/file.txt",
-                      ["AAA", "aaa", "AAA"], split_on_newline=True)
+                      ["AAA", "aaa", "AAA"])
 
     def test_cat_longfile(self):
         res = [str(x) for x in range(1, 21)]
-        self.run_test("cat dir1/longfile.txt", res, split_on_newline=True)
+        self.run_test("cat dir1/longfile.txt", res)
 
 
 if __name__ == "__main__":
