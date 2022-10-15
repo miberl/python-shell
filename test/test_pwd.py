@@ -1,8 +1,6 @@
-import unittest
 from unittest.mock import patch
 from setup_test import TestSetup
 from apps.pwd import Pwd
-from setup_test import TestSetup
 
 
 class TestPwd(TestSetup):
