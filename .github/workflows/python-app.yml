@@ -36,6 +36,9 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build Testing Image
         run: docker build -t $DOCKER_TEST_IMAGE_TAG .
-      - name: Run tests
+      - name: Run unit tests
         run: |
           pytest test/
+      - name: Run system integration tests
+        run: |
+          pytest system_test/

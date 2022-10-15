@@ -3,12 +3,14 @@ import unittest
 from setup_test import TestSetup
 from collections import deque
 from apps.echo import Echo
+from setup_test import TestSetup
 
 
-class TestEcho(unittest.TestCase):
+class TestEcho(TestSetup):
     # HAPPY PATHS
 
     def setUp(self) -> None:
+        super().setUp()
         self.out = deque()
         self.echo = Echo()
 
