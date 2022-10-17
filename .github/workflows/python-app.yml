@@ -39,12 +39,7 @@ jobs:
       - name: Run unit tests & get coverage
         run: |
           coverage run --branch -m pytest test/
-      - name: Coverage comment
-        id: coverage_comment
-        uses: py-cov-action/python-coverage-comment-action@v3
-        with:
-          GITHUB_TOKEN: ${{ github.token }}
-
+          coverage report
       - name: Run system integration tests
         run: |
           pytest system_test/
