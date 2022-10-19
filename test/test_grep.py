@@ -20,8 +20,8 @@ class TestGrep(TestSetup):
         self.out = []
         self.grep = Grep()
 
+    # HAPPY PATHS
 
-"""     # # HAPPY PATHS
     def test_grep(self):
         with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
             self.grep.run(["Test", "test.txt"], self.out)
@@ -46,4 +46,3 @@ class TestGrep(TestSetup):
             self.grep.run(["10", "dir1/longfile.txt"], self.out)
             self.assertEqual(
                 self.out, ["10\n"])
- """
