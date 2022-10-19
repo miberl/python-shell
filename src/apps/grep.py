@@ -9,11 +9,23 @@ class Grep(Application):
         pattern = args[0]
         files = args[1:]
         for file in files:
-            with open(file) as f:
-                lines = f.readlines()
-                for line in lines:
-                    if match(pattern, line):
-                        if len(files) > 1:
-                            out.append(f"{file}:{line}")
-                        else:
-                            out.append(line)
+            lines = self.read_lines(file)
+            print(lines)
+            out.extend(self.filter_matching_lines(
+                lines, pattern, file, len(files) > 1))
+
+    # read lines from file
+    def read_lines(self, filename):
+        with open(filename) as f:
+            return f.readlines()
+
+    # filter lines that match pattern
+    def filter_matching_lines(self, lines, pattern, file_name, multiple_files):
+        res = []
+        for line in lines:
+            if match(pattern, line):
+                if multiple_files:
+                    res.append(f"{file_name}:{line}")
+                else:
+                    res.append(line)
+        return res
