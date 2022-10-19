@@ -35,7 +35,7 @@ jobs:
           pip install pytest coverage
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build Testing Image
-        run: docker build -t --no-cache $DOCKER_TEST_IMAGE_TAG .
+        run: docker build -t $DOCKER_TEST_IMAGE_TAG . --no-cache
       - name: Run unit tests & get coverage
         run: |
           coverage run --branch -m pytest test/
