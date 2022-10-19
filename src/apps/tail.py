@@ -14,11 +14,14 @@ class Tail(Application):
 
         self.print_tail_lines(file, num_lines, out)
 
+    def read_lines(self, filename):
+        with open(filename) as f:
+            return f.readlines()
+
     def print_tail_lines(self, file, num_lines, out):
-        with open(file) as f:
-            lines = f.readlines()
-            display_length = self.get_display_length(lines, num_lines)
-            self.print_in_display_range(display_length, lines, out)
+        lines = self.read_lines(file)
+        display_length = self.get_display_length(lines, num_lines)
+        self.print_in_display_range(display_length, lines, out)
 
     def print_in_display_range(self, display_length, lines, out):
         for i in range(0, display_length):

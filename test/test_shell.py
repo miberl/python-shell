@@ -12,5 +12,5 @@ class TestShell(unittest.TestCase):
         self.assertEqual(len(out), 0)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     unittest.main()

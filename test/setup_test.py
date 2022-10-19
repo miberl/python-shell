@@ -1,5 +1,5 @@
 import unittest
-import subprocess
+from unittest.mock import patch
 
 
 class TestSetup(unittest.TestCase):
@@ -8,76 +8,62 @@ class TestSetup(unittest.TestCase):
     TEST_IMAGE = "comp0010-test-image"
     TEST_DIR = "/test"
 
-    @classmethod
-    def eval(cls, cmdline, shell="/comp0010/sh"):
-        volume = cls.TEST_VOLUME + ":" + cls.TEST_DIR + ":"
-        args = [
-            "docker",
-            "run",
-            "--rm",
-            "-v",
-            volume,
-            cls.TEST_IMAGE,
-            shell,
-            "-c",
-            cmdline,
-        ]
-        p = subprocess.run(args, capture_output=True)
-        return p.stdout.decode()
+    # This is a mock of the filesystem
+    mock_fs = {
+        "test.txt": "Test\n",
+        "dir1": {
+            "subdir": {
+                ".hidden": "secret\n",
+                "normal": "secret\n",
+            },
+            "file1.txt": "AAA\nBBB\nAAA\n",
+            "file2.txt": "CCC\n",
+            "longfile.txt": "\n".join([str(i) for i in range(1, 21)]) + "\n",
+        },
+        "dir2": {
+            "subdir": {
+                "file.txt": "AAA\naaa\nAAA\n",
+            },
+        },
+    }
 
     @classmethod
-    def setUpClass(cls):
-        dockerfile = ("FROM " + cls.SHELL_IMAGE +
-                      "\nWORKDIR " + cls.TEST_DIR).encode()
-        args = ["docker", "build", "-t", cls.TEST_IMAGE, "-"]
-        p = subprocess.run(args, input=dockerfile, stdout=subprocess.DEVNULL)
-        if p.returncode != 0:
-            print("error: failed to build test image")
-            exit(1)
+    def mock_read_file(self, file_path):
+        return TestSetup.fetch_file_from_fs(file_path)
 
-    def setUp(self):
-        p = subprocess.run(
-            ["docker", "volume", "create", self.TEST_VOLUME], stdout=subprocess.DEVNULL
-        )
-        if p.returncode != 0:
-            print("error: failed to create test volume")
-            exit(1)
-        filesystem_setup = ";".join(
-            [
-                "echo \"''\" > test.txt",
-                "mkdir -p dir1/subdir",
-                "mkdir -p dir2/subdir",
-                "echo AAA > dir1/file1.txt",
-                "echo BBB >> dir1/file1.txt",
-                "echo AAA >> dir1/file1.txt",
-                "echo CCC > dir1/file2.txt",
-                "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
-                "echo AAA > dir2/subdir/file.txt",
-                "echo aaa >> dir2/subdir/file.txt",
-                "echo AAA >> dir2/subdir/file.txt",
-                "echo secret >> dir1/subdir/.hidden",
-                "echo secret >> dir1/subdir/normal",
-            ]
-        )
-        self.eval(filesystem_setup, shell="/bin/bash")
+    @classmethod
+    def mock_read_lines(self, file_path):
+        lines = TestSetup.fetch_file_from_fs(file_path).strip().split("\n")
+        return [f"{line}\n" for line in lines]
 
-    def tearDown(self):
-        p = subprocess.run(
-            ["docker", "volume", "rm", self.TEST_VOLUME], stdout=subprocess.DEVNULL
-        )
-        if p.returncode != 0:
-            print("error: failed to remove test volume")
-            exit(1)
+    @classmethod
+    def fetch_file_from_fs(self, file_path):
+        curr_dir = TestSetup.mock_fs
 
-    def run_test(self, cmd, result):
-        stdout = self.eval(cmd)
-        res = stdout.strip().split("\n")
-        self.assertEqual(res, result)
+        file_directories = file_path.split("/")
+        file_name = file_directories.pop()
+        for path in file_directories:
+            curr_dir = curr_dir[path]
 
-    def run_test_expect_exception(self, cmd, exception=RuntimeError):
-        self.assertRaises(exception, self.eval(cmd))
+        return curr_dir[file_name]
 
-    def run_test_no_order(self, cmd, result):
-        stdout = self.eval(cmd)
-        res = stdout.strip().split("\n")
-        self.assertEqual(set(res), set(result))
+    # Runs a test, patches function with mock function if supplied
+    def run_test(self, args, expected_output, ref_to_patch=None, patched_func=None, unordered=False):
+        if ref_to_patch and patched_func:
+            with patch(ref_to_patch, side_effect=patched_func):
+                self.app.run(args, self.out)
+        else:
+            self.app.run(args, self.out)
+        if unordered:
+            self.assertEqual(set(self.out), set(expected_output))
+        else:
+            self.assertEqual(self.out, expected_output)
+
+    # Runs a test, patches function with mock return value
+    def run_test_patch_return(self, args, expected_output, ref_to_patch, patched_return, unordered=False):
+        with patch(ref_to_patch, return_value=patched_return):
+            self.app.run(args, self.out)
+        if unordered:
+            self.assertEqual(set(self.out), set(expected_output))
+        else:
+            self.assertEqual(self.out, expected_output)
