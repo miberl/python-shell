@@ -7,56 +7,41 @@ class TestLs(TestSetup):
     def setUp(self) -> None:
         super().setUp()
         self.out = []
-        self.ls = Ls()
+        self.app = Ls()
 
     # HAPPY PATHS
 
     def test_ls(self):
-        with patch("apps.ls.listdir", return_value=["test.txt", "dir2", "dir1"]):
-            self.ls.run([], self.out)
-            self.assertEqual(set(self.out), {"test.txt\n", "dir2\n", "dir1\n"})
+        return_value = ["test.txt", "dir2", "dir1"]
+        expected_output = ["test.txt\n", "dir2\n", "dir1\n"]
+        self.run_test_patch_return(
+            [], expected_output, "apps.ls.listdir", return_value, unordered=True)
 
     def test_ls_with_hidden(self):
-        with patch(
-            "apps.ls.listdir", return_value=["test.txt", "dir2", "dir1", ".hidden"]
-        ):
-            self.ls.run([], self.out)
-            self.assertEqual(set(self.out), {"test.txt\n", "dir2\n", "dir1\n"})
+        return_value = ["test.txt", "dir2", "dir1", ".hidden"]
+        expected_output = ["test.txt\n", "dir2\n", "dir1\n"]
+        self.run_test_patch_return(
+            [], expected_output, "apps.ls.listdir", return_value, unordered=True)
 
     def test_ls_directory(self):
-        with patch(
-            "apps.ls.listdir",
-            return_value=["longfile.txt", "file1.txt", "file2.txt", "subdir"],
-        ):
-            self.ls.run(["dir1"], self.out)
-            self.assertEqual(
-                set(self.out),
-                {"longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"},
-            )
+        return_value = ["longfile.txt", "file1.txt", "file2.txt", "subdir"]
+        expected_output = ["longfile.txt\n",
+                           "file2.txt\n", "file1.txt\n", "subdir\n"]
+        self.run_test_patch_return(
+            ["dir1"], expected_output, "apps.ls.listdir",  return_value, unordered=True)
 
     def test_ls_directory_with_hidden(self):
-        with patch(
-            "apps.ls.listdir",
-            return_value=[
-                "longfile.txt",
-                "file1.txt",
-                "file2.txt",
-                "subdir",
-                ".hidden",
-            ],
-        ):
-            self.ls.run(["dir1"], self.out)
-            self.assertEqual(
-                set(self.out),
-                {"longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"},
-            )
+        return_value = ["longfile.txt", "file1.txt",
+                        "file2.txt", "subdir", ".hidden"]
+        expected_output = ["longfile.txt\n",
+                           "file2.txt\n", "file1.txt\n", "subdir\n"]
+        self.run_test_patch_return(
+            ["dir1"], expected_output, "apps.ls.listdir", return_value, unordered=True)
 
     def test_ls_subdirectory(self):
-        with patch("apps.ls.listdir", return_value=["text.txt"]):
-            self.ls.run(["dir1/subdir"], self.out)
-            self.assertEqual(set(self.out), {"text.txt\n"})
+        self.run_test_patch_return(
+            ["dir1/subdir"], ["text.txt\n"], "apps.ls.listdir", ["text.txt"], unordered=True)
 
     def test_ls_subdirectory_with_hidden(self):
-        with patch("apps.ls.listdir", return_value=["text.txt", ".hidden"]):
-            self.ls.run(["dir1/subdir"], self.out)
-            self.assertEqual(set(self.out), {"text.txt\n"})
+        self.run_test_patch_return(["dir1/subdir"], ["text.txt\n"],
+                                   "apps.ls.listdir", ["text.txt", ".hidden"], unordered=True)

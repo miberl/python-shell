@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 
 class TestSetup(unittest.TestCase):
@@ -45,3 +46,24 @@ class TestSetup(unittest.TestCase):
             curr_dir = curr_dir[path]
 
         return curr_dir[file_name]
+
+    # Runs a test, patches function with mock function if supplied
+    def run_test(self, args, expected_output, ref_to_patch=None, patched_func=None, unordered=False):
+        if ref_to_patch and patched_func:
+            with patch(ref_to_patch, side_effect=patched_func):
+                self.app.run(args, self.out)
+        else:
+            self.app.run(args, self.out)
+        if unordered:
+            self.assertEqual(set(self.out), set(expected_output))
+        else:
+            self.assertEqual(self.out, expected_output)
+
+    # Runs a test, patches function with mock return value
+    def run_test_patch_return(self, args, expected_output, ref_to_patch, patched_return, unordered=False):
+        with patch(ref_to_patch, return_value=patched_return):
+            self.app.run(args, self.out)
+        if unordered:
+            self.assertEqual(set(self.out), set(expected_output))
+        else:
+            self.assertEqual(self.out, expected_output)

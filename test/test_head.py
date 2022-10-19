@@ -7,30 +7,30 @@ class TestHead(TestSetup):
     def setUp(self) -> None:
         super().setUp()
         self.out = []
-        self.head = Head()
+        self.app = Head()
 
     def test_head(self):
-        with patch("apps.head.Head.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.head.run(["test.txt"], self.out)
-            self.assertEqual(self.out, ["Test\n"])
+        self.run_test(["test.txt"], [
+                      "Test\n"], "apps.head.Head.read_lines", TestSetup.mock_read_lines)
 
     def test_head_2(self):
-        with patch("apps.head.Head.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.head.run(["dir1/file1.txt"], self.out)
-            self.assertEqual(self.out, ["AAA\n", "BBB\n", "AAA\n"])
+        self.run_test(["dir1/file1.txt"], ["AAA\n", "BBB\n", "AAA\n"],
+                      "apps.head.Head.read_lines", TestSetup.mock_read_lines)
 
     # Expects first 10 lines of file as return
     def test_head_longfile(self):
-        with patch("apps.head.Head.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.head.run(["dir1/longfile.txt"], self.out)
-            self.assertEqual(self.out, ([f"{str(i)}\n" for i in range(1, 11)]))
+        expected_output = [f"{str(i)}\n" for i in range(1, 11)]
+        self.run_test(["dir1/longfile.txt"], expected_output,
+                      "apps.head.Head.read_lines", TestSetup.mock_read_lines)
 
     def test_head_specific_line_limit(self):
-        with patch("apps.head.Head.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.head.run(["-n", "5", "dir1/longfile.txt"], self.out)
-            self.assertEqual(self.out, ([f"{str(i)}\n" for i in range(1, 6)]))
+        args = ["-n", "5", "dir1/longfile.txt"]
+        expected_output = [f"{str(i)}\n" for i in range(1, 6)]
+        self.run_test(args, expected_output,
+                      "apps.head.Head.read_lines", TestSetup.mock_read_lines)
 
     def test_head_specific_line_limit_2(self):
-        with patch("apps.head.Head.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.head.run(["-n", "100", "dir1/longfile.txt"], self.out)
-            self.assertEqual(self.out, ([f"{str(i)}\n" for i in range(1, 21)]))
+        args = ["-n", "100", "dir1/longfile.txt"]
+        expected_output = [f"{str(i)}\n" for i in range(1, 21)]
+        self.run_test(args, expected_output,
+                      "apps.head.Head.read_lines", TestSetup.mock_read_lines)

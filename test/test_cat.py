@@ -7,31 +7,31 @@ class TestCat(TestSetup):
     def setUp(self) -> None:
         super().setUp()
         self.out = []
-        self.cat = Cat()
+        self.app = Cat()
 
     # HAPPY PATHS
     def test_cat(self):
-        with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
-            self.cat.run(["test.txt"], self.out)
-            self.assertEqual(self.out, ["Test\n"])
+        self.run_test(["test.txt"], ["Test\n"],
+                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
 
     def test_cat_two_args(self):
-        with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
-            self.cat.run(["dir1/file1.txt", "dir1/file2.txt"], self.out)
-            self.assertEqual(self.out, ["AAA\nBBB\nAAA\n", "CCC\n"])
+        args = ["dir1/file1.txt", "dir1/file2.txt"]
+        expected_output = ["AAA\nBBB\nAAA\n", "CCC\n"]
+        self.run_test(args, expected_output,
+                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
 
     def test_cat_three_args(self):
-        with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
-            self.cat.run(["test.txt", "dir1/file1.txt",
-                         "dir1/file2.txt"], self.out)
-            self.assertEqual(self.out, ["Test\n", "AAA\nBBB\nAAA\n", "CCC\n"])
+        args = ["test.txt", "dir1/file1.txt", "dir1/file2.txt"]
+        expected_output = ["Test\n", "AAA\nBBB\nAAA\n", "CCC\n"]
+        self.run_test(args, expected_output,
+                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
 
     def test_hidden(self):
-        with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
-            self.cat.run(["dir1/subdir/.hidden"], self.out)
-            self.assertEqual(self.out, ["secret\n"])
+        self.run_test(["dir1/subdir/.hidden"], ["secret\n"],
+                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
 
     def test_hidden_2(self):
-        with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
-            self.cat.run(["dir1/subdir/.hidden", "dir1/file1.txt"], self.out)
-            self.assertEqual(self.out, ["secret\n", "AAA\nBBB\nAAA\n"])
+        args = ["dir1/subdir/.hidden", "dir1/file1.txt"]
+        expected_output = ["secret\n", "AAA\nBBB\nAAA\n"]
+        self.run_test(args, expected_output,
+                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
