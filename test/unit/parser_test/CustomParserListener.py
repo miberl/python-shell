@@ -1,7 +1,7 @@
 from collections import deque
 
-from src.parser.antlr.CommandsParser import CommandsParser
-from src.parser.antlr.CommandsListener import CommandsListener
+from parser.antlr.CommandsParser import CommandsParser
+from parser.antlr.CommandsListener import CommandsListener
 
 
 class CustomParserListener(CommandsListener):
