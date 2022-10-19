@@ -13,24 +13,14 @@ class Head(Application):
 
         file, num_lines = self.get_file_and_num_lines_to_read()
 
-        self.open_file_and_read_lines(file, num_lines, out)
+        file_lines = self.read_lines(file)
 
-    def open_file_and_read_lines(self, file, num_lines, out):
-        with open(file) as f:
-            lines = f.readlines()
-            self.write_out_lines(lines, num_lines, out)
+        for i in range(0, min(len(file_lines), num_lines)):
+            out.append(file_lines[i])
 
-    def write_out_lines(self, lines, num_lines, out):
-        for i in self.line_num_range(lines, num_lines):
-            self.write_out_line(i, lines, out)
-
-    @staticmethod
-    def line_num_range(lines, num_lines):
-        return range(0, min(len(lines), num_lines))
-
-    @staticmethod
-    def write_out_line(i, lines, out):
-        out.append(lines[i])
+    def read_lines(self, filename):
+        with open(filename) as f:
+            return f.readlines()
 
     def get_file_and_num_lines_to_read(self):
         file = ''

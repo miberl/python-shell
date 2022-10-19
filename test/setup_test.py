@@ -32,7 +32,7 @@ class TestSetup(unittest.TestCase):
 
     @classmethod
     def mock_read_lines(self, file_path):
-        lines = TestSetup.fetch_file_from_fs(file_path).split("\n")
+        lines = TestSetup.fetch_file_from_fs(file_path).strip().split("\n")
         return [f"{line}\n" for line in lines]
 
     @classmethod

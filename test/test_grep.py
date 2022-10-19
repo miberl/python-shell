@@ -34,15 +34,33 @@ class TestGrep(TestSetup):
             self.assertEqual(
                 self.out, ["dir1/file1.txt:AAA\n", "dir1/file1.txt:AAA\n"])
 
+    def test_long_file(self):
+        with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
+            self.grep.run(["10", "dir1/longfile.txt"], self.out)
+            self.assertEqual(
+                self.out, ["10\n"])
+
+    def test_hidden_file(self):
+        with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
+            self.grep.run(["secret", "dir1/subdir/.hidden"], self.out)
+            self.assertEqual(self.out, ["secret\n"])
+
+    def test_partial_match(self):
+        with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
+            self.grep.run(["AA", "dir1/file1.txt"], self.out)
+            self.assertEqual(
+                self.out, ["AAA\n", "AAA\n"])
+
+    def test_partial_match_multiple_files(self):
+        with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
+            self.grep.run(["AA", "dir1/file1.txt",
+                          "dir1/file2.txt"], self.out)
+            self.assertEqual(
+                self.out, ["dir1/file1.txt:AAA\n", "dir1/file1.txt:AAA\n"])
+
     def test_no_match(self):
         with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
             self.grep.run(["DDD", "dir1/file1.txt",
                           "dir1/file2.txt"], self.out)
             self.assertEqual(
                 self.out, [])
-
-    def test_long_file(self):
-        with patch("apps.grep.Grep.read_lines", side_effect=TestSetup.mock_read_lines):
-            self.grep.run(["10", "dir1/longfile.txt"], self.out)
-            self.assertEqual(
-                self.out, ["10\n"])

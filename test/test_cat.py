@@ -26,12 +26,12 @@ class TestCat(TestSetup):
                          "dir1/file2.txt"], self.out)
             self.assertEqual(self.out, ["Test\n", "AAA\nBBB\nAAA\n", "CCC\n"])
 
-    def test_cat_hidden(self):
+    def test_hidden(self):
         with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
             self.cat.run(["dir1/subdir/.hidden"], self.out)
             self.assertEqual(self.out, ["secret\n"])
 
-    def test_cat_hidden_2(self):
+    def test_hidden_2(self):
         with patch("apps.cat.Cat.read_file", side_effect=TestSetup.mock_read_file):
             self.cat.run(["dir1/subdir/.hidden", "dir1/file1.txt"], self.out)
             self.assertEqual(self.out, ["secret\n", "AAA\nBBB\nAAA\n"])
