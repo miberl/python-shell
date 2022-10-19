@@ -43,10 +43,6 @@ class TestParser(unittest.TestCase):
         self.run_test("qwer*",
                       "instruction(command(app(atom(atom()glob()))))")
 
-    def test_substitute_app(self):
-        self.run_test("`ls`",
-                      "instruction(command(app(atom(substituted(instruction(command(app(atom()))))))))")
-
     def test_use_backslash_in_app(self):
         self.run_test("l\\s",
                       "instruction(command(app(atom())))")
@@ -149,7 +145,7 @@ class TestParser(unittest.TestCase):
 
     def test_cannot_use_semicolon_in_quotes(self):
         with self.assertRaises(Exception):
-            self.run_test("'cm;d", "")
+            self.run_test("'cm;d'", "")
 
     def test_combine_without_space(self):
         self.run_test("cmd1;cmd2",
