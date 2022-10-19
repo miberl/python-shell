@@ -1,3 +1,4 @@
+
 from application import Application
 from re import match
 
@@ -10,7 +11,6 @@ class Grep(Application):
         files = args[1:]
         for file in files:
             lines = self.read_lines(file)
-            print(lines)
             out.extend(self.filter_matching_lines(
                 lines, pattern, file, len(files) > 1))
 
