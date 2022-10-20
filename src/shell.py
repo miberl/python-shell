@@ -1,57 +1,43 @@
-import re
 import sys
-from os import getcwd, listdir, path
+from os import getcwd
 from collections import deque
-from glob import glob
 
 from apps import cat, cd, echo, grep, head, ls, pwd, tail
+from shell_runner.shell import Shell
 
 appList = {'cat': cat.Cat(), 'cd': cd.Cd(), 'echo': echo.Echo(), 'grep': grep.Grep(
 ), 'head': head.Head(), 'ls': ls.Ls(), 'pwd': pwd.Pwd(), 'tail': tail.Tail()}
 
 
 def eval(cmdline, out):
-    raw_commands = []
-    for m in re.finditer("([^\"';]+|\"[^\"]*\"|'[^']*')", cmdline):
-        if m.group(0):
-            raw_commands.append(m.group(0))
-    for command in raw_commands:
-        tokens = []
-        for m in re.finditer("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'", command):
-            if m.group(1) or m.group(2):
-                quoted = m.group(0)
-                tokens.append(quoted[1:-1])
-            else:
-                globbing = glob(m.group(0))
-                if globbing:
-                    tokens.extend(globbing)
-                else:
-                    tokens.append(m.group(0))
-        app = tokens[0]
-        args = tokens[1:]
-
-        if app in appList:
-            appList[app].run(args, out)
-        else:
-            raise ValueError(f"unsupported application {app}")
+    # print(cmdline)
+    shell = Shell()
+    shell.run_instructions(cmdline, out)
 
 
-if __name__ == "__main__":
-    args_num = len(sys.argv) - 1
+def main(argv):
+
+    args_num = len(argv) - 1
     if args_num > 0:
+        print("The shell has been run")
         out = deque()
         if args_num != 2:
             raise ValueError("wrong number of command line arguments")
-        if sys.argv[1] != "-c":
-            raise ValueError(f"unexpected command line argument {sys.argv[1]}")
-        eval(sys.argv[2], out)
+        if argv[1] != "-c":
+            raise ValueError(f"unexpected command line argument {argv[1]}")
+        eval(argv[2], out)
         while len(out) > 0:
             print(out.popleft(), end="")
     else:
         while True:
+            print("The shell has been run")
             print(getcwd() + "> ", end="")
             cmdline = input()
             out = deque()
             eval(cmdline, out)
             while len(out) > 0:
                 print(out.popleft(), end="")
+
+
+if __name__ == "__main__":
+    main(sys.argv)
