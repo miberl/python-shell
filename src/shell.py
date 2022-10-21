@@ -10,7 +10,6 @@ appList = {'cat': cat.Cat(), 'cd': cd.Cd(), 'echo': echo.Echo(), 'grep': grep.Gr
 
 
 def eval(cmdline, out):
-    # print(cmdline)
     shell = Shell()
     shell.run_instructions(cmdline, out)
 
