@@ -1,6 +1,6 @@
 from shell_runner.parser_visitor import ParseVisitor
 
-from inputparser.ParseCommand import ParseCommands
+from inputparser.parse_command import ParseCommands
 
 from apps import cat, echo, ls, cd, pwd, head, grep, tail
 
