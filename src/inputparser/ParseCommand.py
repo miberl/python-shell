@@ -1,6 +1,6 @@
-from parser.antlr.CommandsParser import CommandsParser
-from parser.antlr.CommandsLexer import CommandsLexer
-from antlr4 import ParseTreeWalker, InputStream, CommonTokenStream;
+from inputparser.antlr.CommandsParser import CommandsParser
+from inputparser.antlr.CommandsLexer import CommandsLexer
+from antlr4 import ParseTreeWalker, InputStream, CommonTokenStream
 
 
 class ParseCommands:

@@ -19,7 +19,6 @@ def main(argv):
 
     args_num = len(argv) - 1
     if args_num > 0:
-        print("The shell has been run")
         out = deque()
         if args_num != 2:
             raise ValueError("wrong number of command line arguments")
@@ -30,7 +29,6 @@ def main(argv):
             print(out.popleft(), end="")
     else:
         while True:
-            print("The shell has been run")
             print(getcwd() + "> ", end="")
             cmdline = input()
             out = deque()

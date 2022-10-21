@@ -1,6 +1,6 @@
 import unittest
 
-from parser.ParseCommand import ParseCommands
+from inputparser.ParseCommand import ParseCommands
 from CustomParserListener import CustomParserListener
 
 

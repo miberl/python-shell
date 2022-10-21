@@ -1,5 +1,5 @@
-from parser.antlr.CommandsParser import CommandsParser
-from parser.antlr.CommandsVisitor import CommandsVisitor
+from inputparser.antlr.CommandsParser import CommandsParser
+from inputparser.antlr.CommandsVisitor import CommandsVisitor
 
 
 class ParseVisitor(CommandsVisitor):
@@ -36,5 +36,3 @@ class ParseVisitor(CommandsVisitor):
                 continue
 
         return args
-
-
