@@ -2,11 +2,7 @@ import sys
 from os import getcwd
 from collections import deque
 
-from apps import cat, cd, echo, grep, head, ls, pwd, tail
 from shell_runner.shell import Shell
-
-appList = {'cat': cat.Cat(), 'cd': cd.Cd(), 'echo': echo.Echo(), 'grep': grep.Grep(
-), 'head': head.Head(), 'ls': ls.Ls(), 'pwd': pwd.Pwd(), 'tail': tail.Tail()}
 
 
 def eval(cmdline, out):
