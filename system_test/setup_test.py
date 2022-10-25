@@ -27,8 +27,7 @@ class TestSetup(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        dockerfile = ("FROM " + cls.SHELL_IMAGE +
-                      "\nWORKDIR " + cls.TEST_DIR).encode()
+        dockerfile = ("FROM " + cls.SHELL_IMAGE + "\nWORKDIR " + cls.TEST_DIR).encode()
         args = ["docker", "build", "-t", cls.TEST_IMAGE, "-"]
         p = subprocess.run(args, input=dockerfile, stdout=subprocess.DEVNULL)
         if p.returncode != 0:
@@ -51,6 +50,14 @@ class TestSetup(unittest.TestCase):
                 "echo BBB >> dir1/file1.txt",
                 "echo AAA >> dir1/file1.txt",
                 "echo CCC > dir1/file2.txt",
+                "echo AAA > dir1/file3.txt",
+                "echo AAA >> dir1/file3.txt",
+                "echo BBB >> dir1/file3.txt",
+                "echo CCC >> dir1/file3.txt",
+                "echo CCC >> dir1/file3.txt",
+                "echo CCC >> dir1/file3.txt",
+                "echo AAA > dir1/file4.txt",
+                "echo AAA >> dir1/file4.txt",
                 "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
                 "echo AAA > dir2/subdir/file.txt",
                 "echo aaa >> dir2/subdir/file.txt",

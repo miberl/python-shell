@@ -11,6 +11,7 @@ class TestSetup(unittest.TestCase):
     # This is a mock of the filesystem
     mock_fs = {
         "test.txt": "Test\n",
+        "repeatedFile.txt": "AAA\nBBB\nBBB\nBBB\nAAA\nAAA\n\nBBB",
         "dir1": {
             "subdir": {
                 ".hidden": "secret\n",
@@ -48,7 +49,14 @@ class TestSetup(unittest.TestCase):
         return curr_dir[file_name]
 
     # Runs a test, patches function with mock function if supplied
-    def run_test(self, args, expected_output, ref_to_patch=None, patched_func=None, unordered=False):
+    def run_test(
+        self,
+        args,
+        expected_output,
+        ref_to_patch=None,
+        patched_func=None,
+        unordered=False,
+    ):
         if ref_to_patch and patched_func:
             with patch(ref_to_patch, side_effect=patched_func):
                 self.app.run(args, self.out)
@@ -60,7 +68,9 @@ class TestSetup(unittest.TestCase):
             self.assertEqual(self.out, expected_output)
 
     # Runs a test, patches function with mock return value
-    def run_test_patch_return(self, args, expected_output, ref_to_patch, patched_return, unordered=False):
+    def run_test_patch_return(
+        self, args, expected_output, ref_to_patch, patched_return, unordered=False
+    ):
         with patch(ref_to_patch, return_value=patched_return):
             self.app.run(args, self.out)
         if unordered:
