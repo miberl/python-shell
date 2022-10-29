@@ -1,5 +1,5 @@
-from inputparser.antlr.commands_parser import CommandsParser
-from inputparser.antlr.commands_visitor import CommandsVisitor
+from inputparser.antlr.CommandsParser import CommandsParser
+from inputparser.antlr.CommandsVisitor import CommandsVisitor
 
 
 class ParseVisitor(CommandsVisitor):

@@ -1,25 +1,28 @@
-from inputparser.antlr.commands_parser import CommandsParser
-from inputparser.antlr.commands_lexer import CommandsLexer
+from exceptions.invalid_syntax_error import InvalidSyntaxError
+from inputparser.antlr.CommandsParser import CommandsParser
+from inputparser.antlr.CommandsLexer import CommandsLexer
 from antlr4 import ParseTreeWalker, InputStream, CommonTokenStream
+
+from inputparser.parser_error_listner import ParserErrorListener
 
 
 class ParseCommands:
-    @staticmethod
-    def parse_listen(cmd: str, listener):
-        input_stream = InputStream(cmd)
-        lexer = CommandsLexer(input_stream)
-        stream = CommonTokenStream(lexer)
-        parser = CommandsParser(stream)
-        parser.addErrorListener(listener)
-        tree = parser.prog()
+    def parse_listen(self, cmd: str, listener):
+        tree = self.get_tree(cmd)
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
 
+    def parse_visitor(self, cmd: str, visitor):
+        tree = self.get_tree(cmd)
+        visitor.visit(tree)
+
     @staticmethod
-    def parse_visitor(cmd: str, visitor):
+    def get_tree(cmd):
         input_stream = InputStream(cmd)
         lexer = CommandsLexer(input_stream)
+        lexer.addErrorListener(ParserErrorListener())
         stream = CommonTokenStream(lexer)
         parser = CommandsParser(stream)
+        parser.addErrorListener(ParserErrorListener())
         tree = parser.prog()
-        visitor.visit(tree)
+        return tree

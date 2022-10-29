@@ -1,5 +1,6 @@
 import unittest
 
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 from inputparser.parse_command import ParseCommands
 from CustomParserListener import CustomParserListener
 
@@ -7,7 +8,7 @@ from CustomParserListener import CustomParserListener
 class TestParser(unittest.TestCase):
     def run_test(self, cmd, expected_structure):
         listener = CustomParserListener()
-        ParseCommands.parse_listen(cmd, listener)
+        ParseCommands().parse_listen(cmd, listener)
         actual = ''.join(listener.out)
         self.assertEqual(expected_structure, actual)
 
@@ -56,7 +57,7 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())))")
 
     def test_cannot_use_unrecognised_punctuation(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("l?", "")
 
     def test_ignore_whitespace_in_quotes(self):
@@ -82,7 +83,7 @@ class TestParser(unittest.TestCase):
                       "substituted(instruction(command(app(atom()))))))))")
 
     def test_cannot_glob_in_quote(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("'ls *'", "")
 
     def test_redir_in(self):
@@ -98,15 +99,15 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())file_in(atom())file_out(atom())))")
 
     def test_fails_if_redir_in_bad_order(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("cmd > file1 < file2", "")
 
     def test_fails_if_redir_not_last(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("cmd <file1 arg", "")
 
     def test_fails_if_redir_not_last_out(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("cmd > file2 arg", "")
 
     def test_whitespace_after_redir(self):
@@ -130,7 +131,7 @@ class TestParser(unittest.TestCase):
                       "command(app(atom())))")
 
     def test_cannot_use_pipe_in_quotes(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("'cmd1 | cmd2'", "")
 
     def test_pipe_with_args(self):
@@ -144,7 +145,7 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())))")
 
     def test_cannot_use_semicolon_in_quotes(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("'cm;d'", "")
 
     def test_combine_without_space(self):
@@ -153,5 +154,36 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())))")
 
     def test_empty_errors(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidSyntaxError):
             self.run_test("", "")
+
+    def test_single_flag(self):
+        self.run_test("cmd -a",
+                      "instruction(command(app(atom())args(flag(atom()))))")
+
+    def test_flag_with_arg(self):
+        self.run_test("cmd -a arg",
+                      "instruction(command(app(atom())args(flag(atom())atom())))")
+
+    def test_one_flag_many_arg(self):
+        self.run_test("cmd -a one two three",
+                      "instruction(command(app(atom())args(flag(atom())atom()atom()atom())))")
+
+    def test_two_flag_no_arg(self):
+        self.run_test("cmd -a -b",
+                      "instruction(command(app(atom())args(flag(atom())flag(atom()))))")
+
+    def test_start_flag_no_end(self):
+        with self.assertRaises(InvalidSyntaxError):
+            self.run_test("cmd -", "")
+
+    def test_can_use_double_dash(self):
+        self.run_test("cmd --hello-there", "instruction(command(app(atom())args(flag(atom()))))")
+
+    def test_cannot_start_cmd_with_dash(self):
+        with self.assertRaises(InvalidSyntaxError):
+            self.run_test("-cmd", "")
+
+    def test_cannot_have_arg_before_flag(self):
+        with self.assertRaises(InvalidSyntaxError):
+            self.run_test("cmd hello -a", "")

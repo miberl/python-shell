@@ -1,7 +1,7 @@
 from collections import deque
 
-from inputparser.antlr.commands_parser import CommandsParser
-from inputparser.antlr.commands_listener import CommandsListener
+from inputparser.antlr.CommandsParser import CommandsParser
+from inputparser.antlr.CommandsListener import CommandsListener
 
 
 class CustomParserListener(CommandsListener):
@@ -78,20 +78,16 @@ class CustomParserListener(CommandsListener):
     def exitAtom(self, ctx: CommandsParser.AtomContext):
         self.out.append(")")
 
-    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        raise Exception("Oh no!! 1")
-
-    def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
-        pass
-
-    def reportAttemptingFullContext(self, recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs):
-        pass
-
-    def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
-        pass
-
     def enterSubstituted(self, ctx: CommandsParser.SubstitutedContext):
         self.out.append("substituted(")
 
     def exitSubstituted(self, ctx: CommandsParser.SubstitutedContext):
+        self.out.append(")")
+
+
+    def enterFlag(self, ctx: CommandsParser.FlagContext):
+        self.out.append("flag(")
+
+    # Exit a parse tree produced by CommandsParser#flag.
+    def exitFlag(self, ctx:CommandsParser.FlagContext):
         self.out.append(")")

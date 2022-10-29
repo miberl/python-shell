@@ -18,7 +18,9 @@ command
 // app name
 app         : atom ;
 // arguments
-args        : (WHITESPACE (atom | globbed) )+ ;
+args        : (WHITESPACE? flag (WHITESPACE? arg+)? WHITESPACE?)+ | arg+;
+arg         : (WHITESPACE (atom | globbed)) ;
+flag        : '-' atom  | '--' atom;
 
 // redirection
 redir_in    : '<' WHITESPACE? atom ;
@@ -45,12 +47,21 @@ substituted : '`' terminal '`' ;
 fragment LOWER          : [a-z] ;
 fragment UPPER          : [A-Z] ;
 fragment NUMBER         : [0-9] ;
-fragment PUNCTUATION    : ('.' | ',' | '/' | '\\' | '-' | '_') ;
+fragment STARTPUNCT     : ('.' | ',' | '/' | '\\') ;
+fragment FULLCHAR       : ALPHANUM | '-' | '_' ;
+fragment ALPHANUM       : (LOWER | UPPER | NUMBER | STARTPUNCT) ;
 
-WORD                    : (LOWER | UPPER | NUMBER | PUNCTUATION)+ ;
+fragment SINGLEQUOTEWORD: ~('\r' | '\n' | '\'')* ;
+fragment DOUBLEQUOTEWORD: ~('\r' | '\n' | '"')* ;
+
+WORD                    : ALPHANUM FULLCHAR*;
 WHITESPACE              : (' ' | '\t') + ;
 
+
+
 QUOTEDTEXT
-: '"' (WORD | WHITESPACE)* '"'
-| '\'' (WORD | WHITESPACE)* '\''
+: '"' (WORD | WHITESPACE) * '"'
+| '\'' (WORD | WHITESPACE) * '\''
 ;
+
+OTHER                   : .+?;
