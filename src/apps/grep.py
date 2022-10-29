@@ -14,10 +14,6 @@ class Grep(Application):
             out.extend(self.filter_matching_lines(
                 lines, pattern, file, len(files) > 1))
 
-    # read lines from file
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
 
     # filter lines that match pattern
     def filter_matching_lines(self, lines, pattern, file_name, multiple_files):

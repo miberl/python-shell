@@ -14,9 +14,6 @@ class Tail(Application):
 
         self.print_tail_lines(file, num_lines, out)
 
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
 
     def print_tail_lines(self, file, num_lines, out):
         lines = self.read_lines(file)
