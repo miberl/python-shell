@@ -18,10 +18,6 @@ class Head(Application):
         for i in range(0, min(len(file_lines), num_lines)):
             out.append(file_lines[i])
 
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
-
     def get_file_and_num_lines_to_read(self):
         file = ''
         num_lines = 0

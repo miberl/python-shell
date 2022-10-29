@@ -1,5 +1,4 @@
 from application import Application
-from os.path import exists
 
 
 class Uniq(Application):
@@ -35,10 +34,6 @@ class Uniq(Application):
                 for line in not_repeated_lines:
                     output_file.write(line)
                 output_file.close()
-
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
 
     # always returns true due to mock thing... ask Filipp about this
     def file_exists(self, filename):
