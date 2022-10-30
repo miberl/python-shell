@@ -46,11 +46,10 @@ class Pipe:
 
     @staticmethod
     def check_pipe(pipe_obj):
-        match  pipe_obj:
-            case Command():
-                return pipe_obj
-            case _:
-                raise CommandConstructError("Bad object in pipe")
+        if type(pipe_obj) is Command:
+            return pipe_obj
+        else:
+            raise CommandConstructError("Bad object in pipe")
 
     def get_piped_commands(self):
         if self.left is None or self.right is None:
