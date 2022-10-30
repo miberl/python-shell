@@ -1,1 +1,0 @@
-cat -b hello hter | cmd2 < file1 > file2

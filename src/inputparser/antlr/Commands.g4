@@ -20,6 +20,7 @@ app         : atom ;
 // arguments
 args        : (WHITESPACE? flag (WHITESPACE? arg+)? WHITESPACE?)+ | arg+;
 arg         : (WHITESPACE (atom | globbed)) ;
+// Flag support
 flag        : '-' atom  | '--' atom;
 
 // redirection

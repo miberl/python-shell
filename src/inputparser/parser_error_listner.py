@@ -4,6 +4,7 @@ from exceptions.invalid_syntax_error import InvalidSyntaxError
 
 
 class ParserErrorListener(ErrorListener):
+    # Only interested in catching syntax errors at this stage
 
     def __init__(self):
         super(ParserErrorListener, self).__init__()
