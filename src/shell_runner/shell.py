@@ -1,4 +1,4 @@
-from shell_runner.parser_visitor import ParseVisitor
+from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
