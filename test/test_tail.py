@@ -17,7 +17,7 @@ class TestTail(TestSetup):
     # HAPPY PATHS
 
     def test_tail(self):
-        self.run_test(["test.txt"], ["Test\n"])
+        self.run_test(["test.txt"], ["''\n"])
 
     def test_tail_2(self):
         self.run_test(["dir1/file1.txt"],  ["AAA\n", "BBB\n", "AAA\n"])

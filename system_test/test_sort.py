@@ -32,4 +32,4 @@ class TestSort(TestSetup):
         self.run_test("sort dir1/longfile.txt", expected_output)
 
     def test_sort_hidden(self):
-        self.run_test("sort dir1/subdir/.hidden", ["secret"])
+        self.run_test("sort dir2/subdir/.hidden", ["secret"])
