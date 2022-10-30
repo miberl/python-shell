@@ -25,6 +25,25 @@ class TestUniq(TestSetup):
 
     def test_uniq_3(self):
         self.run_test(
-            ["repeatedFile.txt"],
-            ["AAA\n", "BBB\n", "AAA\n", "\n", "BBB\n"]
+            ["dir1/file2.txt"],
+            ["CCC\n"]
+        )
+    
+
+    def test_uniq_repeated(self):
+        self.run_test(
+            ["dir1/file3.txt"],
+            ["AAA\n", "BBB\n", "CCC\n"]
+        )
+
+    def test_uniq_repeated_2(self):
+        self.run_test(
+            ["dir1/file4.txt"],
+            ["AAA\n"]
+        )
+
+    def test_uniq_ignore_case(self):
+        self.run_test(
+            ["-i", "dir2/subdir/file.txt"],
+            ["AAA\n"]
         )

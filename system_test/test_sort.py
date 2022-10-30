@@ -3,7 +3,7 @@ from setup_test import TestSetup
 class TestSort(TestSetup):
     
     def test_sort(self):
-        self.run_test("sort test.txt", ["\'\'"])
+        self.run_test("sort test.txt", ["Test"])
     
     def test_sort_2(self):
         self.run_test("sort dir1/file2.txt", ["CCC"])
@@ -15,7 +15,7 @@ class TestSort(TestSetup):
         self.run_test("sort dir1/file1.txt dir1/file2.txt", ["AAA", "AAA", "BBB", "CCC"])
 
     def test_sort_reverse(self):
-        self.run_test("sort -r test.txt", ["\'\'"])
+        self.run_test("sort -r test.txt", ["Test"])
 
     def test_sort_2_reverse(self):
         self.run_test("sort -r dir1/file2.txt", ["CCC"])

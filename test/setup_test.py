@@ -10,8 +10,8 @@ class TestSetup(unittest.TestCase):
 
     # This is a mock of the filesystem
     mock_fs = {
+        "quotes.txt": "\'\'\n", 
         "test.txt": "Test\n",
-        "repeatedFile.txt": "AAA\nBBB\nBBB\nBBB\nAAA\nAAA\n\nBBB",
         "dir1": {
             "subdir": {
                 ".hidden": "secret\n",
@@ -19,6 +19,8 @@ class TestSetup(unittest.TestCase):
             },
             "file1.txt": "AAA\nBBB\nAAA\n",
             "file2.txt": "CCC\n",
+            "file3.txt": "AAA\nAAA\nBBB\nCCC\nCCC\nCCC\n",
+            "file4.txt": "AAA\nAAA\n",
             "longfile.txt": "\n".join([str(i) for i in range(1, 21)]) + "\n",
         },
         "dir2": {
@@ -74,6 +76,6 @@ class TestSetup(unittest.TestCase):
         with patch(ref_to_patch, return_value=patched_return):
             self.app.run(args, self.out)
         if unordered:
-            self.assertEqual(set(self.out), set(expected_output))
+            self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
             self.assertEqual(self.out, expected_output)

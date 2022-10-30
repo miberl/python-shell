@@ -43,7 +43,8 @@ class TestSetup(unittest.TestCase):
             exit(1)
         filesystem_setup = ";".join(
             [
-                "echo \"''\" > test.txt",
+                "echo \"''\" > quotes.txt",
+                "echo Test > test.txt",
                 "mkdir -p dir1/subdir",
                 "mkdir -p dir2/subdir",
                 "echo AAA > dir1/file1.txt",
@@ -87,4 +88,4 @@ class TestSetup(unittest.TestCase):
     def run_test_no_order(self, cmd, result):
         stdout = self.eval(cmd)
         res = stdout.strip().split("\n")
-        self.assertEqual(res.sort(), result.sort())
+        self.assertEqual(sorted(res), sorted(result))
