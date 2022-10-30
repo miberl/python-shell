@@ -19,6 +19,7 @@ class TestSetup(unittest.TestCase):
             },
             "file1.txt": "AAA\nBBB\nAAA\n",
             "file2.txt": "CCC\n",
+            "file3.txt": "Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\n",
             "longfile.txt": "\n".join([str(i) for i in range(1, 21)]) + "\n",
         },
         "dir2": {
