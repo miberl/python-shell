@@ -13,16 +13,16 @@ class TestSort(TestSetup):
 
     # HAPPY PATHS
     def test_sort(self):
-        self.run_test(["test.txt"], ["Test\n"])
+        self.run_test(["test.txt"], ["''\n"])
 
     def test_sort_2(self):
         self.run_test(["dir1/file1.txt"], [ "AAA\n", "AAA\n", "BBB\n"])
 
     def test_sort_multiple_args(self):
-        self.run_test(["test.txt", "dir1/file1.txt"], ["AAA\n", "AAA\n", "BBB\n", "Test\n"])
+        self.run_test(["test.txt", "dir1/file1.txt"], ["''\n","AAA\n", "AAA\n", "BBB\n" ])
 
     def test_sort_reverse(self):
-        self.run_test(["-r", "test.txt"], ["Test\n"])
+        self.run_test(["-r", "test.txt"], ["''\n"])
 
     def test_sort_2_reverse(self):
         self.run_test(["-r", "dir1/file1.txt"], [ "BBB\n", "AAA\n", "AAA\n"])

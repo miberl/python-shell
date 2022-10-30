@@ -10,13 +10,8 @@ class TestSetup(unittest.TestCase):
 
     # This is a mock of the filesystem
     mock_fs = {
-        "quotes.txt": "\'\'\n", 
-        "test.txt": "Test\n",
+        "test.txt": "''\n",
         "dir1": {
-            "subdir": {
-                ".hidden": "secret\n",
-                "normal": "secret\n",
-            },
             "file1.txt": "AAA\nBBB\nAAA\n",
             "file2.txt": "CCC\n",
             "file3.txt": "AAA\nAAA\nBBB\nCCC\nCCC\nCCC\n",
@@ -26,6 +21,8 @@ class TestSetup(unittest.TestCase):
         "dir2": {
             "subdir": {
                 "file.txt": "AAA\naaa\nAAA\n",
+                "normal": "secret\n",
+                ".hidden": "secret\n",
             },
         },
     }

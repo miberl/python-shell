@@ -14,7 +14,7 @@ class TestUniq(TestSetup):
     def test_uniq(self):
         self.run_test(
             ["test.txt"],
-            ["Test\n"]
+            ["''\n"]
         )
 
     def test_uniq_2(self):
