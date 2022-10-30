@@ -26,10 +26,10 @@ class TestCat(TestSetup):
         self.run_test("cat dir1/longfile.txt", res)
 
     def test_cat_hidden(self):
-        self.run_test("cat dir1/subdir/.hidden", ["secret"])
+        self.run_test("cat dir2/subdir/.hidden", ["secret"])
 
     def test_cat_hidden_2(self):
-        self.run_test("cat dir1/subdir/.hidden dir1/file1.txt",
+        self.run_test("cat dir2/subdir/.hidden dir1/file1.txt",
                       ["secret", "AAA", "BBB", "AAA"])
 
 

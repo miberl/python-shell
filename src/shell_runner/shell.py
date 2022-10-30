@@ -1,8 +1,8 @@
-from shell_runner.parser_visitor import ParseVisitor
+from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
-from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, cut
+from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut
 
 
 class Shell:
@@ -18,16 +18,24 @@ class Shell:
             "tail": tail.Tail(),
             "uniq": uniq.Uniq(),
             "cut": cut.Cut(),
+            "sort": sort.Sort(),
         }
 
     def run_instructions(self, instruction: str, out):
+        commands = self.get_commands(instruction)
+
+        for (app, args) in commands:
+            self.run_app(app, args, out)
+
+    def run_app(self, app, args, out) -> None:
+        if app in self.appList:
+            self.appList[app].run(args, out)
+        else:
+            raise ValueError(f"unsupported application {app}")
+
+    def get_commands(self, instruction) -> [(str, [str])]:
         visitor = ParseVisitor()
         parser = ParseCommands()
         parser.parse_visitor(instruction, visitor)
         commands = visitor.get_commands()
-
-        for (app, args) in commands:
-            if app in self.appList:
-                self.appList[app].run(args, out)
-            else:
-                raise ValueError(f"unsupported application {app}")
+        return commands

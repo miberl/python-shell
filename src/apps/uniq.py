@@ -1,46 +1,37 @@
 from application import Application
-from os.path import exists
 
+# `-i` ignores case when doing comparison (case insensitive)
 
 class Uniq(Application):
     def __init__(self):
         super().__init__()
-        self.args = None
 
     def run(self, args, out) -> None:
-        self.args = args
+        filename, ignore_case = self.get_filename(args), self.is_ignore_case(args)
 
-        if len(args) > 0:
-            if not self.file_exists(self.args[0]):
-                out.append("uniq: " + self.args[0] + ": No such file or directory")
-                return
-
-            input_file_lines = self.read_lines(self.args[0])
-
-            previous_line = ""
-            not_repeated_lines = []
-            for line in input_file_lines:
-                if line != previous_line:
-                    not_repeated_lines.append(line)
+        file_lines = self.read_lines(filename)
+        previous_line = None
+        for line in file_lines:
+            if not previous_line or not self.compare_lines(line, previous_line, ignore_case):
+                out.append(line)
                 previous_line = line
 
-            if len(args) == 1:
-                for line in not_repeated_lines:
-                    out.append(line)
-            elif len(args) == 2:
-                if not self.file_exists(self.args[1]):
-                    out.append("uniq: " + self.args[1] + ": No such file or directory")
-                    return
-                output_file = open(self.args[1], "w")
-                for line in not_repeated_lines:
-                    output_file.write(line)
-                output_file.close()
+    @classmethod
+    def compare_lines(cls, line1, line2, ignore_case=False) -> bool:
+        if ignore_case:
+            return line1.lower() == line2.lower()
+        return line1 == line2
 
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
 
-    # always returns true due to mock thing... ask Filipp about this
-    def file_exists(self, filename):
-        # return exists(filename)
-        return True
+    def is_ignore_case(self, args) -> bool:
+        if "-i" in args:
+            return True
+        return False
+
+    def get_filename(self, args) -> str:
+        if len(args) == 1:
+            return args[0]
+        elif len(args) == 2:
+            return args[1]
+        else:
+            raise ValueError("wrong number of command line arguments")

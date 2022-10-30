@@ -1,4 +1,3 @@
-from unittest.mock import patch
 from setup_test import TestSetup
 from apps.cat import Cat
 
@@ -9,29 +8,27 @@ class TestCat(TestSetup):
         self.out = []
         self.app = Cat()
 
+    def run_test(self, args, expected_output):
+        super().run_test(args, expected_output,"application.Application.read_file", TestSetup.mock_read_file)
+
     # HAPPY PATHS
     def test_cat(self):
-        self.run_test(["test.txt"], ["Test\n"],
-                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
+        self.run_test(["test.txt"], ["''\n"])
 
     def test_cat_two_args(self):
         args = ["dir1/file1.txt", "dir1/file2.txt"]
         expected_output = ["AAA\nBBB\nAAA\n", "CCC\n"]
-        self.run_test(args, expected_output,
-                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
+        self.run_test(args, expected_output)
 
     def test_cat_three_args(self):
         args = ["test.txt", "dir1/file1.txt", "dir1/file2.txt"]
-        expected_output = ["Test\n", "AAA\nBBB\nAAA\n", "CCC\n"]
-        self.run_test(args, expected_output,
-                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
+        expected_output = ["''\n", "AAA\nBBB\nAAA\n", "CCC\n"]
+        self.run_test(args, expected_output)
 
     def test_hidden(self):
-        self.run_test(["dir1/subdir/.hidden"], ["secret\n"],
-                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
+        self.run_test(["dir2/subdir/.hidden"], ["secret\n"])
 
     def test_hidden_2(self):
-        args = ["dir1/subdir/.hidden", "dir1/file1.txt"]
+        args = ["dir2/subdir/.hidden", "dir1/file1.txt"]
         expected_output = ["secret\n", "AAA\nBBB\nAAA\n"]
-        self.run_test(args, expected_output,
-                      "apps.cat.Cat.read_file", TestSetup.mock_read_file)
+        self.run_test(args, expected_output)
