@@ -13,7 +13,7 @@ class TestHead(TestSetup):
         super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
 
     def test_head(self):
-        self.run_test(["test.txt"], ["Test\n"])
+        self.run_test(["test.txt"], ["''\n"])
 
     def test_head_2(self):
         self.run_test(["dir1/file1.txt"], ["AAA\n", "BBB\n", "AAA\n"])
