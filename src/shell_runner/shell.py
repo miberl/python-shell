@@ -2,7 +2,7 @@ from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
-from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort
+from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut
 
 
 class Shell:
@@ -17,6 +17,7 @@ class Shell:
             "pwd": pwd.Pwd(),
             "tail": tail.Tail(),
             "uniq": uniq.Uniq(),
+            "cut": cut.Cut(),
             "sort": sort.Sort(),
         }
 
