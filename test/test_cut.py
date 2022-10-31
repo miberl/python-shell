@@ -8,94 +8,69 @@ class TestCut(TestSetup):
         self.out = []
         self.app = Cut()
 
-    # test no flag
-    def test_cut_1(self):
-        self.run_test(
-            ["file3.txt"],
-            ["cut: you must specify a list of bytes, characters, or fields\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+    def run_test(self, args, expected_output):
+        super().run_test(
+            args, expected_output, "apps.cut.Cut.read_lines", TestSetup.mock_read_lines
         )
 
     # test -b flag
     def test_cut_2(self):
         self.run_test(
-            ["-b 1,2,3 file3.txt"],
-            ["And\nAru\nAss\nBih\nChh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-b", "1,2,3", "dir1/cutTest.txt"],
+            ["And\n", "Aru\n", "Ass\n", "Bih\n", "Chh\n"],
         )
 
     def test_cut_3(self):
         self.run_test(
-            ["-b 1-3,5-7 file3.txt"],
-            ["Andra\Aruach\nAssm\nBihr\nChhtti\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-b", "1-3,5-7", "dir1/cutTest.txt"],
+            ["Andra \n", "Aruach\n", "Assm\n", "Bihr\n", "Chhtti\n"],
         )
 
     def test_cut_4(self):
         self.run_test(
-            ["-b 1- file3.txt"],
-            ["Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-b", "1-", "dir1/cutTest.txt"],
+            [
+                "Andhra Pradesh\n",
+                "Arunachal Pradesh\n",
+                "Assam\n",
+                "Bihar\n",
+                "Chhattisgarh\n",
+            ],
         )
 
     def test_cut_5(self):
         self.run_test(
-            ["-b -3 file3.txt"],
-            ["And\nAru\nAss\nBih\nChh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-b", "-3", "dir1/cutTest.txt"],
+            ["And\n", "Aru\n", "Ass\n", "Bih\n", "Chh\n"],
         )
 
     # test -c flag
     def test_cut_6(self):
         self.run_test(
-            ["-c 2,5,7 file3.txt"],
-            ["nr\nrah\nsm\nir\nhti\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-c", "2,5,7", "dir1/cutTest.txt"],
+            ["nr \n", "rah\n", "sm\n", "ir\n", "hti\n"],
         )
 
     def test_cut_7(self):
         self.run_test(
-            ["-c 1-7 file3.txt"],
-            ["Andhra\nArunach\nAssam\nBihar\nChhatti\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-c", "1-7", "dir1/cutTest.txt"],
+            ["Andhra \n", "Arunach\n", "Assam\n", "Bihar\n", "Chhatti\n"],
         )
 
     def test_cut_8(self):
         self.run_test(
-            ["-c 1- file3.txt"],
-            ["Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-c", "1-", "dir1/cutTest.txt"],
+            [
+                "Andhra Pradesh\n",
+                "Arunachal Pradesh\n",
+                "Assam\n",
+                "Bihar\n",
+                "Chhattisgarh\n",
+            ],
         )
 
     def test_cut_9(self):
         self.run_test(
-            ["-c -5 file3.txt"],
-            ["Andhr\nAruna\nAssam\nBihar\nChhat\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
-        )
-
-    # test -f flag
-    def test_cut_10(self):
-        self.run_test(
-            ["-f 1 file3.txt"],
-            ["Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
-        )
-
-    def test_cut_11(self):
-        self.run_test(
-            ["-d " " -f 1 file3.txt"],
-            ["Andhra\nArunachal\nAssam\nBihar\nChhattisgarh\n"],
-            "apps.cut.Cut.read_lines",
-            TestSetup.mock_read_lines,
+            ["-c", "-5", "dir1/cutTest.txt"],
+            ["Andhr\n", "Aruna\n", "Assam\n", "Bihar\n", "Chhat\n"],
         )

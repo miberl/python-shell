@@ -43,46 +43,46 @@ class TestSetup(unittest.TestCase):
             exit(1)
 
         # Do not change -> Base setup used by provided system tests
-        base_setup = [ 
-                "echo \"''\" > test.txt",
-                "mkdir dir1",
-                "mkdir -p dir2/subdir",
-                "echo AAA > dir1/file1.txt",
-                "echo BBB >> dir1/file1.txt",
-                "echo AAA >> dir1/file1.txt",
-                "echo CCC > dir1/file2.txt",
-                "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
-                "echo AAA > dir2/subdir/file.txt",
-                "echo aaa >> dir2/subdir/file.txt",
-                "echo AAA >> dir2/subdir/file.txt",
-                "touch dir1/subdir/.hidden", # Note: this command fails
-            ]
+        base_setup = [
+            "echo \"''\" > test.txt",
+            "mkdir dir1",
+            "mkdir -p dir2/subdir",
+            "echo AAA > dir1/file1.txt",
+            "echo BBB >> dir1/file1.txt",
+            "echo AAA >> dir1/file1.txt",
+            "echo CCC > dir1/file2.txt",
+            "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
+            "echo AAA > dir2/subdir/file.txt",
+            "echo aaa >> dir2/subdir/file.txt",
+            "echo AAA >> dir2/subdir/file.txt",
+            "touch dir1/subdir/.hidden",  # Note: this command fails
+        ]
         # Custom files & directories
         custom_setup = [
-                "echo AAA > dir1/file3.txt",
-                "echo AAA >> dir1/file3.txt",
-                "echo BBB >> dir1/file3.txt",
-                "echo CCC >> dir1/file3.txt",
-                "echo CCC >> dir1/file3.txt",
-                "echo CCC >> dir1/file3.txt",
-                "echo AAA > dir1/file4.txt",
-                "echo AAA >> dir1/file4.txt",
-                "echo Andhra Pradesh > dir1/file5.txt",
-                "echo Arunachal Pradesh >> dir1/file5.txt",
-                "echo Assam >> dir1/file5.txt",
-                "echo Bihar >> dir1/file5.txt",
-                "echo Chhattisgarh >> dir1/file5.txt",
-                "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
-                "echo AAA > dir2/subdir/file.txt",
-                "echo aaa >> dir2/subdir/file.txt",
-                "echo AAA >> dir2/subdir/file.txt",
-                "echo secret >> dir1/subdir/.hidden",
-                "echo secret >> dir1/subdir/normal",
-                "echo secret >> dir2/subdir/.hidden",
-                "echo secret >> dir2/subdir/normal",
-            ]
+            "echo AAA > dir1/file3.txt",
+            "echo AAA >> dir1/file3.txt",
+            "echo BBB >> dir1/file3.txt",
+            "echo CCC >> dir1/file3.txt",
+            "echo CCC >> dir1/file3.txt",
+            "echo CCC >> dir1/file3.txt",
+            "echo AAA > dir1/file4.txt",
+            "echo AAA >> dir1/file4.txt",
+            "echo Andhra Pradesh > dir1/cutTest.txt",
+            "echo Arunachal Pradesh >> dir1/cutTest.txt",
+            "echo Assam >> dir1/cutTest.txt",
+            "echo Bihar >> dir1/cutTest.txt",
+            "echo Chhattisgarh >> dir1/cutTest.txt",
+            "for i in {1..20}; do echo $i >> dir1/longfile.txt; done",
+            "echo AAA > dir2/subdir/file.txt",
+            "echo aaa >> dir2/subdir/file.txt",
+            "echo AAA >> dir2/subdir/file.txt",
+            "echo secret >> dir1/subdir/.hidden",
+            "echo secret >> dir1/subdir/normal",
+            "echo secret >> dir2/subdir/.hidden",
+            "echo secret >> dir2/subdir/normal",
+        ]
 
-        filesystem_setup =';'.join(base_setup + custom_setup)
+        filesystem_setup = ";".join(base_setup + custom_setup)
         self.eval(filesystem_setup, shell="/bin/bash")
 
     def tearDown(self):
