@@ -1,5 +1,6 @@
 from setup_test import TestSetup
 
+
 class TestLs(TestSetup):
     # Error on three args
     def test_fail_on_three_args(self):
@@ -11,12 +12,20 @@ class TestLs(TestSetup):
 
     # ls in current dir
     def test_read_current_dir(self):
-        self.run_test_no_order("ls", ["test.txt",  "dir1", "dir2"])
+        self.run_test_no_order("ls", ["test.txt", "dir1", "dir2"])
 
     # ls in specified dir
     def test_read_dir_1(self):
         self.run_test_no_order(
-            "ls dir1", [ "file1.txt", "file2.txt","file3.txt","file4.txt", "longfile.txt"]
+            "ls dir1",
+            [
+                "cutTest.txt",
+                "file1.txt",
+                "file2.txt",
+                "file3.txt",
+                "file4.txt",
+                "longfile.txt",
+            ],
         )
 
     # check for secret files
