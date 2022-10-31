@@ -21,10 +21,6 @@ class Cut(Application):
         if flag_name == "-b" or flag_name == "-c":
             self.cut_by_chars(flag_arg, self.read_lines(file_name), out)
 
-    def read_lines(self, filename):
-        with open(filename) as f:
-            return f.readlines()
-
     def cut_by_chars(self, flag_arg, lines, out):
         # split flag arguments into different ranges and then cut each line
         ranges = self.get_ranges(flag_arg)
