@@ -26,6 +26,7 @@ class Cut(Application):
             return f.readlines()
 
     def cut_by_chars(self, flag_arg, lines, out):
+        # split flag arguments into different ranges and then cut each line
         ranges = self.get_ranges(flag_arg)
         for line in lines:
             out.append(self.cut_line_with_ranges(line, ranges))
@@ -41,16 +42,42 @@ class Cut(Application):
     def cut_line_with_ranges(self, line, ranges):
         output = ""
         for r in ranges:
+            # just a single value
             if len(r) == 1:
                 if not int(r[0]) > len(line):
                     output += line[int(r[0]) - 1]
             else:
-                if r[0] == "":
-                    output += line[: int(r[1])]
-                elif r[1] == "":
-                    output += line[int(r[0]) - 1 :]
-                else:
-                    output += line[int(r[0]) - 1 : int(r[1])]
+                lower_bound, upper_bound = self.get_bounds(line, r)
+
+                if lower_bound > upper_bound:
+                    raise ValueError("invalid range")
+
+                # skip line if the lower bound is out of range
+                if lower_bound > len(line):
+                    continue
+
+                if upper_bound > len(line):
+                    upper_bound = len(line)
+
+                output += line[lower_bound:upper_bound]
+
         if len(output) > 0 and output[-1] != "\n":
             output += "\n"
         return output
+
+    def get_bounds(self, line, range):
+        # :*
+        if range[0] == "":
+            lower_bound = 0
+        # 5:*
+        else:
+            lower_bound = int(range[0]) - 1
+
+        # *:
+        if range[1] == "":
+            upper_bound = len(line)
+        # *:5
+        else:
+            upper_bound = int(range[1])
+
+        return lower_bound, upper_bound
