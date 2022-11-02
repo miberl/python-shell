@@ -1,7 +1,5 @@
 from unittest import TestCase
 
-import pytest
-
 from exceptions.command_construct_error import CommandConstructError
 from inputparser.command import Command, Pipe
 
