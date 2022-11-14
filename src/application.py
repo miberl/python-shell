@@ -9,6 +9,11 @@ class Application(ABC):
     def run(self, args, out):
         pass
 
+    def run_unsafe(self, args, out):
+        try: 
+            self.run(args, out)
+        except Exception as e:
+            out.append(str(e))
     
     def read_lines(self, filename):
         with open(filename) as f:

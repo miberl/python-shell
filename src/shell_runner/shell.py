@@ -28,7 +28,9 @@ class Shell:
             self.run_app(app, args, out)
 
     def run_app(self, app, args, out) -> None:
-        if app in self.appList:
+        if app[-1] == "_" and app[1:] in self.appList:
+            self.appList[app[1:]].run_unsafe(args, out)
+        elif app in self.appList:
             self.appList[app].run(args, out)
         else:
             raise ValueError(f"unsupported application {app}")
