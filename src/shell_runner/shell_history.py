@@ -1,7 +1,7 @@
 from application import Application
 class ShellHistory:
     def __init__(self) -> None:
-        self.history_file = "history.txt"
+        self.history_file = ".history.txt"
 
     def add_to_history(self, command):
         # history doesn't save consecutive duplicates
