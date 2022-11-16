@@ -35,7 +35,7 @@ class ShellExec:
         else:
             raise ValueError(f"unsupported application {app}")
 
-    def get_commands(self, instruction) -> list[tuple[str, list[str]]]:
+    def get_commands(self, instruction) -> [(str, [str])]:
         visitor = ParseVisitor()
         parser = ParseCommands()
         parser.parse_visitor(instruction, visitor)

@@ -7,7 +7,7 @@ from inputparser.parser_visitor import ParseVisitor
 
 class TestParserObjectConstruction(TestCase):
     @staticmethod
-    def run_parser(cmd: str) -> list:
+    def run_parser(cmd: str) -> []:
         visitor = ParseVisitor()
         parser = ParseCommands()
         parser.parse_visitor(cmd, visitor)
