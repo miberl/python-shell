@@ -7,7 +7,7 @@ class Cut(Application):
         super().__init__()
         self.args = None
 
-    def run(self, args, out) -> None:
+    def run(self, args, inpt, out) -> None:
         self.args = args
 
         if len(self.args) != 3:

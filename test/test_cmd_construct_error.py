@@ -1,4 +1,4 @@
-from exceptions.command_construct_error import CommandConstructError
+from exceptions.command_construct_error import InstructionConstructError
 from setup_test import TestSetup
 
 
@@ -7,6 +7,6 @@ class TestInvalidSyntax(TestSetup):
     # Should never really be thrown manually like this
     def test_throw_formatted_message(self):
         try:
-            raise CommandConstructError("Bad Symbol with pipe")
-        except CommandConstructError as e:
+            raise InstructionConstructError("Bad Symbol with pipe")
+        except InstructionConstructError as e:
             self.assertEqual(str(e), "Error while constructing command after parsing, Bad Symbol with pipe")

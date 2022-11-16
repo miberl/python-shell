@@ -19,18 +19,8 @@ class CommandsVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CommandsParser#combine.
-    def visitCombine(self, ctx:CommandsParser.CombineContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CommandsParser#instuctions.
-    def visitInstuctions(self, ctx:CommandsParser.InstuctionsContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CommandsParser#pipe.
-    def visitPipe(self, ctx:CommandsParser.PipeContext):
+    # Visit a parse tree produced by CommandsParser#instruction.
+    def visitInstruction(self, ctx:CommandsParser.InstructionContext):
         return self.visitChildren(ctx)
 
 
@@ -44,18 +34,8 @@ class CommandsVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CommandsParser#args.
-    def visitArgs(self, ctx:CommandsParser.ArgsContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by CommandsParser#arg.
     def visitArg(self, ctx:CommandsParser.ArgContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by CommandsParser#flag.
-    def visitFlag(self, ctx:CommandsParser.FlagContext):
         return self.visitChildren(ctx)
 
 
@@ -81,6 +61,11 @@ class CommandsVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CommandsParser#substituted.
     def visitSubstituted(self, ctx:CommandsParser.SubstitutedContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CommandsParser#quoted_text.
+    def visitQuoted_text(self, ctx:CommandsParser.Quoted_textContext):
         return self.visitChildren(ctx)
 
 

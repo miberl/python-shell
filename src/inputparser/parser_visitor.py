@@ -1,180 +1,92 @@
-from exceptions.command_construct_error import CommandConstructError
+from antlr4 import TerminalNode
+from exceptions.command_construct_error import InstructionConstructError
 from inputparser.antlr.CommandsParser import CommandsParser
 from inputparser.antlr.CommandsVisitor import CommandsVisitor
-from inputparser.command import Command, Pipe
-from antlr4.tree import Tree
-
+from inputparser.command import Command, Instruction
+from shell_runner.eval_instructions import EvalInstructions
+from inputparser.antlr.CommandsLexer import CommandsLexer
 
 class ParseVisitor(CommandsVisitor):
     def __init__(self):
         self.instructions = []
 
-    def get_commands(self) -> [(str, [])]:
-        commands = []
-
-        for instruction in self.instructions:
-            if type(instruction) is Command:
-                app, args = self.construct_new_command_pair(instruction)
-                commands.append((app, args))
-            else:
-                raise NotImplementedError()
-
-        return commands
-
-    def construct_new_command_pair(self, instruction) -> (str, []):
-        app = instruction.get_app()
-        flags = instruction.get_flags_and_args()
-        args = self.expand_flags_to_flat_arr(flags)
-
-        return app, args
-
-    @staticmethod
-    def expand_flags_to_flat_arr(flags) -> []:
-        args = []
-        for flag, flag_args in flags:
-            if flag is not None:
-                args.append('-' + flag)
-            args += flag_args
-
-        return args
-
-    def get_instructions(self) -> []:
+    def get_instructions(self):
         return self.instructions
 
-    def visitInstuctions(self, ctx: CommandsParser.InstuctionsContext) -> None:
-        # Instruction has one or zero children; a pipe or two commands
+    def visitProg(self, ctx: CommandsParser.ProgContext):
+        terminal = ctx.getChild(0, CommandsParser.TerminalContext)
+        self.instructions = self.get_terminal(terminal)
 
-        if len(ctx.children) == 2:
-            new_instruction = self.try_for_pipe(ctx.children)
-        elif len(ctx.children) == 1:
-            new_instruction = self.try_for_command(ctx.children)
-        else:
-            raise CommandConstructError("Bad number of children for instruction")
+    def get_terminal(self, ctx):
+        instructions = ctx.getTypedRuleContexts(CommandsParser.InstructionContext)
+        instruction_objs = []
+        for instruction in instructions:
+            instruction_objs.append(self.get_instruction(instruction))
 
-        self.instructions.append(new_instruction)
+        return instruction_objs
 
-    def try_for_pipe(self, children) -> Pipe:
-        # Create a new pipe object with two commands as children
+    def get_instruction(self, instruction):
+        commands = instruction.getTypedRuleContexts(CommandsParser.CommandContext)
+        instr = Instruction()
 
-        new_pipe = Pipe()
-        self.try_set_left_pipe(children[0], new_pipe)
-        new_pipe.set_right(self.try_for_command([children[1]]))
+        for command in commands:
+            instr.add(self.get_command(command))
 
-        return new_pipe
+        return instr
 
-    def try_set_left_pipe(self, ctx, new_pipe) -> None:
-        # If command on left branch, add this to the new pipe object
-
-        if type(ctx) is CommandsParser.PipeContext:
-            new_pipe.set_left(self.try_for_command(ctx.children))
-        else:
-            self.check_terminator_or_error(ctx, "Expected pipe for instruction with two children")
-
-    def try_for_command(self, children: []) -> Command:
-        # Expecting command in the provided list of children
-
-        for child in children:
-            if type(child) is CommandsParser.CommandContext:
-                return self.get_command(children[0])
-            else:
-                self.check_terminator_or_error(child, "Expected command after instruction or pipe")
-
-        raise CommandConstructError("Expected command after instruction or pipe")
-
-    def get_command(self, ctx) -> Command:
-        # CTX is a command node, should create command object from this
-
-        cmd = self.try_init_command_with_name(ctx)
-
-        for child in ctx.children[1:]:
-            self.enumerate_possible_children_following_name(child, cmd)
-
+    def get_command(self, command: CommandsParser.CommandContext):
+        cmd = self.get_command_app(command)
+        self.get_command_args(cmd, command)
+        self.get_command_redirs(cmd, command)
         return cmd
 
-    def enumerate_possible_children_following_name(self, ctx, cmd) -> None:
-        # Given a command object, with just a name, populate the
-        # remaining fields of the command object (args, redir etc)
-
-        if type(ctx) is CommandsParser.ArgsContext:
-            self.get_args(ctx, cmd)
-        else:
-            self.check_for_redir_command(ctx, cmd)
-
-    def check_for_redir_command(self, ctx, cmd) -> None:
-        # While constructing a command object, check for redirs at a node
-
-        if type(ctx) is CommandsParser.Redir_inContext:
-            cmd.add_redir_in(self.search_for_atom(ctx))
-        elif type(ctx) is CommandsParser.Redir_outContext:
-            cmd.add_redir_out(self.search_for_atom(ctx))
-        else:
-            self.check_terminator_or_error(ctx, "Unexpected child of command")
-
-    def try_init_command_with_name(self, ctx) -> Command:
-        # Check if the ctx node is a command node
-        cmd = None
-
-        if type(ctx.children[0]) is CommandsParser.AppContext:
-            cmd = Command(self.get_app_name(ctx.children[0]))
-        else:
-            self.check_terminator_or_error(ctx.childen[0], "No command could be constructed")
+    def get_command_app(self, command: CommandsParser.CommandContext) -> Command:
+        app = command.getChild(0, CommandsParser.AppContext)
+        self.throw_if_none(app, 'app')
+        app_text = self.eval_atom(app)
+        cmd = Command(app_text)
         return cmd
 
-    def get_app_name(self, ctx) -> str:
-        if len(ctx.children) != 1:
-            raise CommandConstructError("Bad app name node, expected single atom")
+    def get_command_args(self, cmd: Command, command: CommandsParser.CommandContext):
+        args = command.getTypedRuleContexts(CommandsParser.ArgContext)
+        for arg in args:
+            arg_text = self.eval_atom(arg)
+            cmd.add_arg(arg_text)
 
-        return self.search_for_atom(ctx)
+    def get_command_redirs(self, cmd: Command, command: CommandsParser.CommandContext):
+        file_in = command.getChild(0, CommandsParser.Redir_inContext)
+        file_out = command.getChild(0, CommandsParser.Redir_outContext)
 
-    def get_args(self, ctx, cmd) -> None:
-        # From an args node, add all subsequent flags and arguments to a command object
-
-        for child in ctx.children:
-            if type(child) is CommandsParser.ArgContext:
-                arg = self.search_for_atom(child)
-                cmd.add_arg(arg)
-            elif type(child) is CommandsParser.FlagContext:
-                flag = self.search_for_atom(child)
-                cmd.add_flag(flag)
-            else:
-                self.check_terminator_or_error(child, "Unexpected child of args")
+        if file_in is not None:
+            file_in_text = self.eval_atom(file_in)
+            cmd.add_redir_in(file_in_text)
+        if file_out is not None:
+            file_out_text = self.eval_atom(file_out)
+            cmd.add_redir_out(file_out_text)
 
     @staticmethod
-    def check_terminator_or_error(ctx, err_msg) -> None:
-        # Very common pattern, check if the current node is either whitespace, or otherwise throw an error
+    def throw_if_none(elem, err):
+        if elem is None:
+            raise InstructionConstructError(f'Expected {err}, got none while parsing')
 
-        if type(ctx) is not Tree.TerminalNodeImpl:
-            raise CommandConstructError(err_msg)
+    def eval_atom(self, atom_container) -> str:
+        atom = atom_container.getChild(0, CommandsParser.AtomContext)
+        self.throw_if_none(atom, 'atom')
 
-    def search_for_atom(self, ctx) -> str:
-        # We think there is an atom (text) in ctx.children
+        out = ''
 
-        arg = None
-        for child in ctx.children:
-            if type(child) is CommandsParser.AtomContext:
-                arg = self.set_arg(arg, child)
-            else:
-                self.check_terminator_or_error(child, "Unexpected node while searching for atom")
+        for child in atom.getChildren():
+            if isinstance(child, CommandsParser.SubstitutedContext):
+                terminal = child.getChild(0, CommandsParser.TerminalContext)
+                instructions = self.get_terminal(terminal)
+                out += EvalInstructions().eval(instructions)
+            elif isinstance(child, CommandsParser.GlobbedContext):
+                pass
+            elif isinstance(child, CommandsParser.Quoted_textContext):
+                text_words = list(child.getChildren())
+                for word in text_words[1:-1]:
+                    out += word.symbol.text
+            elif isinstance(child, TerminalNode) and child.symbol.type == CommandsLexer.WORD:
+                out += child.symbol.text
 
-        self.error_if_arg_not_assigned(arg)
-
-        return arg
-
-    @staticmethod
-    def error_if_arg_not_assigned(arg) -> None:
-        if arg is None:
-            raise CommandConstructError("®Expected atom, found none")
-
-    def set_arg(self, arg, child) -> str:
-        if arg is not None:
-            raise CommandConstructError("Expected single atom at search, got multiple")
-        arg = self.process_atom(child)
-        return arg
-
-    def process_atom(self, ctx) -> str:
-        # Get string from atom object
-
-        if type(ctx.children[0]) is Tree.TerminalNodeImpl:
-            return ctx.children[0].symbol.text
-        else:
-            raise NotImplementedError()
+        return out

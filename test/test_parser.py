@@ -18,15 +18,15 @@ class TestParser(unittest.TestCase):
 
     def test_command_single_arg(self):
         self.run_test("cmd hi",
-                      "instruction(command(app(atom())args(atom())))")
+                      "instruction(command(app(atom())arg(atom())))")
 
     def test_command_many_args(self):
         self.run_test("cmd one two three",
-                      "instruction(command(app(atom())args(atom()atom()atom())))")
+                      "instruction(command(app(atom())arg(atom())arg(atom())arg(atom())))")
 
     def test_command_whitespace_before(self):
         self.run_test("   cmd one",
-                      "instruction(command(app(atom())args(atom())))")
+                      "instruction(command(app(atom())arg(atom())))")
 
     def test_command_whitespace_everywhere(self):
         self.run_test("    cmd      ",
@@ -34,11 +34,11 @@ class TestParser(unittest.TestCase):
 
     def test_globbed_arg(self):
         self.run_test("cmd *",
-                      "instruction(command(app(atom())args(atom(glob()))))")
+                      "instruction(command(app(atom())arg(atom(glob()))))")
 
     def test_globbed_between_text(self):
         self.run_test("cmd abc*def",
-                      "instruction(command(app(atom())args(atom(atom()glob()atom()))))")
+                      "instruction(command(app(atom())arg(atom(atom()glob()atom()))))")
 
     def test_can_glob_app(self):
         self.run_test("qwer*",
@@ -70,7 +70,7 @@ class TestParser(unittest.TestCase):
 
     def test_substitute_in_arguments(self):
         self.run_test("ls abc`def`ghi",
-                      "instruction(command(app(atom())args(atom(atom()"
+                      "instruction(command(app(atom())arg(atom(atom()"
                       "substituted(instruction(command(app(atom()))))atom()))))")
 
     def test_multi_glob_in_app(self):
@@ -116,18 +116,18 @@ class TestParser(unittest.TestCase):
 
     def test_pipe_command(self):
         self.run_test("cmd1 | cmd2",
-                      "instruction(pipe(command(app(atom())))"
+                      "instruction(command(app(atom()))"
                       "command(app(atom())))")
 
     def test_pipe_with_no_space(self):
         self.run_test("cmd1|cmd2",
-                      "instruction(pipe(command(app(atom())))"
+                      "instruction(command(app(atom()))"
                       "command(app(atom())))")
 
     def test_pipe_many_command(self):
         self.run_test("cmd1 | cmd2 | cmd3",
-                      "instruction(pipe(command(app(atom())))"
-                      "pipe(command(app(atom())))"
+                      "instruction(command(app(atom()))"
+                      "command(app(atom()))"
                       "command(app(atom())))")
 
     def test_cannot_use_pipe_in_quotes(self):
@@ -136,12 +136,12 @@ class TestParser(unittest.TestCase):
 
     def test_pipe_with_args(self):
         self.run_test("cmd1 bla | cmd2 bla",
-                      "instruction(pipe(command(app(atom())args(atom())))"
-                      "command(app(atom())args(atom())))")
+                      "instruction(command(app(atom())arg(atom()))"
+                      "command(app(atom())arg(atom())))")
 
     def test_append_commands(self):
         self.run_test("cmd1 ; cmd2",
-                      "combine(instruction(command(app(atom()))))"
+                      "instruction(command(app(atom())))"
                       "instruction(command(app(atom())))")
 
     def test_cannot_use_semicolon_in_quotes(self):
@@ -150,7 +150,7 @@ class TestParser(unittest.TestCase):
 
     def test_combine_without_space(self):
         self.run_test("cmd1;cmd2",
-                      "combine(instruction(command(app(atom()))))"
+                      "instruction(command(app(atom())))"
                       "instruction(command(app(atom())))")
 
     def test_empty_errors(self):
@@ -159,31 +159,19 @@ class TestParser(unittest.TestCase):
 
     def test_single_flag(self):
         self.run_test("cmd -a",
-                      "instruction(command(app(atom())args(flag(atom()))))")
+                      "instruction(command(app(atom())arg(atom())))")
 
     def test_flag_with_arg(self):
         self.run_test("cmd -a arg",
-                      "instruction(command(app(atom())args(flag(atom())atom())))")
+                      "instruction(command(app(atom())arg(atom())arg(atom())))")
 
     def test_one_flag_many_arg(self):
         self.run_test("cmd -a one two three",
-                      "instruction(command(app(atom())args(flag(atom())atom()atom()atom())))")
+                      "instruction(command(app(atom())arg(atom())arg(atom())arg(atom())arg(atom())))")
 
     def test_two_flag_no_arg(self):
         self.run_test("cmd -a -b",
-                      "instruction(command(app(atom())args(flag(atom())flag(atom()))))")
-
-    def test_start_flag_no_end(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("cmd -", "")
+                      "instruction(command(app(atom())arg(atom())arg(atom())))")
 
     def test_can_use_double_dash(self):
-        self.run_test("cmd --hello-there", "instruction(command(app(atom())args(flag(atom()))))")
-
-    def test_cannot_start_cmd_with_dash(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("-cmd", "")
-
-    def test_cannot_have_arg_before_flag(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("cmd hello -a", "")
+        self.run_test("cmd --hello-there", "instruction(command(app(atom())arg(atom())))")

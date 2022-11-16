@@ -4,7 +4,7 @@ from re import match
 
 
 class Grep(Application):
-    def run(self, args, out) -> None:
+    def run(self, args, inpt, out) -> None:
         if len(args) < 2:
             raise ValueError("wrong number of command line arguments")
         pattern = args[0]

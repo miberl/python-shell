@@ -6,7 +6,7 @@ class Head(Application):
         super().__init__()
         self.args = None
 
-    def run(self, args, out) -> None:
+    def run(self, args, inpt, out) -> None:
         self.args = args
 
         self.error_if_has_bad_num_args()

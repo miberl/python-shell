@@ -4,24 +4,19 @@ grammar Commands ;
 prog        : terminal ('\n' | EOF);
 
 // combine commands with ';'
-terminal    : WHITESPACE? combine*? instuctions WHITESPACE?;
-combine     : instuctions WHITESPACE? ';' WHITESPACE? ;
+terminal    : WHITESPACE? (instruction WHITESPACE? ';' WHITESPACE?)? instruction WHITESPACE?;
 
 // pipe commands into each other
-instuctions : WHITESPACE? (pipe)* command WHITESPACE? ;
-pipe        : command WHITESPACE? '|' WHITESPACE? ;
+instruction : WHITESPACE? command (WHITESPACE? '|' WHITESPACE? command)* WHITESPACE? ;
 
 // simple command structure
 command
-: WHITESPACE? app args? (WHITESPACE redir_in)? (WHITESPACE redir_out)? WHITESPACE?
+: WHITESPACE? app arg* (WHITESPACE redir_in)? (WHITESPACE redir_out)? WHITESPACE?
 ;
 // app name
 app         : atom ;
 // arguments
-args        : (WHITESPACE? flag (WHITESPACE? arg+)? WHITESPACE?)+ | arg+;
 arg         : (WHITESPACE (atom | globbed)) ;
-// Flag support
-flag        : '-' atom  | '--' atom;
 
 // redirection
 redir_in    : '<' WHITESPACE? atom ;
@@ -33,36 +28,34 @@ globbed     : '*' ;
 // quoting support
 atom
 : WORD
-| QUOTEDTEXT
 | atom substituted atom?
 | substituted atom?
 | atom globbed atom?
 | globbed atom?
+| WORD? quoted_text WORD?
 ;
 
 //command substitution
 substituted : '`' terminal '`' ;
+
+// quoted text
+quoted_text : SINGLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? SINGLEQUOTE | DOUBLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? DOUBLEQUOTE ;
 
 // LEXER RULES
 
 fragment LOWER          : [a-z] ;
 fragment UPPER          : [A-Z] ;
 fragment NUMBER         : [0-9] ;
-fragment STARTPUNCT     : ('.' | ',' | '/' | '\\') ;
-fragment FULLCHAR       : ALPHANUM | '-' | '_' ;
-fragment ALPHANUM       : (LOWER | UPPER | NUMBER | STARTPUNCT) ;
+fragment PUNCT     : ('.' | ',' | '/' | '\\' | '_'| '-') ;
+fragment ALPHANUM       : (LOWER | UPPER | NUMBER | PUNCT ) ;
 
-fragment SINGLEQUOTEWORD: ~('\r' | '\n' | '\'')* ;
-fragment DOUBLEQUOTEWORD: ~('\r' | '\n' | '"')* ;
-
-WORD                    : ALPHANUM FULLCHAR*;
+WORD                    : ALPHANUM+;
 WHITESPACE              : (' ' | '\t') + ;
 
+SINGLEQUOTE : '\'' ;
+DOUBLEQUOTE : '"' ;
 
-
-QUOTEDTEXT
-: '"' (WORD | WHITESPACE) * '"'
-| '\'' (WORD | WHITESPACE) * '\''
-;
+SINGLEQUOTECHAR: ~('\r' | '\n' | '\'') ;
+DOUBLEQUOTECHAR: ~('\r' | '\n' | '"') ;
 
 OTHER                   : .+?;

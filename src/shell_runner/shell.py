@@ -22,7 +22,7 @@ class Shell:
         }
 
     def run_instructions(self, instruction: str, out):
-        commands = self.get_commands(instruction)
+        commands = self.get_instructions(instruction)
 
         for (app, args) in commands:
             self.run_app(app, args, out)
@@ -33,9 +33,9 @@ class Shell:
         else:
             raise ValueError(f"unsupported application {app}")
 
-    def get_commands(self, instruction) -> [(str, [str])]:
+    def get_instructions(self, instruction) -> [(str, [str])]:
         visitor = ParseVisitor()
         parser = ParseCommands()
         parser.parse_visitor(instruction, visitor)
-        commands = visitor.get_commands()
-        return commands
+        instructions = visitor.get_instructions()
+        return instructions

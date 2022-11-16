@@ -2,7 +2,7 @@ from application import Application
 
 class Sort(Application):
     
-    def run(self, args, out)-> None:
+    def run(self, args, inpt, out)-> None:
         lines = []
         rev = self.is_reversed(args)
         

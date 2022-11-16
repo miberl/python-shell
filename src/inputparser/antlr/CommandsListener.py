@@ -26,30 +26,12 @@ class CommandsListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CommandsParser#combine.
-    def enterCombine(self, ctx:CommandsParser.CombineContext):
+    # Enter a parse tree produced by CommandsParser#instruction.
+    def enterInstruction(self, ctx:CommandsParser.InstructionContext):
         pass
 
-    # Exit a parse tree produced by CommandsParser#combine.
-    def exitCombine(self, ctx:CommandsParser.CombineContext):
-        pass
-
-
-    # Enter a parse tree produced by CommandsParser#instuctions.
-    def enterInstuctions(self, ctx:CommandsParser.InstuctionsContext):
-        pass
-
-    # Exit a parse tree produced by CommandsParser#instuctions.
-    def exitInstuctions(self, ctx:CommandsParser.InstuctionsContext):
-        pass
-
-
-    # Enter a parse tree produced by CommandsParser#pipe.
-    def enterPipe(self, ctx:CommandsParser.PipeContext):
-        pass
-
-    # Exit a parse tree produced by CommandsParser#pipe.
-    def exitPipe(self, ctx:CommandsParser.PipeContext):
+    # Exit a parse tree produced by CommandsParser#instruction.
+    def exitInstruction(self, ctx:CommandsParser.InstructionContext):
         pass
 
 
@@ -71,30 +53,12 @@ class CommandsListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CommandsParser#args.
-    def enterArgs(self, ctx:CommandsParser.ArgsContext):
-        pass
-
-    # Exit a parse tree produced by CommandsParser#args.
-    def exitArgs(self, ctx:CommandsParser.ArgsContext):
-        pass
-
-
     # Enter a parse tree produced by CommandsParser#arg.
     def enterArg(self, ctx:CommandsParser.ArgContext):
         pass
 
     # Exit a parse tree produced by CommandsParser#arg.
     def exitArg(self, ctx:CommandsParser.ArgContext):
-        pass
-
-
-    # Enter a parse tree produced by CommandsParser#flag.
-    def enterFlag(self, ctx:CommandsParser.FlagContext):
-        pass
-
-    # Exit a parse tree produced by CommandsParser#flag.
-    def exitFlag(self, ctx:CommandsParser.FlagContext):
         pass
 
 
@@ -140,6 +104,15 @@ class CommandsListener(ParseTreeListener):
 
     # Exit a parse tree produced by CommandsParser#substituted.
     def exitSubstituted(self, ctx:CommandsParser.SubstitutedContext):
+        pass
+
+
+    # Enter a parse tree produced by CommandsParser#quoted_text.
+    def enterQuoted_text(self, ctx:CommandsParser.Quoted_textContext):
+        pass
+
+    # Exit a parse tree produced by CommandsParser#quoted_text.
+    def exitQuoted_text(self, ctx:CommandsParser.Quoted_textContext):
         pass
 
 

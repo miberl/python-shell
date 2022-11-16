@@ -7,7 +7,7 @@ class Ls(Application):
         super().__init__()
         self.args = None
 
-    def run(self, args, out) -> None:
+    def run(self, args, inpt, out) -> None:
         self.args = args
 
         self.throw_if_too_many_args()

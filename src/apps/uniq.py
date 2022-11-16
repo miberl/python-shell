@@ -6,7 +6,7 @@ class Uniq(Application):
     def __init__(self):
         super().__init__()
 
-    def run(self, args, out) -> None:
+    def run(self, args, inpt, out) -> None:
         filename, ignore_case = self.get_filename(args), self.is_ignore_case(args)
 
         file_lines = self.read_lines(filename)
