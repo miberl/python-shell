@@ -169,4 +169,7 @@ class TestParserObjectConstruction(TestCase):
 
         self.make_assertions(command, args=['a'])
 
-    # TODO: Test globbing and command substitution
+    def test_command_substitution(self):
+        command = self.run_single_command('echo `echo hello`')
+
+        self.make_assertions(command, name='echo', args=['hello\n'])

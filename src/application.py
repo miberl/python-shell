@@ -18,3 +18,8 @@ class Application(ABC):
     def read_file(cls, filename):
         with open(filename) as f:
             return f.read()
+
+    @classmethod
+    def write_lines(cls, file, lines):
+        with open(file, 'w') as f:
+            f.writelines(lines)

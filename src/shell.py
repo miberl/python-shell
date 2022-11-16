@@ -1,33 +1,30 @@
 import sys
 from os import getcwd
-from collections import deque
 
 from shell_runner.shell import Shell
 
 
-def eval(cmdline, out):
+def eval(cmdline):
     shell = Shell()
-    shell.run_instructions(cmdline, out)
+    return shell.run_instructions(cmdline)
 
 
 def main(argv):
 
     args_num = len(argv) - 1
     if args_num > 0:
-        out = deque()
         if args_num != 2:
             raise ValueError("wrong number of command line arguments")
         if argv[1] != "-c":
             raise ValueError(f"unexpected command line argument {argv[1]}")
-        eval(argv[2], out)
+        out = eval(argv[2])
         while len(out) > 0:
             print(out.popleft(), end="")
     else:
         while True:
             print(getcwd() + "> ", end="")
             cmdline = input()
-            out = deque()
-            eval(cmdline, out)
+            out = eval(cmdline)
             while len(out) > 0:
                 print(out.popleft(), end="")
 

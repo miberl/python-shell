@@ -9,7 +9,7 @@ class TestCat(TestSetup):
         self.app = Cat()
 
     def run_test(self, args, expected_output):
-        super().run_test(args, expected_output,"application.Application.read_file", TestSetup.mock_read_file)
+        super().run_test(args, expected_output, "application.Application.read_file", TestSetup.mock_read_file)
 
     # HAPPY PATHS
     def test_cat(self):

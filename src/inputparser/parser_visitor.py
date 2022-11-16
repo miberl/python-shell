@@ -73,20 +73,71 @@ class ParseVisitor(CommandsVisitor):
         atom = atom_container.getChild(0, CommandsParser.AtomContext)
         self.throw_if_none(atom, 'atom')
 
-        out = ''
+        out = []
 
         for child in atom.getChildren():
             if isinstance(child, CommandsParser.SubstitutedContext):
                 terminal = child.getChild(0, CommandsParser.TerminalContext)
                 instructions = self.get_terminal(terminal)
-                out += EvalInstructions().eval(instructions)
+                out.append(self.eval_substituted(instructions))
             elif isinstance(child, CommandsParser.GlobbedContext):
-                pass
+                out.append(None)
             elif isinstance(child, CommandsParser.Quoted_textContext):
                 text_words = list(child.getChildren())
                 for word in text_words[1:-1]:
-                    out += word.symbol.text
+                    out.append(word.symbol.text)
             elif isinstance(child, TerminalNode) and child.symbol.type == CommandsLexer.WORD:
-                out += child.symbol.text
+                out.append(child.symbol.text)
 
+        result = self.globbed_results(out)
+
+        return result
+
+    def eval_substituted(self, instructions):
+        out = ''
+        for line in EvalInstructions().eval(instructions):
+            out += line
         return out
+
+    def globbed_results(self, out):
+        if None not in out:
+            return self.combined_str(out)
+
+        poss = self.get_list_of_items_in_current_dir()
+
+        result = ''
+        for pos in poss:
+            if self.pos_satisfies_out(out, pos):
+                result += pos + ' '
+
+        if result == '':
+            raise InstructionConstructError('No Globbing match found')
+        return result[:-1]
+
+    @staticmethod
+    def get_list_of_items_in_current_dir():
+        i = Instruction()
+        i.add(Command('ls'))
+        poss = EvalInstructions().eval([i])
+        for i, pos in enumerate(poss):
+            poss[i] = pos[:-1]
+        return poss
+
+    @staticmethod
+    def combined_str(out) -> str:
+        result = ''
+        for word in out:
+            result += word
+        return result
+
+    def pos_satisfies_out(self, out, pos, i=0):
+        if not out and len(pos) == i:
+            return True
+        elif not out or i >= len(pos) or (out[0] is not None and i + len(out[0]) > len(pos)):
+            return False
+
+        if out[0] is None:
+            return self.pos_satisfies_out(out[1:], pos, i) or self.pos_satisfies_out(out, pos, i + 1)
+        else:
+            l = len(out[0])
+            return pos[i: i + l] == out[0] and self.pos_satisfies_out(out[1:], pos, i + l)

@@ -27,19 +27,17 @@ globbed     : '*' ;
 
 // quoting support
 atom
-: WORD
-| atom substituted atom?
-| substituted atom?
-| atom globbed atom?
-| globbed atom?
-| WORD? quoted_text WORD?
+: (WORD | substituted | globbed | quoted_text)+
 ;
 
 //command substitution
 substituted : '`' terminal '`' ;
 
 // quoted text
-quoted_text : SINGLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? SINGLEQUOTE | DOUBLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? DOUBLEQUOTE ;
+quoted_text
+: SINGLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? SINGLEQUOTE
+| DOUBLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? DOUBLEQUOTE
+;
 
 // LEXER RULES
 
@@ -55,7 +53,7 @@ WHITESPACE              : (' ' | '\t') + ;
 SINGLEQUOTE : '\'' ;
 DOUBLEQUOTE : '"' ;
 
-SINGLEQUOTECHAR: ~('\r' | '\n' | '\'') ;
-DOUBLEQUOTECHAR: ~('\r' | '\n' | '"') ;
+SINGLEQUOTEWORD: (ALPHANUM| '"' | '*')+  ;
+DOUBLEQUOTEWORD: (ALPHANUM| '\'' | '*') ;
 
 OTHER                   : .+?;

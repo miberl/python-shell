@@ -26,16 +26,14 @@ class EvalInstructions:
         if not instructions:
             return deque()
 
-        inp = sys.stdin
-
+        outp = deque()
         for instruction in instructions:
-            inp = self.run_one_instruction(inp, instruction)
+            outp += self.run_one_instruction(instruction)
 
-        return self.get_return_val(inp)
+        return self.get_return_val(outp)
 
-    def run_one_instruction(self, inp, instruction):
+    def run_one_instruction(self, instruction):
         inp = sys.stdin
-        outp = ''
         while instruction.has_next():
             inp = self.run_command(inp, instruction)
         return inp
@@ -43,17 +41,29 @@ class EvalInstructions:
     def run_command(self, inp, instruction):
         command = instruction.get_next_command()
         r_in, r_out = command.get_redirs()
+        inp = self.handle_input_redirection(inp, r_in)
+        outp = self.eval_cmd(command, inp)
+        outp = self.handle_output_redirection(outp, r_out)
+        return outp
+
+    @staticmethod
+    def handle_input_redirection(inp, r_in):
         if r_in:
             if inp == sys.stdin:
                 inp = Application.read_file(r_in)
             else:
-                inp
-
-        outp = self.eval_cmd(command, inp)
-        inp = outp
+                inp += Application.read_file(r_in)
         return inp
 
-    def get_return_val(self, inp):
+    @staticmethod
+    def handle_output_redirection(outp, r_out):
+        if r_out:
+            Application.write_lines(r_out, list(outp))
+            outp = deque()
+        return outp
+
+    @staticmethod
+    def get_return_val(inp):
         if inp == sys.stdin:
             return deque()
         return inp
@@ -61,10 +71,10 @@ class EvalInstructions:
     def eval_cmd(self, command, inp):
         app = command.get_app()
         args = command.get_args()
-
         outp = deque()
 
         if app in self.appList:
-            self.appList[app].run(args, outp)
+            self.appList[app].run(args, inp, outp)
+            return outp
         else:
             raise ValueError(f"unsupported application {app}")

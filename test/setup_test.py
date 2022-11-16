@@ -1,3 +1,4 @@
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -27,6 +28,11 @@ class TestSetup(unittest.TestCase):
             },
         },
     }
+
+    def __init__(self, methodName: str = ...):
+        super().__init__(methodName)
+        self.out = None
+        self.app = None
 
     @classmethod
     def mock_read_file(self, file_path):
@@ -59,7 +65,7 @@ class TestSetup(unittest.TestCase):
     ):
         if ref_to_patch and patched_func:
             with patch(ref_to_patch, side_effect=patched_func):
-                self.app.run(args, self.out)
+                self.app.run(args, sys.stdin, self.out)
         else:
             self.app.run(args, self.out)
         if unordered:
@@ -72,7 +78,7 @@ class TestSetup(unittest.TestCase):
         self, args, expected_output, ref_to_patch, patched_return, unordered=False
     ):
         with patch(ref_to_patch, return_value=patched_return):
-            self.app.run(args, self.out)
+            self.app.run(args, sys.stdin, self.out)
         if unordered:
             self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
