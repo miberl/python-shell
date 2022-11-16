@@ -7,7 +7,7 @@ from inputparser.parser_visitor import ParseVisitor
 
 class TestParserObjectConstruction(TestCase):
     @staticmethod
-    def run_parser(cmd: str) -> []:
+    def run_parser(cmd: str) -> list:
         visitor = ParseVisitor()
         parser = ParseCommands()
         parser.parse_visitor(cmd, visitor)
@@ -118,6 +118,7 @@ class TestParserObjectConstruction(TestCase):
             pipe = None
             self.assertTrue(False)
         return pipe
+
 
     def test_pipe(self):
         instructions = self.run_parser('ls -a hello -b there mate < input.txt | cat file.txt')
