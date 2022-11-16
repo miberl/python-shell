@@ -6,7 +6,7 @@ class Application(ABC):
         pass
 
     @abstractmethod
-    def run(self, args, inpt, out):
+    def run(self, args, out):
         pass
 
     @classmethod
