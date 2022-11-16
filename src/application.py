@@ -9,11 +9,12 @@ class Application(ABC):
     def run(self, args, out):
         pass
 
-    
-    def read_lines(self, filename):
+    @classmethod
+    def read_lines(cls, filename):
         with open(filename) as f:
             return f.readlines()
 
-    def read_file(self, filename):
+    @classmethod
+    def read_file(cls, filename):
         with open(filename) as f:
             return f.read()

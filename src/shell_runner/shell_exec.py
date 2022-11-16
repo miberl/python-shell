@@ -2,10 +2,10 @@ from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
-from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut
+from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut, history
+from shell_runner.shell_history import ShellHistory
 
-
-class Shell:
+class ShellExec:
     def __init__(self):
         self.appList = {
             "cat": cat.Cat(),
@@ -19,11 +19,13 @@ class Shell:
             "uniq": uniq.Uniq(),
             "cut": cut.Cut(),
             "sort": sort.Sort(),
+            "history": history.History(),
         }
+        self.history = ShellHistory()
 
     def run_instructions(self, instruction: str, out):
+        self.history.add_to_history(instruction)
         commands = self.get_commands(instruction)
-
         for (app, args) in commands:
             self.run_app(app, args, out)
 

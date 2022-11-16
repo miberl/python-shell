@@ -119,6 +119,7 @@ class TestParserObjectConstruction(TestCase):
             self.assertTrue(False)
         return pipe
 
+
     def test_pipe(self):
         instructions = self.run_parser('ls -a hello -b there mate < input.txt | cat file.txt')
 
