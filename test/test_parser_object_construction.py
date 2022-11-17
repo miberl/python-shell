@@ -115,6 +115,7 @@ class TestParserObjectConstruction(TestCase):
             piped_commands.append(instruction.get_next_command())
         return piped_commands
 
+
     def test_pipe(self):
         instructions = self.run_parser('ls -a hello -b there mate < input.txt | cat file.txt')
 

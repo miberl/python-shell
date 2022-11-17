@@ -1,13 +1,16 @@
 import unittest
-from shell import eval
+
+from shell import Shell
+from collections import deque
 
 
 class TestShell(unittest.TestCase):
     def test_shell(self):
-        out = eval("echo foo")
+        shell = Shell()
+        out = shell.eval("echo foo")
         self.assertEqual(out.popleft(), "foo\n")
         self.assertEqual(len(out), 0)
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     unittest.main()

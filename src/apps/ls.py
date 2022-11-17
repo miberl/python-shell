@@ -16,7 +16,6 @@ class Ls(Application):
 
         self.get_list_from_dir(ls_dir, out)
 
-        out
 
     def get_list_from_dir(self, ls_dir, out):
         for f in listdir(ls_dir):
