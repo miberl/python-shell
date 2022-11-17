@@ -38,11 +38,11 @@ class TestParser(unittest.TestCase):
 
     def test_globbed_between_text(self):
         self.run_test("cmd abc*def",
-                      "instruction(command(app(atom())arg(atom(atom()glob()atom()))))")
+                      "instruction(command(app(atom())arg(atom(glob()))))")
 
     def test_can_glob_app(self):
         self.run_test("qwer*",
-                      "instruction(command(app(atom(atom()glob()))))")
+                      "instruction(command(app(atom(glob()))))")
 
     def test_use_backslash_in_app(self):
         self.run_test("l\\s",
@@ -70,12 +70,12 @@ class TestParser(unittest.TestCase):
 
     def test_substitute_in_arguments(self):
         self.run_test("ls abc`def`ghi",
-                      "instruction(command(app(atom())arg(atom(atom()"
-                      "substituted(instruction(command(app(atom()))))atom()))))")
+                      "instruction(command(app(atom())arg(atom("
+                      "substituted(instruction(command(app(atom()))))))))")
 
     def test_multi_glob_in_app(self):
         self.run_test("*.*",
-                      "instruction(command(app(atom(glob()atom(atom()glob())))))")
+                      "instruction(command(app(atom(glob()glob()))))")
 
     def test_only_substitute(self):
         self.run_test("`ls`",
