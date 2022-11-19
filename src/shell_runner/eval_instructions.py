@@ -75,7 +75,10 @@ class EvalInstructions:
         args = command.get_args()
         outp = deque()
 
-        if app in self.appList:
+        if app[0] == "_" and app[1:] in self.appList:
+            self.appList[app[1:]].run_unsafe(args, inp, outp)
+            return outp
+        elif app in self.appList:
             self.appList[app].run(args, inp, outp)
             return outp
         else:

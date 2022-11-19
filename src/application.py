@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from exceptions.unexpected_argument_error import UnexpectedArgumentError
 from exceptions.unknown_option_error import UnknownFlagError
 
+
 class Application(ABC):
     def __init__(self) -> None:
         self.options = dict()
@@ -10,6 +11,12 @@ class Application(ABC):
     @abstractmethod
     def run(self, args, inpt, out):
         pass
+
+    def run_unsafe(self, args, inpt, out):
+        try:
+            self.run(args, inpt, out)
+        except Exception as e:
+            out.append(str(e))
 
     @classmethod
     def read_lines(cls, filename):
@@ -52,11 +59,11 @@ class Application(ABC):
             elif self.is_option_flag(args[i]):
                 raise UnknownFlagError(args[i])
             else:
-                #trailing command options, if available.
+                # trailing command options, if available.
                 command_args.extend(self.check_no_flags(args[i:]))
                 break
 
-        return (command_args, options)
+        return command_args, options
 
     @classmethod
     def is_option_flag(cls, arg):
