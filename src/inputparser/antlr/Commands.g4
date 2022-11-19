@@ -1,10 +1,10 @@
 grammar Commands ;
 
 // PARSER RULES
-prog        : terminal ('\n' | EOF);
+prog        : terminal? ('\n' | EOF);
 
 // combine commands with ';'
-terminal    : WHITESPACE? (instruction WHITESPACE? ';' WHITESPACE?)? instruction WHITESPACE?;
+terminal    : WHITESPACE? (instruction WHITESPACE? ';' WHITESPACE?)* instruction WHITESPACE?;
 
 // pipe commands into each other
 instruction : WHITESPACE? command (WHITESPACE? '|' WHITESPACE? command)* WHITESPACE? ;

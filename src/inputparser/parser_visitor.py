@@ -17,6 +17,8 @@ class ParseVisitor(CommandsVisitor):
 
     def visitProg(self, ctx: CommandsParser.ProgContext):
         terminal = ctx.getChild(0, CommandsParser.TerminalContext)
+        if terminal is None:
+            return
         self.instructions = self.get_terminal(terminal)
 
     def get_terminal(self, ctx):
@@ -110,7 +112,7 @@ class ParseVisitor(CommandsVisitor):
         out = ''
         for line in EvalInstructions().eval(instructions):
             out += line
-        return out.strip('\n')
+        return out.strip('\n').replace('\n', ' ')
 
     def pos_satisfies_out(self, out, pos, i=0):
         if not out and len(pos) == i:

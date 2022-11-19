@@ -65,10 +65,10 @@ class EvalInstructions:
         return outp
 
     @staticmethod
-    def get_return_val(inp):
-        if inp == sys.stdin:
+    def get_return_val(outp):
+        if outp == sys.stdin:
             return deque()
-        return inp
+        return outp
 
     def eval_cmd(self, command, inp):
         app = command.get_app()
