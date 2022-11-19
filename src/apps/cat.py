@@ -8,7 +8,7 @@ class Cat(Application):
         command_args, options = self.parse_args(args)
         if len(command_args) > 0:
             for arg in command_args:
-                out.append(self.read_file(arg))
+                out.extend(self.read_lines(arg))
             return None 
         for line in inpt:
             out.append(line)

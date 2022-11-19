@@ -23,14 +23,14 @@ class Head(Application):
                 lines.append(line)
         
         limit_option = int(options.get("-n")[0]) if options.get("-n") else None
-        out.extend(self.limit_line_num(lines, limit_option))
+        line_limit = self.line_limit_num(lines, limit_option)
+        out.extend(lines[:line_limit])
 
-
-    def limit_line_num(self, lines, limit):
+    def line_limit_num(self, lines, limit):
         DEFAULT_LINE_LIMIT = 10
         if limit is None:
             limit = DEFAULT_LINE_LIMIT
         limit = min(limit, len(lines))
-        return lines[:limit]
+        return limit
         
 
