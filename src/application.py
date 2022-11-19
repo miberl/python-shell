@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
-
+from exceptions.unexpected_argument_error import UnexpectedArgumentError
+from exceptions.unknown_option_error import UnknownFlagError
 
 class Application(ABC):
     def __init__(self) -> None:
-        pass
+        self.options = dict()
 
     @abstractmethod
     def run(self, args, inpt, out):
