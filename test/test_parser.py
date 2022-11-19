@@ -138,9 +138,8 @@ class TestParser(unittest.TestCase):
                       "instruction(command(arg(atom())))"
                       "instruction(command(arg(atom())))")
 
-    def test_empty_errors(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("", "")
+    def test_empty_ok(self):
+        self.run_test("", "")
 
     def test_single_flag(self):
         self.run_test("cmd -a",
