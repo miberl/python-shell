@@ -50,17 +50,17 @@ class EvalInstructions:
 
     @staticmethod
     def handle_input_redirection(inp, r_in):
-        if r_in:
+        for r in r_in:
             if inp == sys.stdin:
-                inp = Application.read_lines(r_in)
+                inp = Application.read_lines(r)
             else:
-                inp += Application.read_lines(r_in)
+                inp += Application.read_lines(r)
         return inp
 
     @staticmethod
     def handle_output_redirection(outp, r_out):
-        if r_out:
-            Application.write_lines(r_out, list(outp))
+        for r in r_out:
+            Application.write_lines(r, list(outp))
             outp = deque()
         return outp
 

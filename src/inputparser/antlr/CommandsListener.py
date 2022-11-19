@@ -44,15 +44,6 @@ class CommandsListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by CommandsParser#app.
-    def enterApp(self, ctx:CommandsParser.AppContext):
-        pass
-
-    # Exit a parse tree produced by CommandsParser#app.
-    def exitApp(self, ctx:CommandsParser.AppContext):
-        pass
-
-
     # Enter a parse tree produced by CommandsParser#arg.
     def enterArg(self, ctx:CommandsParser.ArgContext):
         pass

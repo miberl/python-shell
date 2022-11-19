@@ -1,3 +1,4 @@
+import os
 from abc import ABC, abstractmethod
 from exceptions.unexpected_argument_error import UnexpectedArgumentError
 from exceptions.unknown_option_error import UnknownFlagError

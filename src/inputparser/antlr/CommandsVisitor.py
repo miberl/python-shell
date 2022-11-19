@@ -29,11 +29,6 @@ class CommandsVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by CommandsParser#app.
-    def visitApp(self, ctx:CommandsParser.AppContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by CommandsParser#arg.
     def visitArg(self, ctx:CommandsParser.ArgContext):
         return self.visitChildren(ctx)

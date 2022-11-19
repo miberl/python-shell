@@ -4,7 +4,7 @@ from exceptions.command_construct_error import InstructionConstructError
 from inputparser.command import Command, Instruction
 
 
-class TestHead(TestCase):
+class TestCommand(TestCase):
     def setUp(self) -> None:
         self.app_only = Command('cmd')
         self.single_flag = Command('cmd_1')
@@ -44,18 +44,25 @@ class TestHead(TestCase):
 
     def test_add_file_in(self):
         self.app_only.add_redir_in('file_one.txt')
-        self.assertEqual(self.app_only.get_redirs(), ('file_one.txt', None))
+        self.assertEqual(self.app_only.get_redirs(), (['file_one.txt'], []))
 
     def test_add_file_out(self):
         self.app_only.add_redir_out('file_two.txt')
-        self.assertEqual(self.app_only.get_redirs(), (None, 'file_two.txt'))
+        self.assertEqual(self.app_only.get_redirs(), ([], ['file_two.txt']))
 
     def test_add_redir_in_and_out(self):
         self.app_only.add_redir_in('file_one.txt')
         self.app_only.add_redir_out('file_two.txt')
 
         self.assertEqual(self.app_only.get_redirs()
-                         , ('file_one.txt', 'file_two.txt'))
+                         , (['file_one.txt'], ['file_two.txt']))
+
+    def test_add_multiple_redir_in(self):
+        self.app_only.add_redir_in('file_one.txt')
+        self.app_only.add_redir_in('file_two.txt')
+
+        self.assertEqual(self.app_only.get_redirs(),
+                         (['file_one.txt', 'file_two.txt'], []))
 
 
 class TestInstruction(TestCase):

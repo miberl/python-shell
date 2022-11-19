@@ -21,7 +21,7 @@ class TestParserObjectConstruction(TestCase):
         else:
             self.assertFalse(True)
 
-    def make_assertions(self, command, name='ls', args=None, redir=(None, None)):
+    def make_assertions(self, command, name='ls', args=None, redir=([], [])):
         if args is None:
             args = []
 
@@ -42,7 +42,7 @@ class TestParserObjectConstruction(TestCase):
     def test_simple_command_no_redir(self):
         command = self.run_single_command('ls')
 
-        self.assertEqual(command.get_redirs(), (None, None))
+        self.assertEqual(command.get_redirs(), ([], []))
 
     def test_simple_command_with_extra_spaces(self):
         command = self.run_single_command(' ls ')
@@ -77,24 +77,24 @@ class TestParserObjectConstruction(TestCase):
     def test_file_redir_in(self):
         command = self.run_single_command('ls < hello.txt')
 
-        self.make_assertions(command, redir=('hello.txt', None))
+        self.make_assertions(command, redir=(['hello.txt'], []))
 
     def test_file_redir_out(self):
         command = self.run_single_command('ls > bye.txt')
 
-        self.make_assertions(command, redir=(None, 'bye.txt'))
+        self.make_assertions(command, redir=([], ['bye.txt']))
 
     def test_file_redir_both(self):
         command = self.run_single_command('ls < hello.txt > bye.txt')
 
-        self.make_assertions(command, redir=('hello.txt', 'bye.txt'))
+        self.make_assertions(command, redir=(['hello.txt'], ['bye.txt']))
 
     def test_flags_args_redir(self):
         command = self.run_single_command('ls -a hello -b there mate < input.txt > output.txt')
 
         self.make_assertions(command,
                              args=['-a', 'hello', '-b', 'there', 'mate'],
-                             redir=('input.txt', 'output.txt'))
+                             redir=(['input.txt'], ['output.txt']))
 
     def test_simple_pipe(self):
         instructions = self.run_parser('ls | ls')
@@ -129,7 +129,7 @@ class TestParserObjectConstruction(TestCase):
         assert len(commands) == 2
         self.make_assertions(left_command,
                              args=['-a', 'hello', '-b', 'there', 'mate'],
-                             redir=('input.txt', None))
+                             redir=(['input.txt'], []))
 
         self.make_assertions(right_command,
                              name='cat',

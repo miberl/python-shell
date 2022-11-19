@@ -11,12 +11,10 @@ instruction : WHITESPACE? command (WHITESPACE? '|' WHITESPACE? command)* WHITESP
 
 // simple command structure
 command
-: WHITESPACE? app arg* (WHITESPACE redir_in)? (WHITESPACE redir_out)? WHITESPACE?
+:  (redir_in | redir_out | WHITESPACE)* arg (WHITESPACE arg | redir_in | redir_out | WHITESPACE)*
 ;
-// app name
-app         : atom ;
 // arguments
-arg         : (WHITESPACE (atom | globbed)) ;
+arg         : (atom | globbed) ;
 
 // redirection
 redir_in    : '<' WHITESPACE? atom ;
@@ -35,8 +33,8 @@ substituted : '`' terminal '`' ;
 
 // Quoting Support
 quoted_text:
-(SINGLEQUOTE (DOUBLEQUOTE | '*' | '|' | ';' |QUOTEWORD | WORD | substituted | WHITESPACE)* SINGLEQUOTE)
-| (DOUBLEQUOTE (SINGLEQUOTE | ';' | '*' | ';' | '*' |QUOTEWORD | WORD | substituted | WHITESPACE)* DOUBLEQUOTE)
+(SINGLEQUOTE (DOUBLEQUOTE | '*' | '|' | ';' | '<' | '>' | QUOTEWORD | WORD | substituted | WHITESPACE)* SINGLEQUOTE)
+| (DOUBLEQUOTE (SINGLEQUOTE | ';' | '*' | ';' | '*' | '<' | '>' |QUOTEWORD | WORD | substituted | WHITESPACE)* DOUBLEQUOTE)
 ;
 
 
@@ -53,6 +51,6 @@ WHITESPACE              : (' ' | '\t') + ;
 
 SINGLEQUOTE: '\'' ;
 DOUBLEQUOTE: '"' ;
-QUOTEWORD: ~('\r' | '\n' | '\'' | '"' | '`' | ' ' | '\t' | '*' | '|' | ';')+;
+QUOTEWORD: ~('\r' | '\n' | '\'' | '"' | '`' | ' ' | '\t' | '*' | '|' | ';' | '<' | '>')+;
 
 OTHER                   : .+?;

@@ -1,5 +1,6 @@
 from antlr4 import TerminalNode
 from exceptions.command_construct_error import InstructionConstructError
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 from inputparser.antlr.CommandsParser import CommandsParser
 from inputparser.antlr.CommandsVisitor import CommandsVisitor
 from inputparser.command import Command, Instruction
@@ -36,20 +37,13 @@ class ParseVisitor(CommandsVisitor):
         return instr
 
     def get_command(self, command: CommandsParser.CommandContext):
-        cmd_args = self.get_command_app(command)
-        cmd_args += self.get_command_args(command)
+        cmd_args = self.get_command_args(command)
         cmd = Command(cmd_args[0])
         for arg in cmd_args[1:]:
             cmd.add_arg(arg)
 
         self.get_command_redirs(cmd, command)
         return cmd
-
-    def get_command_app(self, command: CommandsParser.CommandContext) -> [str]:
-        app = command.getChild(0, CommandsParser.AppContext)
-        self.throw_if_none(app, 'app')
-        app_text = self.eval_atom(app)
-        return app_text
 
     def get_command_args(self, command: CommandsParser.CommandContext) -> [str]:
         args = command.getTypedRuleContexts(CommandsParser.ArgContext)
@@ -61,14 +55,19 @@ class ParseVisitor(CommandsVisitor):
 
     def get_command_redirs(self, cmd: Command, command: CommandsParser.CommandContext) -> (str, str):
         file_in = command.getChild(0, CommandsParser.Redir_inContext)
-        file_out = command.getChild(0, CommandsParser.Redir_outContext)
-
-        if file_in is not None:
+        i = 1
+        while file_in is not None:
             file_in_text = self.eval_atom(file_in)[-1]
             cmd.add_redir_in(file_in_text)
-        if file_out is not None:
+            file_in = command.getChild(i, CommandsParser.Redir_outContext)
+            i += 1
+
+        file_out = command.getChild(0, CommandsParser.Redir_outContext)
+        while file_out is not None:
             file_out_text = self.eval_atom(file_out)[-1]
             cmd.add_redir_out(file_out_text)
+            file_out = command.getChild(i, CommandsParser.Redir_outContext)
+            i += 1
 
     @staticmethod
     def throw_if_none(elem, err):

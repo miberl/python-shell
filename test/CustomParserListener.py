@@ -23,13 +23,6 @@ class CustomParserListener(CommandsListener):
     def exitCommand(self, ctx: CommandsParser.CommandContext):
         self.out.append(")")
 
-    # Enter a antlr tree produced by CommandsParser#app.
-    def enterApp(self, ctx: CommandsParser.AppContext):
-        self.out.append("app(")
-
-    def exitApp(self, ctx: CommandsParser.AppContext):
-        self.out.append(")")
-
     # Enter a antlr tree produced by CommandsParser#args.
     def enterArg(self, ctx: CommandsParser.ArgContext):
         self.out.append("arg(")

@@ -5,22 +5,22 @@ class Command:
     def __init__(self, app: str):
         self.app = app
         self.args = []
-        self.redir_in = None
-        self.redir_out = None
+        self.redir_in = []
+        self.redir_out = []
 
     def add_arg(self, arg: str) -> None:
        self.args.append(arg)
 
     def add_redir_in(self, file: str) -> None:
-        self.redir_in = file
+        self.redir_in.append(file)
 
     def add_redir_out(self, file: str) -> None:
-        self.redir_out = file
+        self.redir_out.append(file)
 
     def get_args(self) -> [str]:
         return self.args
 
-    def get_redirs(self) -> (str, str):
+    def get_redirs(self) -> ([str], [str]):
         return self.redir_in, self.redir_out
 
     def get_app(self) -> str:
