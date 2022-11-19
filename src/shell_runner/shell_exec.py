@@ -2,7 +2,6 @@ from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
-from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut, history
 from shell_runner.shell_history import ShellHistory
 from shell_runner.eval_instructions import EvalInstructions
 

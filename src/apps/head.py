@@ -1,60 +1,36 @@
 from application import Application
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 
+# head [file ...]
 
 class Head(Application):
     def __init__(self):
         super().__init__()
-        self.args = None
+        self.options = {
+            "-n": 1
+        }
 
     def run(self, args, inpt, out) -> None:
-        self.args = args
+        command_args, options = self.parse_args(args)
 
-        self.error_if_has_bad_num_args()
+        lines = []
+        if len(command_args) == 1:
+            lines.extend(self.read_lines(command_args[0]))
+        elif len(command_args) > 1:
+            raise InvalidSyntaxError("multiple arguments provided, expected 1")
+        else:
+            for line in inpt:
+                lines.append(line)
+        
+        limit_option = int(options.get("-n")[0]) if options.get("-n") else None
+        out.extend(self.limit_line_num(lines, limit_option))
 
-        file, num_lines = self.get_file_and_num_lines_to_read()
 
-        file_lines = self.read_lines(file)
+    def limit_line_num(self, lines, limit):
+        DEFAULT_LINE_LIMIT = 10
+        if limit is None:
+            limit = DEFAULT_LINE_LIMIT
+        limit = min(limit, len(lines))
+        return lines[:limit]
+        
 
-        for i in range(0, min(len(file_lines), num_lines)):
-            out.append(file_lines[i])
-
-    def get_file_and_num_lines_to_read(self):
-        file = ''
-        num_lines = 0
-
-        if len(self.args) == 1:
-            file, num_lines = self.read_10_with_one_arg()
-        if len(self.args) == 3:
-            file, num_lines = self.read_n_with_three_args()
-
-        return file, num_lines
-
-    def read_n_with_three_args(self):
-        self.error_if_not_flag_n()
-
-        file, num_lines = self.read_in_args()
-        return file, num_lines
-
-    def read_in_args(self):
-        num_lines = int(self.args[1])
-        file = self.args[2]
-        return file, num_lines
-
-    def error_if_not_flag_n(self):
-        if not self.is_first_flag_n():
-            raise ValueError("wrong flags")
-
-    def is_first_flag_n(self):
-        return self.args[0] == "-n"
-
-    def read_10_with_one_arg(self):
-        num_lines = 10
-        file = self.args[0]
-        return file, num_lines
-
-    def error_if_has_bad_num_args(self):
-        if not self.one_or_three_args():
-            raise ValueError("wrong number of command line arguments")
-
-    def one_or_three_args(self):
-        return len(self.args) == 1 or len(self.args) == 3
