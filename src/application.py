@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
-from exceptions.unexpected_argument_error import UnexpectedArgumentError
-from exceptions.unknown_option_error import UnknownFlagError
+
 
 class Application(ABC):
     def __init__(self) -> None:
-        self.options = dict()
+        pass
 
     @abstractmethod
     def run(self, args, inpt, out):
@@ -24,22 +23,25 @@ class Application(ABC):
     def write_lines(cls, file, lines):
         with open(file, 'w') as f:
             f.writelines(lines)
-    
+
+    @classmethod
+    def get_dir_contents(cls, top: str):
+        return next(os.walk(top))
 
     # parses provided arguments, returns a tuple of (command_args, options)
     # where command args is a list of leading and trailing arguments that are not options
     def parse_args(self, args):
         command_args = []
         options = dict()
-        i = 0 
+        i = 0
 
         # leading command options
         while i < len(args):
             if self.is_option_flag(args[i]):
-                break 
+                break
             command_args.append(args[i])
             i += 1
-        
+
         while i < len(args):
             if args[i] in self.options:
                 options[args[i]] = Application.check_no_flags(

@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
@@ -7,7 +8,7 @@ class Shell:
     def __init__(self) -> None:
         self.shell = ShellExec()
 
-    def eval(self, cmdline):
+    def eval(self, cmdline: str) -> deque:
         return self.shell.run_instructions(cmdline)
 
     def main(self, argv):

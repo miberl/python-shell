@@ -33,27 +33,26 @@ atom
 //command substitution
 substituted : '`' terminal '`' ;
 
-// quoted text
-quoted_text
-: SINGLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? SINGLEQUOTE
-| DOUBLEQUOTE WHITESPACE? (WORD WHITESPACE?)* WHITESPACE? DOUBLEQUOTE
+// Quoting Support
+quoted_text:
+(SINGLEQUOTE (DOUBLEQUOTE | '*' | '|' | ';' |QUOTEWORD | WORD | substituted | WHITESPACE)* SINGLEQUOTE)
+| (DOUBLEQUOTE (SINGLEQUOTE | ';' | '*' | ';' | '*' |QUOTEWORD | WORD | substituted | WHITESPACE)* DOUBLEQUOTE)
 ;
+
 
 // LEXER RULES
 
 fragment LOWER          : [a-z] ;
 fragment UPPER          : [A-Z] ;
 fragment NUMBER         : [0-9] ;
-fragment PUNCT     : ('.' | ',' | '/' | '\\' | '_'| '-') ;
+fragment PUNCT          : ('.' | ',' | '/' | '\\' | '_'| '-') ;
 fragment ALPHANUM       : (LOWER | UPPER | NUMBER | PUNCT ) ;
 
 WORD                    : ALPHANUM+;
 WHITESPACE              : (' ' | '\t') + ;
 
-SINGLEQUOTE : '\'' ;
-DOUBLEQUOTE : '"' ;
-
-SINGLEQUOTEWORD: (ALPHANUM| '"' | '*')+  ;
-DOUBLEQUOTEWORD: (ALPHANUM| '\'' | '*') ;
+SINGLEQUOTE: '\'' ;
+DOUBLEQUOTE: '"' ;
+QUOTEWORD: ~('\r' | '\n' | '\'' | '"' | '`' | ' ' | '\t' | '*' | '|' | ';')+;
 
 OTHER                   : .+?;

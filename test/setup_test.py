@@ -54,6 +54,23 @@ class TestSetup(unittest.TestCase):
 
         return curr_dir[file_name]
 
+    @classmethod
+    def mock_os_walk(cls, top):
+        dirs = top.split('/')[1:-1]
+        pwd = cls.mock_fs
+        for dir_ in dirs:
+            pwd = pwd[dir_]
+
+        files = []
+        dirs = []
+        for entry in pwd.keys():
+            if type(pwd[entry]) is str:
+                files.append(entry)
+            else:
+                dirs.append(entry)
+
+        return top, dirs, files
+
     # Runs a test, patches function with mock function if supplied
     def run_test(
         self,
@@ -65,20 +82,23 @@ class TestSetup(unittest.TestCase):
     ):
         if ref_to_patch and patched_func:
             with patch(ref_to_patch, side_effect=patched_func):
-                self.app.run(args, sys.stdin, self.out)
+                self.code_under_test(args)
         else:
-            self.app.run(args, self.out)
+            self.code_under_test(args)
         if unordered:
             self.assertEqual(set(self.out), set(expected_output))
         else:
             self.assertEqual(self.out, expected_output)
+
+    def code_under_test(self, args):
+        self.app.run(args, sys.stdin, self.out)
 
     # Runs a test, patches function with mock return value
     def run_test_patch_return(
         self, args, expected_output, ref_to_patch, patched_return, unordered=False
     ):
         with patch(ref_to_patch, return_value=patched_return):
-            self.app.run(args, sys.stdin, self.out)
+            self.code_under_test(args)
         if unordered:
             self.assertEqual(sorted(self.out), sorted(expected_output))
         else:

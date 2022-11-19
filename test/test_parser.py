@@ -41,7 +41,7 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())arg(atom(glob()))))")
 
     def test_can_glob_app(self):
-        self.run_test("qwer*",
+         self.run_test("qwer*",
                       "instruction(command(app(atom(glob()))))")
 
     def test_use_backslash_in_app(self):
@@ -82,9 +82,8 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom("
                       "substituted(instruction(command(app(atom()))))))))")
 
-    def test_cannot_glob_in_quote(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("'ls *'", "")
+    def test_can_use_asterisk_in_quotes(self):
+        self.run_test("'ls *'", "instruction(command(app(atom())))")
 
     def test_redir_in(self):
         self.run_test("cmd < file",
@@ -130,9 +129,8 @@ class TestParser(unittest.TestCase):
                       "command(app(atom()))"
                       "command(app(atom())))")
 
-    def test_cannot_use_pipe_in_quotes(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("'cmd1 | cmd2'", "")
+    def test_can_use_pipe_in_quotes(self):
+        self.run_test("'cmd1 | cmd2'", "instruction(command(app(atom())))")
 
     def test_pipe_with_args(self):
         self.run_test("cmd1 bla | cmd2 bla",
@@ -144,9 +142,8 @@ class TestParser(unittest.TestCase):
                       "instruction(command(app(atom())))"
                       "instruction(command(app(atom())))")
 
-    def test_cannot_use_semicolon_in_quotes(self):
-        with self.assertRaises(InvalidSyntaxError):
-            self.run_test("'cm;d'", "")
+    def test_can_use_punctuation_in_quotes(self):
+        self.run_test("'cm;d'", "instruction(command(app(atom())))")
 
     def test_combine_without_space(self):
         self.run_test("cmd1;cmd2",

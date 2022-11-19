@@ -17,7 +17,7 @@ class Command:
     def add_redir_out(self, file: str) -> None:
         self.redir_out = file
 
-    def get_args(self) -> [(str, [str])]:
+    def get_args(self) -> [str]:
         return self.args
 
     def get_redirs(self) -> (str, str):
@@ -31,17 +31,17 @@ class Instruction:
     def __init__(self):
         self.commands = []
 
-    def add(self, command: Command):
+    def add(self, command: Command) -> None:
         if type(command) is not Command:
             raise InstructionConstructError("Expected command when adding to instruction")
 
         self.commands.append(command)
 
-    def get_next_command(self) -> (Command, Command):
+    def get_next_command(self) -> Command:
         self.throw_if_either_is_none()
         return self.commands.pop(0)
 
-    def has_next(self):
+    def has_next(self) -> bool:
         return len(self.commands) != 0
 
     def throw_if_either_is_none(self) -> None:

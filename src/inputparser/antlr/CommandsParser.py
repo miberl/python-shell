@@ -10,7 +10,7 @@ else:
 
 def serializedATN():
     return [
-        4,1,14,155,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,13,152,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,1,0,1,0,1,0,1,1,3,
         1,29,8,1,1,1,1,1,3,1,33,8,1,1,1,1,1,3,1,37,8,1,3,1,39,8,1,1,1,1,
         1,3,1,43,8,1,1,2,3,2,46,8,2,1,2,1,2,3,2,50,8,2,1,2,1,2,3,2,54,8,
@@ -18,53 +18,54 @@ def serializedATN():
         1,3,1,3,5,3,70,8,3,10,3,12,3,73,9,3,1,3,1,3,3,3,77,8,3,1,3,1,3,3,
         3,81,8,3,1,3,3,3,84,8,3,1,4,1,4,1,5,1,5,1,5,3,5,91,8,5,1,6,1,6,3,
         6,95,8,6,1,6,1,6,1,7,1,7,3,7,101,8,7,1,7,1,7,1,8,1,8,1,9,1,9,1,9,
-        1,9,4,9,111,8,9,11,9,12,9,112,1,10,1,10,1,10,1,10,1,11,1,11,3,11,
-        121,8,11,1,11,1,11,3,11,125,8,11,5,11,127,8,11,10,11,12,11,130,9,
-        11,1,11,3,11,133,8,11,1,11,1,11,1,11,3,11,138,8,11,1,11,1,11,3,11,
-        142,8,11,5,11,144,8,11,10,11,12,11,147,9,11,1,11,3,11,150,8,11,1,
-        11,3,11,153,8,11,1,11,0,0,12,0,2,4,6,8,10,12,14,16,18,20,22,0,1,
-        1,1,1,1,173,0,24,1,0,0,0,2,28,1,0,0,0,4,45,1,0,0,0,6,65,1,0,0,0,
-        8,85,1,0,0,0,10,87,1,0,0,0,12,92,1,0,0,0,14,98,1,0,0,0,16,104,1,
-        0,0,0,18,110,1,0,0,0,20,114,1,0,0,0,22,152,1,0,0,0,24,25,3,2,1,0,
-        25,26,7,0,0,0,26,1,1,0,0,0,27,29,5,9,0,0,28,27,1,0,0,0,28,29,1,0,
-        0,0,29,38,1,0,0,0,30,32,3,4,2,0,31,33,5,9,0,0,32,31,1,0,0,0,32,33,
-        1,0,0,0,33,34,1,0,0,0,34,36,5,2,0,0,35,37,5,9,0,0,36,35,1,0,0,0,
-        36,37,1,0,0,0,37,39,1,0,0,0,38,30,1,0,0,0,38,39,1,0,0,0,39,40,1,
-        0,0,0,40,42,3,4,2,0,41,43,5,9,0,0,42,41,1,0,0,0,42,43,1,0,0,0,43,
-        3,1,0,0,0,44,46,5,9,0,0,45,44,1,0,0,0,45,46,1,0,0,0,46,47,1,0,0,
-        0,47,58,3,6,3,0,48,50,5,9,0,0,49,48,1,0,0,0,49,50,1,0,0,0,50,51,
-        1,0,0,0,51,53,5,3,0,0,52,54,5,9,0,0,53,52,1,0,0,0,53,54,1,0,0,0,
-        54,55,1,0,0,0,55,57,3,6,3,0,56,49,1,0,0,0,57,60,1,0,0,0,58,56,1,
-        0,0,0,58,59,1,0,0,0,59,62,1,0,0,0,60,58,1,0,0,0,61,63,5,9,0,0,62,
-        61,1,0,0,0,62,63,1,0,0,0,63,5,1,0,0,0,64,66,5,9,0,0,65,64,1,0,0,
-        0,65,66,1,0,0,0,66,67,1,0,0,0,67,71,3,8,4,0,68,70,3,10,5,0,69,68,
-        1,0,0,0,70,73,1,0,0,0,71,69,1,0,0,0,71,72,1,0,0,0,72,76,1,0,0,0,
-        73,71,1,0,0,0,74,75,5,9,0,0,75,77,3,12,6,0,76,74,1,0,0,0,76,77,1,
-        0,0,0,77,80,1,0,0,0,78,79,5,9,0,0,79,81,3,14,7,0,80,78,1,0,0,0,80,
-        81,1,0,0,0,81,83,1,0,0,0,82,84,5,9,0,0,83,82,1,0,0,0,83,84,1,0,0,
-        0,84,7,1,0,0,0,85,86,3,18,9,0,86,9,1,0,0,0,87,90,5,9,0,0,88,91,3,
-        18,9,0,89,91,3,16,8,0,90,88,1,0,0,0,90,89,1,0,0,0,91,11,1,0,0,0,
-        92,94,5,4,0,0,93,95,5,9,0,0,94,93,1,0,0,0,94,95,1,0,0,0,95,96,1,
-        0,0,0,96,97,3,18,9,0,97,13,1,0,0,0,98,100,5,5,0,0,99,101,5,9,0,0,
-        100,99,1,0,0,0,100,101,1,0,0,0,101,102,1,0,0,0,102,103,3,18,9,0,
-        103,15,1,0,0,0,104,105,5,6,0,0,105,17,1,0,0,0,106,111,5,8,0,0,107,
-        111,3,20,10,0,108,111,3,16,8,0,109,111,3,22,11,0,110,106,1,0,0,0,
-        110,107,1,0,0,0,110,108,1,0,0,0,110,109,1,0,0,0,111,112,1,0,0,0,
-        112,110,1,0,0,0,112,113,1,0,0,0,113,19,1,0,0,0,114,115,5,7,0,0,115,
-        116,3,2,1,0,116,117,5,7,0,0,117,21,1,0,0,0,118,120,5,10,0,0,119,
-        121,5,9,0,0,120,119,1,0,0,0,120,121,1,0,0,0,121,128,1,0,0,0,122,
-        124,5,8,0,0,123,125,5,9,0,0,124,123,1,0,0,0,124,125,1,0,0,0,125,
-        127,1,0,0,0,126,122,1,0,0,0,127,130,1,0,0,0,128,126,1,0,0,0,128,
-        129,1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,0,131,133,5,9,0,0,132,
-        131,1,0,0,0,132,133,1,0,0,0,133,134,1,0,0,0,134,153,5,10,0,0,135,
-        137,5,11,0,0,136,138,5,9,0,0,137,136,1,0,0,0,137,138,1,0,0,0,138,
-        145,1,0,0,0,139,141,5,8,0,0,140,142,5,9,0,0,141,140,1,0,0,0,141,
-        142,1,0,0,0,142,144,1,0,0,0,143,139,1,0,0,0,144,147,1,0,0,0,145,
-        143,1,0,0,0,145,146,1,0,0,0,146,149,1,0,0,0,147,145,1,0,0,0,148,
-        150,5,9,0,0,149,148,1,0,0,0,149,150,1,0,0,0,150,151,1,0,0,0,151,
-        153,5,11,0,0,152,118,1,0,0,0,152,135,1,0,0,0,153,23,1,0,0,0,29,28,
-        32,36,38,42,45,49,53,58,62,65,71,76,80,83,90,94,100,110,112,120,
-        124,128,132,137,141,145,149,152
+        1,9,4,9,111,8,9,11,9,12,9,112,1,10,1,10,1,10,1,10,1,11,1,11,1,11,
+        1,11,1,11,1,11,1,11,1,11,1,11,5,11,128,8,11,10,11,12,11,131,9,11,
+        1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,5,11,144,
+        8,11,10,11,12,11,147,9,11,1,11,3,11,150,8,11,1,11,0,0,12,0,2,4,6,
+        8,10,12,14,16,18,20,22,0,1,1,1,1,1,179,0,24,1,0,0,0,2,28,1,0,0,0,
+        4,45,1,0,0,0,6,65,1,0,0,0,8,85,1,0,0,0,10,87,1,0,0,0,12,92,1,0,0,
+        0,14,98,1,0,0,0,16,104,1,0,0,0,18,110,1,0,0,0,20,114,1,0,0,0,22,
+        149,1,0,0,0,24,25,3,2,1,0,25,26,7,0,0,0,26,1,1,0,0,0,27,29,5,9,0,
+        0,28,27,1,0,0,0,28,29,1,0,0,0,29,38,1,0,0,0,30,32,3,4,2,0,31,33,
+        5,9,0,0,32,31,1,0,0,0,32,33,1,0,0,0,33,34,1,0,0,0,34,36,5,2,0,0,
+        35,37,5,9,0,0,36,35,1,0,0,0,36,37,1,0,0,0,37,39,1,0,0,0,38,30,1,
+        0,0,0,38,39,1,0,0,0,39,40,1,0,0,0,40,42,3,4,2,0,41,43,5,9,0,0,42,
+        41,1,0,0,0,42,43,1,0,0,0,43,3,1,0,0,0,44,46,5,9,0,0,45,44,1,0,0,
+        0,45,46,1,0,0,0,46,47,1,0,0,0,47,58,3,6,3,0,48,50,5,9,0,0,49,48,
+        1,0,0,0,49,50,1,0,0,0,50,51,1,0,0,0,51,53,5,3,0,0,52,54,5,9,0,0,
+        53,52,1,0,0,0,53,54,1,0,0,0,54,55,1,0,0,0,55,57,3,6,3,0,56,49,1,
+        0,0,0,57,60,1,0,0,0,58,56,1,0,0,0,58,59,1,0,0,0,59,62,1,0,0,0,60,
+        58,1,0,0,0,61,63,5,9,0,0,62,61,1,0,0,0,62,63,1,0,0,0,63,5,1,0,0,
+        0,64,66,5,9,0,0,65,64,1,0,0,0,65,66,1,0,0,0,66,67,1,0,0,0,67,71,
+        3,8,4,0,68,70,3,10,5,0,69,68,1,0,0,0,70,73,1,0,0,0,71,69,1,0,0,0,
+        71,72,1,0,0,0,72,76,1,0,0,0,73,71,1,0,0,0,74,75,5,9,0,0,75,77,3,
+        12,6,0,76,74,1,0,0,0,76,77,1,0,0,0,77,80,1,0,0,0,78,79,5,9,0,0,79,
+        81,3,14,7,0,80,78,1,0,0,0,80,81,1,0,0,0,81,83,1,0,0,0,82,84,5,9,
+        0,0,83,82,1,0,0,0,83,84,1,0,0,0,84,7,1,0,0,0,85,86,3,18,9,0,86,9,
+        1,0,0,0,87,90,5,9,0,0,88,91,3,18,9,0,89,91,3,16,8,0,90,88,1,0,0,
+        0,90,89,1,0,0,0,91,11,1,0,0,0,92,94,5,4,0,0,93,95,5,9,0,0,94,93,
+        1,0,0,0,94,95,1,0,0,0,95,96,1,0,0,0,96,97,3,18,9,0,97,13,1,0,0,0,
+        98,100,5,5,0,0,99,101,5,9,0,0,100,99,1,0,0,0,100,101,1,0,0,0,101,
+        102,1,0,0,0,102,103,3,18,9,0,103,15,1,0,0,0,104,105,5,6,0,0,105,
+        17,1,0,0,0,106,111,5,8,0,0,107,111,3,20,10,0,108,111,3,16,8,0,109,
+        111,3,22,11,0,110,106,1,0,0,0,110,107,1,0,0,0,110,108,1,0,0,0,110,
+        109,1,0,0,0,111,112,1,0,0,0,112,110,1,0,0,0,112,113,1,0,0,0,113,
+        19,1,0,0,0,114,115,5,7,0,0,115,116,3,2,1,0,116,117,5,7,0,0,117,21,
+        1,0,0,0,118,129,5,10,0,0,119,128,5,11,0,0,120,128,5,6,0,0,121,128,
+        5,3,0,0,122,128,5,2,0,0,123,128,5,12,0,0,124,128,5,8,0,0,125,128,
+        3,20,10,0,126,128,5,9,0,0,127,119,1,0,0,0,127,120,1,0,0,0,127,121,
+        1,0,0,0,127,122,1,0,0,0,127,123,1,0,0,0,127,124,1,0,0,0,127,125,
+        1,0,0,0,127,126,1,0,0,0,128,131,1,0,0,0,129,127,1,0,0,0,129,130,
+        1,0,0,0,130,132,1,0,0,0,131,129,1,0,0,0,132,150,5,10,0,0,133,145,
+        5,11,0,0,134,144,5,10,0,0,135,144,5,2,0,0,136,144,5,6,0,0,137,144,
+        5,2,0,0,138,144,5,6,0,0,139,144,5,12,0,0,140,144,5,8,0,0,141,144,
+        3,20,10,0,142,144,5,9,0,0,143,134,1,0,0,0,143,135,1,0,0,0,143,136,
+        1,0,0,0,143,137,1,0,0,0,143,138,1,0,0,0,143,139,1,0,0,0,143,140,
+        1,0,0,0,143,141,1,0,0,0,143,142,1,0,0,0,144,147,1,0,0,0,145,143,
+        1,0,0,0,145,146,1,0,0,0,146,148,1,0,0,0,147,145,1,0,0,0,148,150,
+        5,11,0,0,149,118,1,0,0,0,149,133,1,0,0,0,150,23,1,0,0,0,25,28,32,
+        36,38,42,45,49,53,58,62,65,71,76,80,83,90,94,100,110,112,127,129,
+        143,145,149
     ]
 
 class CommandsParser ( Parser ):
@@ -83,7 +84,7 @@ class CommandsParser ( Parser ):
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "WORD", "WHITESPACE", "SINGLEQUOTE", "DOUBLEQUOTE", 
-                      "SINGLEQUOTECHAR", "DOUBLEQUOTECHAR", "OTHER" ]
+                      "QUOTEWORD", "OTHER" ]
 
     RULE_prog = 0
     RULE_terminal = 1
@@ -114,9 +115,8 @@ class CommandsParser ( Parser ):
     WHITESPACE=9
     SINGLEQUOTE=10
     DOUBLEQUOTE=11
-    SINGLEQUOTECHAR=12
-    DOUBLEQUOTECHAR=13
-    OTHER=14
+    QUOTEWORD=12
+    OTHER=13
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -960,11 +960,17 @@ class CommandsParser ( Parser ):
             else:
                 return self.getToken(CommandsParser.SINGLEQUOTE, i)
 
-        def WHITESPACE(self, i:int=None):
+        def DOUBLEQUOTE(self, i:int=None):
             if i is None:
-                return self.getTokens(CommandsParser.WHITESPACE)
+                return self.getTokens(CommandsParser.DOUBLEQUOTE)
             else:
-                return self.getToken(CommandsParser.WHITESPACE, i)
+                return self.getToken(CommandsParser.DOUBLEQUOTE, i)
+
+        def QUOTEWORD(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.QUOTEWORD)
+            else:
+                return self.getToken(CommandsParser.QUOTEWORD, i)
 
         def WORD(self, i:int=None):
             if i is None:
@@ -972,11 +978,18 @@ class CommandsParser ( Parser ):
             else:
                 return self.getToken(CommandsParser.WORD, i)
 
-        def DOUBLEQUOTE(self, i:int=None):
+        def substituted(self, i:int=None):
             if i is None:
-                return self.getTokens(CommandsParser.DOUBLEQUOTE)
+                return self.getTypedRuleContexts(CommandsParser.SubstitutedContext)
             else:
-                return self.getToken(CommandsParser.DOUBLEQUOTE, i)
+                return self.getTypedRuleContext(CommandsParser.SubstitutedContext,i)
+
+
+        def WHITESPACE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.WHITESPACE)
+            else:
+                return self.getToken(CommandsParser.WHITESPACE, i)
 
         def getRuleIndex(self):
             return CommandsParser.RULE_quoted_text
@@ -1004,89 +1017,124 @@ class CommandsParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_quoted_text)
         self._la = 0 # Token type
         try:
-            self.state = 152
+            self.state = 149
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [10]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 118
                 self.match(CommandsParser.SINGLEQUOTE)
-                self.state = 120
-                self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
-                if la_ == 1:
-                    self.state = 119
-                    self.match(CommandsParser.WHITESPACE)
-
-
-                self.state = 128
+                self.state = 129
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==8:
-                    self.state = 122
-                    self.match(CommandsParser.WORD)
-                    self.state = 124
+                while ((_la) & ~0x3f) == 0 and ((1 << _la) & 7116) != 0:
+                    self.state = 127
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,21,self._ctx)
-                    if la_ == 1:
+                    token = self._input.LA(1)
+                    if token in [11]:
+                        self.state = 119
+                        self.match(CommandsParser.DOUBLEQUOTE)
+                        pass
+                    elif token in [6]:
+                        self.state = 120
+                        self.match(CommandsParser.T__5)
+                        pass
+                    elif token in [3]:
+                        self.state = 121
+                        self.match(CommandsParser.T__2)
+                        pass
+                    elif token in [2]:
+                        self.state = 122
+                        self.match(CommandsParser.T__1)
+                        pass
+                    elif token in [12]:
                         self.state = 123
+                        self.match(CommandsParser.QUOTEWORD)
+                        pass
+                    elif token in [8]:
+                        self.state = 124
+                        self.match(CommandsParser.WORD)
+                        pass
+                    elif token in [7]:
+                        self.state = 125
+                        self.substituted()
+                        pass
+                    elif token in [9]:
+                        self.state = 126
                         self.match(CommandsParser.WHITESPACE)
+                        pass
+                    else:
+                        raise NoViableAltException(self)
 
-
-                    self.state = 130
+                    self.state = 131
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
                 self.state = 132
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==9:
-                    self.state = 131
-                    self.match(CommandsParser.WHITESPACE)
-
-
-                self.state = 134
                 self.match(CommandsParser.SINGLEQUOTE)
                 pass
             elif token in [11]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 135
+                self.state = 133
                 self.match(CommandsParser.DOUBLEQUOTE)
-                self.state = 137
-                self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
-                if la_ == 1:
-                    self.state = 136
-                    self.match(CommandsParser.WHITESPACE)
-
-
                 self.state = 145
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==8:
-                    self.state = 139
-                    self.match(CommandsParser.WORD)
-                    self.state = 141
+                while ((_la) & ~0x3f) == 0 and ((1 << _la) & 6084) != 0:
+                    self.state = 143
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
                     if la_ == 1:
+                        self.state = 134
+                        self.match(CommandsParser.SINGLEQUOTE)
+                        pass
+
+                    elif la_ == 2:
+                        self.state = 135
+                        self.match(CommandsParser.T__1)
+                        pass
+
+                    elif la_ == 3:
+                        self.state = 136
+                        self.match(CommandsParser.T__5)
+                        pass
+
+                    elif la_ == 4:
+                        self.state = 137
+                        self.match(CommandsParser.T__1)
+                        pass
+
+                    elif la_ == 5:
+                        self.state = 138
+                        self.match(CommandsParser.T__5)
+                        pass
+
+                    elif la_ == 6:
+                        self.state = 139
+                        self.match(CommandsParser.QUOTEWORD)
+                        pass
+
+                    elif la_ == 7:
                         self.state = 140
+                        self.match(CommandsParser.WORD)
+                        pass
+
+                    elif la_ == 8:
+                        self.state = 141
+                        self.substituted()
+                        pass
+
+                    elif la_ == 9:
+                        self.state = 142
                         self.match(CommandsParser.WHITESPACE)
+                        pass
 
 
                     self.state = 147
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 149
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==9:
-                    self.state = 148
-                    self.match(CommandsParser.WHITESPACE)
-
-
-                self.state = 151
+                self.state = 148
                 self.match(CommandsParser.DOUBLEQUOTE)
                 pass
             else:

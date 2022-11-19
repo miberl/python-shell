@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from inputparser.command import Command, Instruction
+from inputparser.command import Command
 from inputparser.parse_command import ParseCommands
 from inputparser.parser_visitor import ParseVisitor
 
@@ -173,4 +173,4 @@ class TestParserObjectConstruction(TestCase):
     def test_command_substitution(self):
         command = self.run_single_command('echo `echo hello`')
 
-        self.make_assertions(command, name='echo', args=['hello\n'])
+        self.make_assertions(command, name='echo', args=['hello'])

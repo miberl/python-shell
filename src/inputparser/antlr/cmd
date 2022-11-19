@@ -1,1 +1,1 @@
-ls hello there*you 'how goes it'
+echo `echo hello`
