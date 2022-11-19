@@ -52,9 +52,9 @@ class EvalInstructions:
     def handle_input_redirection(inp, r_in):
         if r_in:
             if inp == sys.stdin:
-                inp = Application.read_file(r_in)
+                inp = Application.read_lines(r_in)
             else:
-                inp += Application.read_file(r_in)
+                inp += Application.read_lines(r_in)
         return inp
 
     @staticmethod
