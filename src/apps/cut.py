@@ -1,7 +1,6 @@
 import sys
 
 from application import Application
-from os.path import exists
 
 
 class Cut(Application):
