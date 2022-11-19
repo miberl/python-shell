@@ -1,69 +1,49 @@
-from exceptions.command_construct_error import CommandConstructError
+from exceptions.command_construct_error import InstructionConstructError
 
 
 class Command:
     def __init__(self, app: str):
         self.app = app
         self.args = []
-        self.redir_in = None
-        self.redir_out = None
+        self.redir_in = []
+        self.redir_out = []
 
     def add_arg(self, arg: str) -> None:
-        if self.no_existing_flags():
-            self.add_arg_to_end(arg)
-        else:
-            self.add_arg_to_flag_args(arg)
-
-    def add_arg_to_end(self, arg: str) -> None:
-        self.args.append((None, [arg]))
-
-    def add_arg_to_flag_args(self, arg: str) -> None:
-        self.args[-1][1].append(arg)
-
-    def no_existing_flags(self) -> bool:
-        return len(self.args) == 0
-
-    def add_flag(self, flag: str) -> None:
-        self.args.append((flag, []))
+       self.args.append(arg)
 
     def add_redir_in(self, file: str) -> None:
-        self.redir_in = file
+        self.redir_in.append(file)
 
     def add_redir_out(self, file: str) -> None:
-        self.redir_out = file
+        self.redir_out.append(file)
 
-    def get_flags_and_args(self) -> [(str, [str])]:
+    def get_args(self) -> [str]:
         return self.args
 
-    def get_redirs(self) -> (str, str):
+    def get_redirs(self) -> ([str], [str]):
         return self.redir_in, self.redir_out
 
     def get_app(self) -> str:
         return self.app
 
 
-class Pipe:
+class Instruction:
     def __init__(self):
-        self.left = None
-        self.right = None
+        self.commands = []
 
-    def set_left(self, left: Command) -> None:
-        self.throw_if_not_command(left)
-        self.left = left
+    def add(self, command: Command) -> None:
+        if type(command) is not Command:
+            raise InstructionConstructError("Expected command when adding to instruction")
 
-    def set_right(self, right: Command) -> None:
-        self.throw_if_not_command(right)
-        self.right = right
+        self.commands.append(command)
 
-    @staticmethod
-    def throw_if_not_command(pipe_obj: Command) -> None:
-        if type(pipe_obj) is not Command:
-            raise CommandConstructError("Bad object in pipe")
-
-    def get_piped_commands(self) -> (Command, Command):
+    def get_next_command(self) -> Command:
         self.throw_if_either_is_none()
-        return self.left, self.right
+        return self.commands.pop(0)
+
+    def has_next(self) -> bool:
+        return len(self.commands) != 0
 
     def throw_if_either_is_none(self) -> None:
-        if self.left is None or self.right is None:
-            raise CommandConstructError("Pipe accessed before commands populated")
+        if not self.commands:
+            raise InstructionConstructError("No command in instruction")

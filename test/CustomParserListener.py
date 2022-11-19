@@ -9,25 +9,11 @@ class CustomParserListener(CommandsListener):
         super().__init__()
         self.out = deque()
 
-    # Enter a antlr tree produced by CommandsParser#combine.
-    def enterCombine(self, ctx: CommandsParser.CombineContext):
-        self.out.append("combine(")
-
-    def exitCombine(self, ctx: CommandsParser.CombineContext):
-        self.out.append(")")
-
     # Enter an antlr tree produced by CommandsParser#instuctions.
-    def enterInstuctions(self, ctx: CommandsParser.InstuctionsContext):
+    def enterInstruction(self, ctx: CommandsParser.InstructionContext):
         self.out.append("instruction(")
 
-    def exitInstuctions(self, ctx: CommandsParser.InstuctionsContext):
-        self.out.append(")")
-
-    # Enter a antlr tree produced by CommandsParser#pipe.
-    def enterPipe(self, ctx: CommandsParser.PipeContext):
-        self.out.append("pipe(")
-
-    def exitPipe(self, ctx: CommandsParser.PipeContext):
+    def exitInstruction(self, ctx: CommandsParser.InstructionContext):
         self.out.append(")")
 
     # Enter a antlr tree produced by CommandsParser#command.
@@ -37,18 +23,11 @@ class CustomParserListener(CommandsListener):
     def exitCommand(self, ctx: CommandsParser.CommandContext):
         self.out.append(")")
 
-    # Enter a antlr tree produced by CommandsParser#app.
-    def enterApp(self, ctx: CommandsParser.AppContext):
-        self.out.append("app(")
-
-    def exitApp(self, ctx: CommandsParser.AppContext):
-        self.out.append(")")
-
     # Enter a antlr tree produced by CommandsParser#args.
-    def enterArgs(self, ctx: CommandsParser.ArgsContext):
-        self.out.append("args(")
+    def enterArg(self, ctx: CommandsParser.ArgContext):
+        self.out.append("arg(")
 
-    def exitArgs(self, ctx: CommandsParser.ArgsContext):
+    def exitArg(self, ctx: CommandsParser.ArgContext):
         self.out.append(")")
 
     # Enter a antlr tree produced by CommandsParser#redir_in.
@@ -82,12 +61,4 @@ class CustomParserListener(CommandsListener):
         self.out.append("substituted(")
 
     def exitSubstituted(self, ctx: CommandsParser.SubstitutedContext):
-        self.out.append(")")
-
-
-    def enterFlag(self, ctx: CommandsParser.FlagContext):
-        self.out.append("flag(")
-
-    # Exit a parse tree produced by CommandsParser#flag.
-    def exitFlag(self, ctx:CommandsParser.FlagContext):
         self.out.append(")")

@@ -1,22 +1,31 @@
 
 from application import Application
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 from re import match
 
 
 class Grep(Application):
-    def run(self, args, out) -> None:
-        if len(args) < 2:
-            raise ValueError("wrong number of command line arguments")
-        pattern = args[0]
-        files = args[1:]
-        for file in files:
-            lines = self.read_lines(file)
-            out.extend(self.filter_matching_lines(
-                lines, pattern, file, len(files) > 1))
+    def run(self, args, inpt, out) -> None:
+        command_args, options = self.parse_args(args)
+        
+        if len(command_args) == 0:
+            raise InvalidSyntaxError("no pattern provided") 
+        pattern = command_args[0]
+        
+        if len(command_args) >= 2: # files as arguments
+            files = args[1:]
+            for file in files:
+                lines = self.read_lines(file)
+                out.extend(self.filter_matching_lines(lines, pattern, file, len(files) > 1))
+        else: # files as stdin
+            lines = []
+            for line in inpt:
+                lines.append(line)
+            out.extend(self.filter_matching_lines(lines, pattern))
 
 
     # filter lines that match pattern
-    def filter_matching_lines(self, lines, pattern, file_name, multiple_files):
+    def filter_matching_lines(self, lines, pattern, file_name="", multiple_files=False):
         res = []
         for line in lines:
             if match(pattern, line):
