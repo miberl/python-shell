@@ -46,3 +46,31 @@ class TestCut(TestSetup):
         self.run_test(
             "cut -c -5 dir1/cutTest.txt", ["Andhr", "Aruna", "Assam", "Bihar", "Chhat"]
         )
+
+    def test_cut_overlapping_range(self):
+        self.run_test(
+            "cut -b 2-,3- dir1/cutTest.txt",
+            [
+                "ndhra Pradesh",
+                "runachal Pradesh",
+                "ssam",
+                "ihar",
+                "hhattisgarh",
+            ]
+        )
+
+    def test_cut_full_range_separate_cut(self):
+        self.run_test(
+            "cut -b -1,2- dir1/cutTest.txt",
+            [
+                "Andhra Pradesh",
+                "Arunachal Pradesh",
+                "Assam",
+                "Bihar",
+                "Chhattisgarh",
+            ]
+        )
+
+    def test_cut_stdin(self):
+        self.run_test("echo abc | cut -b 1",
+                      ["a"])

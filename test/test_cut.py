@@ -74,3 +74,27 @@ class TestCut(TestSetup):
             ["-c", "-5", "dir1/cutTest.txt"],
             ["Andhr\n", "Aruna\n", "Assam\n", "Bihar\n", "Chhat\n"],
         )
+
+    def test_cut_overlapping_range(self):
+        self.run_test(
+            ["-b", "2-,3-", "dir1/cutTest.txt"],
+            [
+                "ndhra Pradesh\n",
+                "runachal Pradesh\n",
+                "ssam\n",
+                "ihar\n",
+                "hhattisgarh\n",
+            ]
+        )
+
+    def test_cut_full_range_separate_cut(self):
+        self.run_test(
+            ["-b", "-1,2-", "dir1/cutTest.txt"],
+            [
+                "Andhra Pradesh\n",
+                "Arunachal Pradesh\n",
+                "Assam\n",
+                "Bihar\n",
+                "Chhattisgarh\n",
+            ]
+        )
