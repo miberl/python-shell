@@ -1,43 +1,19 @@
+from inputparser.command import Instruction
 from inputparser.parser_visitor import ParseVisitor
 
 from inputparser.parse_command import ParseCommands
 
-from apps import cat, echo, ls, cd, pwd, head, grep, tail, uniq, sort, cut, history
-from shell_runner.shell_history import ShellHistory
+from shell_runner.eval_instructions import EvalInstructions
 
 class ShellExec:
-    def __init__(self):
-        self.appList = {
-            "cat": cat.Cat(),
-            "cd": cd.Cd(),
-            "echo": echo.Echo(),
-            "grep": grep.Grep(),
-            "head": head.Head(),
-            "ls": ls.Ls(),
-            "pwd": pwd.Pwd(),
-            "tail": tail.Tail(),
-            "uniq": uniq.Uniq(),
-            "cut": cut.Cut(),
-            "sort": sort.Sort(),
-            "history": history.History(),
-        }
-        self.history = ShellHistory()
+    def run_instructions(self, cmdline: str):
+        instructions = self.get_instructions_object_from_string(cmdline)
+        
+        return EvalInstructions().eval(instructions)
 
-    def run_instructions(self, instruction: str, out):
-        self.history.add_to_history(instruction)
-        commands = self.get_commands(instruction)
-        for (app, args) in commands:
-            self.run_app(app, args, out)
-
-    def run_app(self, app, args, out) -> None:
-        if app in self.appList:
-            self.appList[app].run(args, out)
-        else:
-            raise ValueError(f"unsupported application {app}")
-
-    def get_commands(self, instruction) -> [(str, [str])]:
+    def get_instructions_object_from_string(self, cmdline: str) -> [Instruction]:
         visitor = ParseVisitor()
         parser = ParseCommands()
-        parser.parse_visitor(instruction, visitor)
-        commands = visitor.get_commands()
-        return commands
+        parser.parse_visitor(cmdline, visitor)
+        instructions = visitor.get_instructions()
+        return instructions

@@ -1,27 +1,20 @@
 grammar Commands ;
 
 // PARSER RULES
-prog        : terminal ('\n' | EOF);
+prog        : terminal? ('\n' | EOF);
 
 // combine commands with ';'
-terminal    : WHITESPACE? combine*? instuctions WHITESPACE?;
-combine     : instuctions WHITESPACE? ';' WHITESPACE? ;
+terminal    : WHITESPACE? (instruction WHITESPACE? ';' WHITESPACE?)* instruction WHITESPACE?;
 
 // pipe commands into each other
-instuctions : WHITESPACE? (pipe)* command WHITESPACE? ;
-pipe        : command WHITESPACE? '|' WHITESPACE? ;
+instruction : WHITESPACE? command (WHITESPACE? '|' WHITESPACE? command)* WHITESPACE? ;
 
 // simple command structure
 command
-: WHITESPACE? app args? (WHITESPACE redir_in)? (WHITESPACE redir_out)? WHITESPACE?
+:  (redir_in | redir_out | WHITESPACE)* arg (WHITESPACE arg | redir_in | redir_out | WHITESPACE)*
 ;
-// app name
-app         : atom ;
 // arguments
-args        : (WHITESPACE? flag (WHITESPACE? arg+)? WHITESPACE?)+ | arg+;
-arg         : (WHITESPACE (atom | globbed)) ;
-// Flag support
-flag        : '-' atom  | '--' atom;
+arg         : (atom | globbed) ;
 
 // redirection
 redir_in    : '<' WHITESPACE? atom ;
@@ -32,37 +25,32 @@ globbed     : '*' ;
 
 // quoting support
 atom
-: WORD
-| QUOTEDTEXT
-| atom substituted atom?
-| substituted atom?
-| atom globbed atom?
-| globbed atom?
+: (WORD | substituted | globbed | quoted_text)+
 ;
 
 //command substitution
 substituted : '`' terminal '`' ;
+
+// Quoting Support
+quoted_text:
+(SINGLEQUOTE (DOUBLEQUOTE | '*' | '|' | ';' | '<' | '>' | QUOTEWORD | WORD | substituted | WHITESPACE)* SINGLEQUOTE)
+| (DOUBLEQUOTE (SINGLEQUOTE | ';' | '*' | ';' | '*' | '<' | '>' |QUOTEWORD | WORD | substituted | WHITESPACE)* DOUBLEQUOTE)
+;
+
 
 // LEXER RULES
 
 fragment LOWER          : [a-z] ;
 fragment UPPER          : [A-Z] ;
 fragment NUMBER         : [0-9] ;
-fragment STARTPUNCT     : ('.' | ',' | '/' | '\\') ;
-fragment FULLCHAR       : ALPHANUM | '-' | '_' ;
-fragment ALPHANUM       : (LOWER | UPPER | NUMBER | STARTPUNCT) ;
+fragment PUNCT          : ('.' | ',' | '/' | '\\' | '_'| '-') ;
+fragment ALPHANUM       : (LOWER | UPPER | NUMBER | PUNCT ) ;
 
-fragment SINGLEQUOTEWORD: ~('\r' | '\n' | '\'')* ;
-fragment DOUBLEQUOTEWORD: ~('\r' | '\n' | '"')* ;
-
-WORD                    : ALPHANUM FULLCHAR*;
+WORD                    : ALPHANUM+;
 WHITESPACE              : (' ' | '\t') + ;
 
-
-
-QUOTEDTEXT
-: '"' (WORD | WHITESPACE) * '"'
-| '\'' (WORD | WHITESPACE) * '\''
-;
+SINGLEQUOTE: '\'' ;
+DOUBLEQUOTE: '"' ;
+QUOTEWORD: ~('\r' | '\n' | '\'' | '"' | '`' | ' ' | '\t' | '*' | '|' | ';' | '<' | '>')+;
 
 OTHER                   : .+?;

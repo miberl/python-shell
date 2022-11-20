@@ -10,71 +10,64 @@ else:
 
 def serializedATN():
     return [
-        4,1,13,181,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
-        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
-        2,14,7,14,1,0,1,0,1,0,1,1,3,1,35,8,1,1,1,5,1,38,8,1,10,1,12,1,41,
-        9,1,1,1,1,1,3,1,45,8,1,1,2,1,2,3,2,49,8,2,1,2,1,2,3,2,53,8,2,1,3,
-        3,3,56,8,3,1,3,5,3,59,8,3,10,3,12,3,62,9,3,1,3,1,3,3,3,66,8,3,1,
-        4,1,4,3,4,70,8,4,1,4,1,4,3,4,74,8,4,1,5,3,5,77,8,5,1,5,1,5,3,5,81,
-        8,5,1,5,1,5,3,5,85,8,5,1,5,1,5,3,5,89,8,5,1,5,3,5,92,8,5,1,6,1,6,
-        1,7,3,7,97,8,7,1,7,1,7,3,7,101,8,7,1,7,4,7,104,8,7,11,7,12,7,105,
-        3,7,108,8,7,1,7,3,7,111,8,7,4,7,113,8,7,11,7,12,7,114,1,7,4,7,118,
-        8,7,11,7,12,7,119,3,7,122,8,7,1,8,1,8,1,8,3,8,127,8,8,1,9,1,9,1,
-        9,1,9,3,9,133,8,9,1,10,1,10,3,10,137,8,10,1,10,1,10,1,11,1,11,3,
-        11,143,8,11,1,11,1,11,1,12,1,12,1,13,1,13,1,13,1,13,1,13,3,13,154,
-        8,13,1,13,1,13,3,13,158,8,13,3,13,160,8,13,1,13,1,13,1,13,3,13,165,
-        8,13,1,13,1,13,1,13,3,13,170,8,13,5,13,172,8,13,10,13,12,13,175,
-        9,13,1,14,1,14,1,14,1,14,1,14,1,39,1,26,15,0,2,4,6,8,10,12,14,16,
-        18,20,22,24,26,28,0,1,1,1,1,1,201,0,30,1,0,0,0,2,34,1,0,0,0,4,46,
-        1,0,0,0,6,55,1,0,0,0,8,67,1,0,0,0,10,76,1,0,0,0,12,93,1,0,0,0,14,
-        121,1,0,0,0,16,123,1,0,0,0,18,132,1,0,0,0,20,134,1,0,0,0,22,140,
-        1,0,0,0,24,146,1,0,0,0,26,159,1,0,0,0,28,176,1,0,0,0,30,31,3,2,1,
-        0,31,32,7,0,0,0,32,1,1,0,0,0,33,35,5,11,0,0,34,33,1,0,0,0,34,35,
-        1,0,0,0,35,39,1,0,0,0,36,38,3,4,2,0,37,36,1,0,0,0,38,41,1,0,0,0,
-        39,40,1,0,0,0,39,37,1,0,0,0,40,42,1,0,0,0,41,39,1,0,0,0,42,44,3,
-        6,3,0,43,45,5,11,0,0,44,43,1,0,0,0,44,45,1,0,0,0,45,3,1,0,0,0,46,
-        48,3,6,3,0,47,49,5,11,0,0,48,47,1,0,0,0,48,49,1,0,0,0,49,50,1,0,
-        0,0,50,52,5,2,0,0,51,53,5,11,0,0,52,51,1,0,0,0,52,53,1,0,0,0,53,
-        5,1,0,0,0,54,56,5,11,0,0,55,54,1,0,0,0,55,56,1,0,0,0,56,60,1,0,0,
-        0,57,59,3,8,4,0,58,57,1,0,0,0,59,62,1,0,0,0,60,58,1,0,0,0,60,61,
-        1,0,0,0,61,63,1,0,0,0,62,60,1,0,0,0,63,65,3,10,5,0,64,66,5,11,0,
-        0,65,64,1,0,0,0,65,66,1,0,0,0,66,7,1,0,0,0,67,69,3,10,5,0,68,70,
-        5,11,0,0,69,68,1,0,0,0,69,70,1,0,0,0,70,71,1,0,0,0,71,73,5,3,0,0,
-        72,74,5,11,0,0,73,72,1,0,0,0,73,74,1,0,0,0,74,9,1,0,0,0,75,77,5,
-        11,0,0,76,75,1,0,0,0,76,77,1,0,0,0,77,78,1,0,0,0,78,80,3,12,6,0,
-        79,81,3,14,7,0,80,79,1,0,0,0,80,81,1,0,0,0,81,84,1,0,0,0,82,83,5,
-        11,0,0,83,85,3,20,10,0,84,82,1,0,0,0,84,85,1,0,0,0,85,88,1,0,0,0,
-        86,87,5,11,0,0,87,89,3,22,11,0,88,86,1,0,0,0,88,89,1,0,0,0,89,91,
-        1,0,0,0,90,92,5,11,0,0,91,90,1,0,0,0,91,92,1,0,0,0,92,11,1,0,0,0,
-        93,94,3,26,13,0,94,13,1,0,0,0,95,97,5,11,0,0,96,95,1,0,0,0,96,97,
-        1,0,0,0,97,98,1,0,0,0,98,107,3,18,9,0,99,101,5,11,0,0,100,99,1,0,
-        0,0,100,101,1,0,0,0,101,103,1,0,0,0,102,104,3,16,8,0,103,102,1,0,
-        0,0,104,105,1,0,0,0,105,103,1,0,0,0,105,106,1,0,0,0,106,108,1,0,
-        0,0,107,100,1,0,0,0,107,108,1,0,0,0,108,110,1,0,0,0,109,111,5,11,
-        0,0,110,109,1,0,0,0,110,111,1,0,0,0,111,113,1,0,0,0,112,96,1,0,0,
-        0,113,114,1,0,0,0,114,112,1,0,0,0,114,115,1,0,0,0,115,122,1,0,0,
-        0,116,118,3,16,8,0,117,116,1,0,0,0,118,119,1,0,0,0,119,117,1,0,0,
-        0,119,120,1,0,0,0,120,122,1,0,0,0,121,112,1,0,0,0,121,117,1,0,0,
-        0,122,15,1,0,0,0,123,126,5,11,0,0,124,127,3,26,13,0,125,127,3,24,
-        12,0,126,124,1,0,0,0,126,125,1,0,0,0,127,17,1,0,0,0,128,129,5,4,
-        0,0,129,133,3,26,13,0,130,131,5,5,0,0,131,133,3,26,13,0,132,128,
-        1,0,0,0,132,130,1,0,0,0,133,19,1,0,0,0,134,136,5,6,0,0,135,137,5,
-        11,0,0,136,135,1,0,0,0,136,137,1,0,0,0,137,138,1,0,0,0,138,139,3,
-        26,13,0,139,21,1,0,0,0,140,142,5,7,0,0,141,143,5,11,0,0,142,141,
-        1,0,0,0,142,143,1,0,0,0,143,144,1,0,0,0,144,145,3,26,13,0,145,23,
-        1,0,0,0,146,147,5,8,0,0,147,25,1,0,0,0,148,149,6,13,-1,0,149,160,
-        5,10,0,0,150,160,5,12,0,0,151,153,3,28,14,0,152,154,3,26,13,0,153,
-        152,1,0,0,0,153,154,1,0,0,0,154,160,1,0,0,0,155,157,3,24,12,0,156,
-        158,3,26,13,0,157,156,1,0,0,0,157,158,1,0,0,0,158,160,1,0,0,0,159,
-        148,1,0,0,0,159,150,1,0,0,0,159,151,1,0,0,0,159,155,1,0,0,0,160,
-        173,1,0,0,0,161,162,10,4,0,0,162,164,3,28,14,0,163,165,3,26,13,0,
-        164,163,1,0,0,0,164,165,1,0,0,0,165,172,1,0,0,0,166,167,10,2,0,0,
-        167,169,3,24,12,0,168,170,3,26,13,0,169,168,1,0,0,0,169,170,1,0,
-        0,0,170,172,1,0,0,0,171,161,1,0,0,0,171,166,1,0,0,0,172,175,1,0,
-        0,0,173,171,1,0,0,0,173,174,1,0,0,0,174,27,1,0,0,0,175,173,1,0,0,
-        0,176,177,5,9,0,0,177,178,3,2,1,0,178,179,5,9,0,0,179,29,1,0,0,0,
-        34,34,39,44,48,52,55,60,65,69,73,76,80,84,88,91,96,100,105,107,110,
-        114,119,121,126,132,136,142,153,157,159,164,169,171,173
+        4,1,13,154,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,1,0,3,0,24,8,0,1,0,1,0,1,1,3,
+        1,29,8,1,1,1,1,1,3,1,33,8,1,1,1,1,1,3,1,37,8,1,5,1,39,8,1,10,1,12,
+        1,42,9,1,1,1,1,1,3,1,46,8,1,1,2,3,2,49,8,2,1,2,1,2,3,2,53,8,2,1,
+        2,1,2,3,2,57,8,2,1,2,5,2,60,8,2,10,2,12,2,63,9,2,1,2,3,2,66,8,2,
+        1,3,1,3,1,3,5,3,71,8,3,10,3,12,3,74,9,3,1,3,1,3,1,3,1,3,1,3,1,3,
+        5,3,82,8,3,10,3,12,3,85,9,3,1,4,1,4,3,4,89,8,4,1,5,1,5,3,5,93,8,
+        5,1,5,1,5,1,6,1,6,3,6,99,8,6,1,6,1,6,1,7,1,7,1,8,1,8,1,8,1,8,4,8,
+        109,8,8,11,8,12,8,110,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,
+        10,1,10,1,10,1,10,1,10,1,10,5,10,128,8,10,10,10,12,10,131,9,10,1,
+        10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,5,
+        10,146,8,10,10,10,12,10,149,9,10,1,10,3,10,152,8,10,1,10,0,0,11,
+        0,2,4,6,8,10,12,14,16,18,20,0,1,1,1,1,1,189,0,23,1,0,0,0,2,28,1,
+        0,0,0,4,48,1,0,0,0,6,72,1,0,0,0,8,88,1,0,0,0,10,90,1,0,0,0,12,96,
+        1,0,0,0,14,102,1,0,0,0,16,108,1,0,0,0,18,112,1,0,0,0,20,151,1,0,
+        0,0,22,24,3,2,1,0,23,22,1,0,0,0,23,24,1,0,0,0,24,25,1,0,0,0,25,26,
+        7,0,0,0,26,1,1,0,0,0,27,29,5,9,0,0,28,27,1,0,0,0,28,29,1,0,0,0,29,
+        40,1,0,0,0,30,32,3,4,2,0,31,33,5,9,0,0,32,31,1,0,0,0,32,33,1,0,0,
+        0,33,34,1,0,0,0,34,36,5,2,0,0,35,37,5,9,0,0,36,35,1,0,0,0,36,37,
+        1,0,0,0,37,39,1,0,0,0,38,30,1,0,0,0,39,42,1,0,0,0,40,38,1,0,0,0,
+        40,41,1,0,0,0,41,43,1,0,0,0,42,40,1,0,0,0,43,45,3,4,2,0,44,46,5,
+        9,0,0,45,44,1,0,0,0,45,46,1,0,0,0,46,3,1,0,0,0,47,49,5,9,0,0,48,
+        47,1,0,0,0,48,49,1,0,0,0,49,50,1,0,0,0,50,61,3,6,3,0,51,53,5,9,0,
+        0,52,51,1,0,0,0,52,53,1,0,0,0,53,54,1,0,0,0,54,56,5,3,0,0,55,57,
+        5,9,0,0,56,55,1,0,0,0,56,57,1,0,0,0,57,58,1,0,0,0,58,60,3,6,3,0,
+        59,52,1,0,0,0,60,63,1,0,0,0,61,59,1,0,0,0,61,62,1,0,0,0,62,65,1,
+        0,0,0,63,61,1,0,0,0,64,66,5,9,0,0,65,64,1,0,0,0,65,66,1,0,0,0,66,
+        5,1,0,0,0,67,71,3,10,5,0,68,71,3,12,6,0,69,71,5,9,0,0,70,67,1,0,
+        0,0,70,68,1,0,0,0,70,69,1,0,0,0,71,74,1,0,0,0,72,70,1,0,0,0,72,73,
+        1,0,0,0,73,75,1,0,0,0,74,72,1,0,0,0,75,83,3,8,4,0,76,77,5,9,0,0,
+        77,82,3,8,4,0,78,82,3,10,5,0,79,82,3,12,6,0,80,82,5,9,0,0,81,76,
+        1,0,0,0,81,78,1,0,0,0,81,79,1,0,0,0,81,80,1,0,0,0,82,85,1,0,0,0,
+        83,81,1,0,0,0,83,84,1,0,0,0,84,7,1,0,0,0,85,83,1,0,0,0,86,89,3,16,
+        8,0,87,89,3,14,7,0,88,86,1,0,0,0,88,87,1,0,0,0,89,9,1,0,0,0,90,92,
+        5,4,0,0,91,93,5,9,0,0,92,91,1,0,0,0,92,93,1,0,0,0,93,94,1,0,0,0,
+        94,95,3,16,8,0,95,11,1,0,0,0,96,98,5,5,0,0,97,99,5,9,0,0,98,97,1,
+        0,0,0,98,99,1,0,0,0,99,100,1,0,0,0,100,101,3,16,8,0,101,13,1,0,0,
+        0,102,103,5,6,0,0,103,15,1,0,0,0,104,109,5,8,0,0,105,109,3,18,9,
+        0,106,109,3,14,7,0,107,109,3,20,10,0,108,104,1,0,0,0,108,105,1,0,
+        0,0,108,106,1,0,0,0,108,107,1,0,0,0,109,110,1,0,0,0,110,108,1,0,
+        0,0,110,111,1,0,0,0,111,17,1,0,0,0,112,113,5,7,0,0,113,114,3,2,1,
+        0,114,115,5,7,0,0,115,19,1,0,0,0,116,129,5,10,0,0,117,128,5,11,0,
+        0,118,128,5,6,0,0,119,128,5,3,0,0,120,128,5,2,0,0,121,128,5,4,0,
+        0,122,128,5,5,0,0,123,128,5,12,0,0,124,128,5,8,0,0,125,128,3,18,
+        9,0,126,128,5,9,0,0,127,117,1,0,0,0,127,118,1,0,0,0,127,119,1,0,
+        0,0,127,120,1,0,0,0,127,121,1,0,0,0,127,122,1,0,0,0,127,123,1,0,
+        0,0,127,124,1,0,0,0,127,125,1,0,0,0,127,126,1,0,0,0,128,131,1,0,
+        0,0,129,127,1,0,0,0,129,130,1,0,0,0,130,132,1,0,0,0,131,129,1,0,
+        0,0,132,152,5,10,0,0,133,147,5,11,0,0,134,146,5,10,0,0,135,146,5,
+        2,0,0,136,146,5,6,0,0,137,146,5,2,0,0,138,146,5,6,0,0,139,146,5,
+        4,0,0,140,146,5,5,0,0,141,146,5,12,0,0,142,146,5,8,0,0,143,146,3,
+        18,9,0,144,146,5,9,0,0,145,134,1,0,0,0,145,135,1,0,0,0,145,136,1,
+        0,0,0,145,137,1,0,0,0,145,138,1,0,0,0,145,139,1,0,0,0,145,140,1,
+        0,0,0,145,141,1,0,0,0,145,142,1,0,0,0,145,143,1,0,0,0,145,144,1,
+        0,0,0,146,149,1,0,0,0,147,145,1,0,0,0,147,148,1,0,0,0,148,150,1,
+        0,0,0,149,147,1,0,0,0,150,152,5,11,0,0,151,116,1,0,0,0,151,133,1,
+        0,0,0,152,21,1,0,0,0,25,23,28,32,36,40,45,48,52,56,61,65,70,72,81,
+        83,88,92,98,108,110,127,129,145,147,151
     ]
 
 class CommandsParser ( Parser ):
@@ -87,33 +80,29 @@ class CommandsParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'\\n'", "';'", "'|'", "'-'", "'--'", 
-                     "'<'", "'>'", "'*'", "'`'" ]
+    literalNames = [ "<INVALID>", "'\\n'", "';'", "'|'", "'<'", "'>'", "'*'", 
+                     "'`'", "<INVALID>", "<INVALID>", "'''", "'\"'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "WORD", "WHITESPACE", "QUOTEDTEXT", 
-                      "OTHER" ]
+                      "WORD", "WHITESPACE", "SINGLEQUOTE", "DOUBLEQUOTE", 
+                      "QUOTEWORD", "OTHER" ]
 
     RULE_prog = 0
     RULE_terminal = 1
-    RULE_combine = 2
-    RULE_instuctions = 3
-    RULE_pipe = 4
-    RULE_command = 5
-    RULE_app = 6
-    RULE_args = 7
-    RULE_arg = 8
-    RULE_flag = 9
-    RULE_redir_in = 10
-    RULE_redir_out = 11
-    RULE_globbed = 12
-    RULE_atom = 13
-    RULE_substituted = 14
+    RULE_instruction = 2
+    RULE_command = 3
+    RULE_arg = 4
+    RULE_redir_in = 5
+    RULE_redir_out = 6
+    RULE_globbed = 7
+    RULE_atom = 8
+    RULE_substituted = 9
+    RULE_quoted_text = 10
 
-    ruleNames =  [ "prog", "terminal", "combine", "instuctions", "pipe", 
-                   "command", "app", "args", "arg", "flag", "redir_in", 
-                   "redir_out", "globbed", "atom", "substituted" ]
+    ruleNames =  [ "prog", "terminal", "instruction", "command", "arg", 
+                   "redir_in", "redir_out", "globbed", "atom", "substituted", 
+                   "quoted_text" ]
 
     EOF = Token.EOF
     T__0=1
@@ -123,11 +112,11 @@ class CommandsParser ( Parser ):
     T__4=5
     T__5=6
     T__6=7
-    T__7=8
-    T__8=9
-    WORD=10
-    WHITESPACE=11
-    QUOTEDTEXT=12
+    WORD=8
+    WHITESPACE=9
+    SINGLEQUOTE=10
+    DOUBLEQUOTE=11
+    QUOTEWORD=12
     OTHER=13
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
@@ -146,12 +135,12 @@ class CommandsParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def EOF(self):
+            return self.getToken(CommandsParser.EOF, 0)
+
         def terminal(self):
             return self.getTypedRuleContext(CommandsParser.TerminalContext,0)
 
-
-        def EOF(self):
-            return self.getToken(CommandsParser.EOF, 0)
 
         def getRuleIndex(self):
             return CommandsParser.RULE_prog
@@ -180,9 +169,15 @@ class CommandsParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 30
-            self.terminal()
-            self.state = 31
+            self.state = 23
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if ((_la) & ~0x3f) == 0 and ((1 << _la) & 4080) != 0:
+                self.state = 22
+                self.terminal()
+
+
+            self.state = 25
             _la = self._input.LA(1)
             if not(_la==-1 or _la==1):
                 self._errHandler.recoverInline(self)
@@ -205,8 +200,11 @@ class CommandsParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def instuctions(self):
-            return self.getTypedRuleContext(CommandsParser.InstuctionsContext,0)
+        def instruction(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.InstructionContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.InstructionContext,i)
 
 
         def WHITESPACE(self, i:int=None):
@@ -214,13 +212,6 @@ class CommandsParser ( Parser ):
                 return self.getTokens(CommandsParser.WHITESPACE)
             else:
                 return self.getToken(CommandsParser.WHITESPACE, i)
-
-        def combine(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CommandsParser.CombineContext)
-            else:
-                return self.getTypedRuleContext(CommandsParser.CombineContext,i)
-
 
         def getRuleIndex(self):
             return CommandsParser.RULE_terminal
@@ -249,32 +240,50 @@ class CommandsParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 34
+            self.state = 28
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
             if la_ == 1:
-                self.state = 33
+                self.state = 27
                 self.match(CommandsParser.WHITESPACE)
 
 
-            self.state = 39
+            self.state = 40
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
-            while _alt!=1 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1+1:
-                    self.state = 36
-                    self.combine() 
-                self.state = 41
-                self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 30
+                    self.instruction()
+                    self.state = 32
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    if _la==9:
+                        self.state = 31
+                        self.match(CommandsParser.WHITESPACE)
 
-            self.state = 42
-            self.instuctions()
-            self.state = 44
+
+                    self.state = 34
+                    self.match(CommandsParser.T__1)
+                    self.state = 36
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+                    if la_ == 1:
+                        self.state = 35
+                        self.match(CommandsParser.WHITESPACE)
+
+             
+                self.state = 42
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
+
+            self.state = 43
+            self.instruction()
+            self.state = 45
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==11:
-                self.state = 43
+            if _la==9:
+                self.state = 44
                 self.match(CommandsParser.WHITESPACE)
 
 
@@ -287,15 +296,18 @@ class CommandsParser ( Parser ):
         return localctx
 
 
-    class CombineContext(ParserRuleContext):
+    class InstructionContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def instuctions(self):
-            return self.getTypedRuleContext(CommandsParser.InstuctionsContext,0)
+        def command(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.CommandContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.CommandContext,i)
 
 
         def WHITESPACE(self, i:int=None):
@@ -305,210 +317,76 @@ class CommandsParser ( Parser ):
                 return self.getToken(CommandsParser.WHITESPACE, i)
 
         def getRuleIndex(self):
-            return CommandsParser.RULE_combine
+            return CommandsParser.RULE_instruction
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCombine" ):
-                listener.enterCombine(self)
+            if hasattr( listener, "enterInstruction" ):
+                listener.enterInstruction(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCombine" ):
-                listener.exitCombine(self)
+            if hasattr( listener, "exitInstruction" ):
+                listener.exitInstruction(self)
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCombine" ):
-                return visitor.visitCombine(self)
+            if hasattr( visitor, "visitInstruction" ):
+                return visitor.visitInstruction(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def combine(self):
+    def instruction(self):
 
-        localctx = CommandsParser.CombineContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 4, self.RULE_combine)
+        localctx = CommandsParser.InstructionContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 4, self.RULE_instruction)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 46
-            self.instuctions()
             self.state = 48
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==11:
+            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            if la_ == 1:
                 self.state = 47
                 self.match(CommandsParser.WHITESPACE)
 
 
             self.state = 50
-            self.match(CommandsParser.T__1)
-            self.state = 52
+            self.command()
+            self.state = 61
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
-            if la_ == 1:
-                self.state = 51
-                self.match(CommandsParser.WHITESPACE)
-
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class InstuctionsContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def command(self):
-            return self.getTypedRuleContext(CommandsParser.CommandContext,0)
-
-
-        def WHITESPACE(self, i:int=None):
-            if i is None:
-                return self.getTokens(CommandsParser.WHITESPACE)
-            else:
-                return self.getToken(CommandsParser.WHITESPACE, i)
-
-        def pipe(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CommandsParser.PipeContext)
-            else:
-                return self.getTypedRuleContext(CommandsParser.PipeContext,i)
-
-
-        def getRuleIndex(self):
-            return CommandsParser.RULE_instuctions
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInstuctions" ):
-                listener.enterInstuctions(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInstuctions" ):
-                listener.exitInstuctions(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInstuctions" ):
-                return visitor.visitInstuctions(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def instuctions(self):
-
-        localctx = CommandsParser.InstuctionsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 6, self.RULE_instuctions)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 55
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
-            if la_ == 1:
-                self.state = 54
-                self.match(CommandsParser.WHITESPACE)
-
-
-            self.state = 60
-            self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 57
-                    self.pipe() 
-                self.state = 62
-                self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
+                    self.state = 52
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    if _la==9:
+                        self.state = 51
+                        self.match(CommandsParser.WHITESPACE)
 
-            self.state = 63
-            self.command()
+
+                    self.state = 54
+                    self.match(CommandsParser.T__2)
+                    self.state = 56
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
+                    if la_ == 1:
+                        self.state = 55
+                        self.match(CommandsParser.WHITESPACE)
+
+
+                    self.state = 58
+                    self.command() 
+                self.state = 63
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,9,self._ctx)
+
             self.state = 65
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
             if la_ == 1:
                 self.state = 64
-                self.match(CommandsParser.WHITESPACE)
-
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class PipeContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def command(self):
-            return self.getTypedRuleContext(CommandsParser.CommandContext,0)
-
-
-        def WHITESPACE(self, i:int=None):
-            if i is None:
-                return self.getTokens(CommandsParser.WHITESPACE)
-            else:
-                return self.getToken(CommandsParser.WHITESPACE, i)
-
-        def getRuleIndex(self):
-            return CommandsParser.RULE_pipe
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPipe" ):
-                listener.enterPipe(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPipe" ):
-                listener.exitPipe(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPipe" ):
-                return visitor.visitPipe(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def pipe(self):
-
-        localctx = CommandsParser.PipeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_pipe)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 67
-            self.command()
-            self.state = 69
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==11:
-                self.state = 68
-                self.match(CommandsParser.WHITESPACE)
-
-
-            self.state = 71
-            self.match(CommandsParser.T__2)
-            self.state = 73
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
-            if la_ == 1:
-                self.state = 72
                 self.match(CommandsParser.WHITESPACE)
 
 
@@ -528,8 +406,25 @@ class CommandsParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def app(self):
-            return self.getTypedRuleContext(CommandsParser.AppContext,0)
+        def arg(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.ArgContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.ArgContext,i)
+
+
+        def redir_in(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.Redir_inContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.Redir_inContext,i)
+
+
+        def redir_out(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.Redir_outContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.Redir_outContext,i)
 
 
         def WHITESPACE(self, i:int=None):
@@ -537,18 +432,6 @@ class CommandsParser ( Parser ):
                 return self.getTokens(CommandsParser.WHITESPACE)
             else:
                 return self.getToken(CommandsParser.WHITESPACE, i)
-
-        def args(self):
-            return self.getTypedRuleContext(CommandsParser.ArgsContext,0)
-
-
-        def redir_in(self):
-            return self.getTypedRuleContext(CommandsParser.Redir_inContext,0)
-
-
-        def redir_out(self):
-            return self.getTypedRuleContext(CommandsParser.Redir_outContext,0)
-
 
         def getRuleIndex(self):
             return CommandsParser.RULE_command
@@ -573,249 +456,72 @@ class CommandsParser ( Parser ):
     def command(self):
 
         localctx = CommandsParser.CommandContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_command)
+        self.enterRule(localctx, 6, self.RULE_command)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 76
+            self.state = 72
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==11:
-                self.state = 75
-                self.match(CommandsParser.WHITESPACE)
-
-
-            self.state = 78
-            self.app()
-            self.state = 80
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
-            if la_ == 1:
-                self.state = 79
-                self.args()
-
-
-            self.state = 84
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
-            if la_ == 1:
-                self.state = 82
-                self.match(CommandsParser.WHITESPACE)
-                self.state = 83
-                self.redir_in()
-
-
-            self.state = 88
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
-            if la_ == 1:
-                self.state = 86
-                self.match(CommandsParser.WHITESPACE)
-                self.state = 87
-                self.redir_out()
-
-
-            self.state = 91
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
-            if la_ == 1:
-                self.state = 90
-                self.match(CommandsParser.WHITESPACE)
-
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class AppContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def atom(self):
-            return self.getTypedRuleContext(CommandsParser.AtomContext,0)
-
-
-        def getRuleIndex(self):
-            return CommandsParser.RULE_app
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterApp" ):
-                listener.enterApp(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitApp" ):
-                listener.exitApp(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitApp" ):
-                return visitor.visitApp(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def app(self):
-
-        localctx = CommandsParser.AppContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_app)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 93
-            self.atom(0)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ArgsContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def flag(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CommandsParser.FlagContext)
-            else:
-                return self.getTypedRuleContext(CommandsParser.FlagContext,i)
-
-
-        def WHITESPACE(self, i:int=None):
-            if i is None:
-                return self.getTokens(CommandsParser.WHITESPACE)
-            else:
-                return self.getToken(CommandsParser.WHITESPACE, i)
-
-        def arg(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(CommandsParser.ArgContext)
-            else:
-                return self.getTypedRuleContext(CommandsParser.ArgContext,i)
-
-
-        def getRuleIndex(self):
-            return CommandsParser.RULE_args
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArgs" ):
-                listener.enterArgs(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArgs" ):
-                listener.exitArgs(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArgs" ):
-                return visitor.visitArgs(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def args(self):
-
-        localctx = CommandsParser.ArgsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_args)
-        self._la = 0 # Token type
-        try:
-            self.state = 121
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
-            if la_ == 1:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 112 
+            while ((_la) & ~0x3f) == 0 and ((1 << _la) & 560) != 0:
+                self.state = 70
                 self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 96
-                        self._errHandler.sync(self)
-                        _la = self._input.LA(1)
-                        if _la==11:
-                            self.state = 95
-                            self.match(CommandsParser.WHITESPACE)
+                token = self._input.LA(1)
+                if token in [4]:
+                    self.state = 67
+                    self.redir_in()
+                    pass
+                elif token in [5]:
+                    self.state = 68
+                    self.redir_out()
+                    pass
+                elif token in [9]:
+                    self.state = 69
+                    self.match(CommandsParser.WHITESPACE)
+                    pass
+                else:
+                    raise NoViableAltException(self)
 
+                self.state = 74
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
 
-                        self.state = 98
-                        self.flag()
-                        self.state = 107
-                        self._errHandler.sync(self)
-                        la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
-                        if la_ == 1:
-                            self.state = 100
-                            self._errHandler.sync(self)
-                            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
-                            if la_ == 1:
-                                self.state = 99
-                                self.match(CommandsParser.WHITESPACE)
-
-
-                            self.state = 103 
-                            self._errHandler.sync(self)
-                            _alt = 1
-                            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                                if _alt == 1:
-                                    self.state = 102
-                                    self.arg()
-
-                                else:
-                                    raise NoViableAltException(self)
-                                self.state = 105 
-                                self._errHandler.sync(self)
-                                _alt = self._interp.adaptivePredict(self._input,17,self._ctx)
-
-
-
-                        self.state = 110
-                        self._errHandler.sync(self)
-                        la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
-                        if la_ == 1:
-                            self.state = 109
-                            self.match(CommandsParser.WHITESPACE)
-
-
-
-                    else:
-                        raise NoViableAltException(self)
-                    self.state = 114 
+            self.state = 75
+            self.arg()
+            self.state = 83
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,14,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 81
                     self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
-
-                pass
-
-            elif la_ == 2:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 117 
-                self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 116
+                    la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
+                    if la_ == 1:
+                        self.state = 76
+                        self.match(CommandsParser.WHITESPACE)
+                        self.state = 77
                         self.arg()
+                        pass
 
-                    else:
-                        raise NoViableAltException(self)
-                    self.state = 119 
-                    self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
+                    elif la_ == 2:
+                        self.state = 78
+                        self.redir_in()
+                        pass
 
-                pass
+                    elif la_ == 3:
+                        self.state = 79
+                        self.redir_out()
+                        pass
 
+                    elif la_ == 4:
+                        self.state = 80
+                        self.match(CommandsParser.WHITESPACE)
+                        pass
+
+             
+                self.state = 85
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,14,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -832,9 +538,6 @@ class CommandsParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
-
-        def WHITESPACE(self):
-            return self.getToken(CommandsParser.WHITESPACE, 0)
 
         def atom(self):
             return self.getTypedRuleContext(CommandsParser.AtomContext,0)
@@ -867,89 +570,22 @@ class CommandsParser ( Parser ):
     def arg(self):
 
         localctx = CommandsParser.ArgContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_arg)
+        self.enterRule(localctx, 8, self.RULE_arg)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 123
-            self.match(CommandsParser.WHITESPACE)
-            self.state = 126
+            self.state = 88
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,23,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
             if la_ == 1:
-                self.state = 124
-                self.atom(0)
+                self.state = 86
+                self.atom()
                 pass
 
             elif la_ == 2:
-                self.state = 125
+                self.state = 87
                 self.globbed()
                 pass
 
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class FlagContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def atom(self):
-            return self.getTypedRuleContext(CommandsParser.AtomContext,0)
-
-
-        def getRuleIndex(self):
-            return CommandsParser.RULE_flag
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFlag" ):
-                listener.enterFlag(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFlag" ):
-                listener.exitFlag(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFlag" ):
-                return visitor.visitFlag(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def flag(self):
-
-        localctx = CommandsParser.FlagContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_flag)
-        try:
-            self.state = 132
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [4]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 128
-                self.match(CommandsParser.T__3)
-                self.state = 129
-                self.atom(0)
-                pass
-            elif token in [5]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 130
-                self.match(CommandsParser.T__4)
-                self.state = 131
-                self.atom(0)
-                pass
-            else:
-                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -997,22 +633,22 @@ class CommandsParser ( Parser ):
     def redir_in(self):
 
         localctx = CommandsParser.Redir_inContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_redir_in)
+        self.enterRule(localctx, 10, self.RULE_redir_in)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 134
-            self.match(CommandsParser.T__5)
-            self.state = 136
+            self.state = 90
+            self.match(CommandsParser.T__3)
+            self.state = 92
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==11:
-                self.state = 135
+            if _la==9:
+                self.state = 91
                 self.match(CommandsParser.WHITESPACE)
 
 
-            self.state = 138
-            self.atom(0)
+            self.state = 94
+            self.atom()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1059,22 +695,22 @@ class CommandsParser ( Parser ):
     def redir_out(self):
 
         localctx = CommandsParser.Redir_outContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_redir_out)
+        self.enterRule(localctx, 12, self.RULE_redir_out)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 140
-            self.match(CommandsParser.T__6)
-            self.state = 142
+            self.state = 96
+            self.match(CommandsParser.T__4)
+            self.state = 98
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==11:
-                self.state = 141
+            if _la==9:
+                self.state = 97
                 self.match(CommandsParser.WHITESPACE)
 
 
-            self.state = 144
-            self.atom(0)
+            self.state = 100
+            self.atom()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1115,11 +751,11 @@ class CommandsParser ( Parser ):
     def globbed(self):
 
         localctx = CommandsParser.GlobbedContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_globbed)
+        self.enterRule(localctx, 14, self.RULE_globbed)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 146
-            self.match(CommandsParser.T__7)
+            self.state = 102
+            self.match(CommandsParser.T__5)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1136,25 +772,31 @@ class CommandsParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def WORD(self):
-            return self.getToken(CommandsParser.WORD, 0)
-
-        def QUOTEDTEXT(self):
-            return self.getToken(CommandsParser.QUOTEDTEXT, 0)
-
-        def substituted(self):
-            return self.getTypedRuleContext(CommandsParser.SubstitutedContext,0)
-
-
-        def atom(self, i:int=None):
+        def WORD(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(CommandsParser.AtomContext)
+                return self.getTokens(CommandsParser.WORD)
             else:
-                return self.getTypedRuleContext(CommandsParser.AtomContext,i)
+                return self.getToken(CommandsParser.WORD, i)
+
+        def substituted(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.SubstitutedContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.SubstitutedContext,i)
 
 
-        def globbed(self):
-            return self.getTypedRuleContext(CommandsParser.GlobbedContext,0)
+        def globbed(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.GlobbedContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.GlobbedContext,i)
+
+
+        def quoted_text(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.Quoted_textContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.Quoted_textContext,i)
 
 
         def getRuleIndex(self):
@@ -1176,114 +818,53 @@ class CommandsParser ( Parser ):
 
 
 
-    def atom(self, _p:int=0):
-        _parentctx = self._ctx
-        _parentState = self.state
-        localctx = CommandsParser.AtomContext(self, self._ctx, _parentState)
-        _prevctx = localctx
-        _startState = 26
-        self.enterRecursionRule(localctx, 26, self.RULE_atom, _p)
+
+    def atom(self):
+
+        localctx = CommandsParser.AtomContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_atom)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 159
+            self.state = 108 
             self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [10]:
-                self.state = 149
-                self.match(CommandsParser.WORD)
-                pass
-            elif token in [12]:
-                self.state = 150
-                self.match(CommandsParser.QUOTEDTEXT)
-                pass
-            elif token in [9]:
-                self.state = 151
-                self.substituted()
-                self.state = 153
-                self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,27,self._ctx)
-                if la_ == 1:
-                    self.state = 152
-                    self.atom(0)
-
-
-                pass
-            elif token in [8]:
-                self.state = 155
-                self.globbed()
-                self.state = 157
-                self._errHandler.sync(self)
-                la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
-                if la_ == 1:
-                    self.state = 156
-                    self.atom(0)
-
-
-                pass
-            else:
-                raise NoViableAltException(self)
-
-            self._ctx.stop = self._input.LT(-1)
-            self.state = 173
-            self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,33,self._ctx)
+            _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
-                    if self._parseListeners is not None:
-                        self.triggerExitRuleEvent()
-                    _prevctx = localctx
-                    self.state = 171
+                if _alt == 1:
+                    self.state = 108
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,32,self._ctx)
-                    if la_ == 1:
-                        localctx = CommandsParser.AtomContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_atom)
-                        self.state = 161
-                        if not self.precpred(self._ctx, 4):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 162
+                    token = self._input.LA(1)
+                    if token in [8]:
+                        self.state = 104
+                        self.match(CommandsParser.WORD)
+                        pass
+                    elif token in [7]:
+                        self.state = 105
                         self.substituted()
-                        self.state = 164
-                        self._errHandler.sync(self)
-                        la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
-                        if la_ == 1:
-                            self.state = 163
-                            self.atom(0)
-
-
                         pass
-
-                    elif la_ == 2:
-                        localctx = CommandsParser.AtomContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_atom)
-                        self.state = 166
-                        if not self.precpred(self._ctx, 2):
-                            from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 167
+                    elif token in [6]:
+                        self.state = 106
                         self.globbed()
-                        self.state = 169
-                        self._errHandler.sync(self)
-                        la_ = self._interp.adaptivePredict(self._input,31,self._ctx)
-                        if la_ == 1:
-                            self.state = 168
-                            self.atom(0)
-
-
                         pass
+                    elif token in [10, 11]:
+                        self.state = 107
+                        self.quoted_text()
+                        pass
+                    else:
+                        raise NoViableAltException(self)
 
-             
-                self.state = 175
+
+                else:
+                    raise NoViableAltException(self)
+                self.state = 110 
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,33,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
             self._errHandler.recover(self, re)
         finally:
-            self.unrollRecursionContexts(_parentctx)
+            self.exitRule()
         return localctx
 
 
@@ -1321,15 +902,15 @@ class CommandsParser ( Parser ):
     def substituted(self):
 
         localctx = CommandsParser.SubstitutedContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_substituted)
+        self.enterRule(localctx, 18, self.RULE_substituted)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 176
-            self.match(CommandsParser.T__8)
-            self.state = 177
+            self.state = 112
+            self.match(CommandsParser.T__6)
+            self.state = 113
             self.terminal()
-            self.state = 178
-            self.match(CommandsParser.T__8)
+            self.state = 114
+            self.match(CommandsParser.T__6)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1339,25 +920,225 @@ class CommandsParser ( Parser ):
         return localctx
 
 
+    class Quoted_textContext(ParserRuleContext):
+        __slots__ = 'parser'
 
-    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
-        if self._predicates == None:
-            self._predicates = dict()
-        self._predicates[13] = self.atom_sempred
-        pred = self._predicates.get(ruleIndex, None)
-        if pred is None:
-            raise Exception("No predicate with index:" + str(ruleIndex))
-        else:
-            return pred(localctx, predIndex)
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
 
-    def atom_sempred(self, localctx:AtomContext, predIndex:int):
-            if predIndex == 0:
-                return self.precpred(self._ctx, 4)
-         
+        def SINGLEQUOTE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.SINGLEQUOTE)
+            else:
+                return self.getToken(CommandsParser.SINGLEQUOTE, i)
 
-            if predIndex == 1:
-                return self.precpred(self._ctx, 2)
-         
+        def DOUBLEQUOTE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.DOUBLEQUOTE)
+            else:
+                return self.getToken(CommandsParser.DOUBLEQUOTE, i)
+
+        def QUOTEWORD(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.QUOTEWORD)
+            else:
+                return self.getToken(CommandsParser.QUOTEWORD, i)
+
+        def WORD(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.WORD)
+            else:
+                return self.getToken(CommandsParser.WORD, i)
+
+        def substituted(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(CommandsParser.SubstitutedContext)
+            else:
+                return self.getTypedRuleContext(CommandsParser.SubstitutedContext,i)
+
+
+        def WHITESPACE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CommandsParser.WHITESPACE)
+            else:
+                return self.getToken(CommandsParser.WHITESPACE, i)
+
+        def getRuleIndex(self):
+            return CommandsParser.RULE_quoted_text
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterQuoted_text" ):
+                listener.enterQuoted_text(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitQuoted_text" ):
+                listener.exitQuoted_text(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitQuoted_text" ):
+                return visitor.visitQuoted_text(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def quoted_text(self):
+
+        localctx = CommandsParser.Quoted_textContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_quoted_text)
+        self._la = 0 # Token type
+        try:
+            self.state = 151
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [10]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 116
+                self.match(CommandsParser.SINGLEQUOTE)
+                self.state = 129
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while ((_la) & ~0x3f) == 0 and ((1 << _la) & 7164) != 0:
+                    self.state = 127
+                    self._errHandler.sync(self)
+                    token = self._input.LA(1)
+                    if token in [11]:
+                        self.state = 117
+                        self.match(CommandsParser.DOUBLEQUOTE)
+                        pass
+                    elif token in [6]:
+                        self.state = 118
+                        self.match(CommandsParser.T__5)
+                        pass
+                    elif token in [3]:
+                        self.state = 119
+                        self.match(CommandsParser.T__2)
+                        pass
+                    elif token in [2]:
+                        self.state = 120
+                        self.match(CommandsParser.T__1)
+                        pass
+                    elif token in [4]:
+                        self.state = 121
+                        self.match(CommandsParser.T__3)
+                        pass
+                    elif token in [5]:
+                        self.state = 122
+                        self.match(CommandsParser.T__4)
+                        pass
+                    elif token in [12]:
+                        self.state = 123
+                        self.match(CommandsParser.QUOTEWORD)
+                        pass
+                    elif token in [8]:
+                        self.state = 124
+                        self.match(CommandsParser.WORD)
+                        pass
+                    elif token in [7]:
+                        self.state = 125
+                        self.substituted()
+                        pass
+                    elif token in [9]:
+                        self.state = 126
+                        self.match(CommandsParser.WHITESPACE)
+                        pass
+                    else:
+                        raise NoViableAltException(self)
+
+                    self.state = 131
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 132
+                self.match(CommandsParser.SINGLEQUOTE)
+                pass
+            elif token in [11]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 133
+                self.match(CommandsParser.DOUBLEQUOTE)
+                self.state = 147
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while ((_la) & ~0x3f) == 0 and ((1 << _la) & 6132) != 0:
+                    self.state = 145
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
+                    if la_ == 1:
+                        self.state = 134
+                        self.match(CommandsParser.SINGLEQUOTE)
+                        pass
+
+                    elif la_ == 2:
+                        self.state = 135
+                        self.match(CommandsParser.T__1)
+                        pass
+
+                    elif la_ == 3:
+                        self.state = 136
+                        self.match(CommandsParser.T__5)
+                        pass
+
+                    elif la_ == 4:
+                        self.state = 137
+                        self.match(CommandsParser.T__1)
+                        pass
+
+                    elif la_ == 5:
+                        self.state = 138
+                        self.match(CommandsParser.T__5)
+                        pass
+
+                    elif la_ == 6:
+                        self.state = 139
+                        self.match(CommandsParser.T__3)
+                        pass
+
+                    elif la_ == 7:
+                        self.state = 140
+                        self.match(CommandsParser.T__4)
+                        pass
+
+                    elif la_ == 8:
+                        self.state = 141
+                        self.match(CommandsParser.QUOTEWORD)
+                        pass
+
+                    elif la_ == 9:
+                        self.state = 142
+                        self.match(CommandsParser.WORD)
+                        pass
+
+                    elif la_ == 10:
+                        self.state = 143
+                        self.substituted()
+                        pass
+
+                    elif la_ == 11:
+                        self.state = 144
+                        self.match(CommandsParser.WHITESPACE)
+                        pass
+
+
+                    self.state = 149
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 150
+                self.match(CommandsParser.DOUBLEQUOTE)
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
 
 
 
