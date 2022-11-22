@@ -19,13 +19,10 @@ class shell_colours:
 
 
 class syntax_highlighter:
-    def take_input(self):
+    def highlight_and_print_code(self, code):
         cwd = getcwd()
-        print(cwd + "> ", end="")
-        code = input()
         print(shell_colours.LINE_UP, end=shell_colours.LINE_CLEAR)
         print(cwd + "> " + self.highlight_code(code))
-        return code
 
     def highlight_code(self, code) -> str:
         has_space = code.endswith(" ")

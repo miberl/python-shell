@@ -1,9 +1,9 @@
 import sys
 from collections import deque
-from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
 from syntax_highlighting.syntax_highlighter import syntax_highlighter
+from interactive_input.autocompleter import take_input
 
 
 class Shell:
@@ -27,7 +27,8 @@ class Shell:
         else:
             while True:
                 sh = syntax_highlighter()
-                cmdline = sh.take_input()
+                cmdline = take_input()
+                sh.highlight_and_print_code(cmdline)
                 out = self.eval(cmdline)
                 while len(out) > 0:
                     print(out.popleft(), end="")
