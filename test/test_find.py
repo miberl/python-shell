@@ -8,7 +8,7 @@ class TestFind(TestSetup):
         self.out = []
         self.app = Find()
 
-    def run_test(self, args, expected_output):
+    def run_test(self, args, expected_output, **kwargs):
         super().run_test(
             args,
             expected_output,

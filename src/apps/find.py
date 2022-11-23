@@ -18,7 +18,8 @@ class Find(Application):
 
         self.find(directory, file_name_pattern, out)
 
-    def find(self, path, file_pattern, out):
+    @staticmethod
+    def find(path, file_pattern, out):
         file_pattern = (
             file_pattern.replace("*", ".*").rstrip() if file_pattern else None
         )

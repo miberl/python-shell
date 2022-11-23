@@ -19,6 +19,7 @@ class ShellExec:
     def run_instructions(self, cmdline: str):
         """
         Takes a command line string and runs the parser on them, then calls evaluation methods to get a result
+
         :param cmdline: Command line as a string (eg. 'ls -a dir1/')
         :return: type(deque) - Result of evaluation of command line objects
         """

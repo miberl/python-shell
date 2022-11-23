@@ -1,6 +1,7 @@
 import sys
 
 from application import Application
+from exceptions.unknown_option_error import UnknownFlagError
 
 
 class Cut(Application):
@@ -26,6 +27,8 @@ class Cut(Application):
         # in our context -b and -c are the same thing so why not support both
         if flag_name == "-b" or flag_name == "-c":
             self.cut_by_chars(flag_arg, data, out)
+        else:
+            raise UnknownFlagError(flag_name)
 
     def cut_by_chars(self, flag_arg, lines, out):
         # split flag arguments into different ranges and then cut each line
@@ -33,16 +36,17 @@ class Cut(Application):
         for line in lines:
             out.append(self.cut_line_with_ranges(line, ranges))
 
-    def get_ranges(self, input):
+    def get_ranges(self, inp):
         ranges = []
-        split_ranges = input.split(",")
+        split_ranges = inp.split(",")
         for r in split_ranges:
             nums = r.split("-")
             ranges.append(nums)
         ranges = self.adjust_for_overlapping_ranges(ranges)
         return ranges
 
-    def cut_line_with_ranges(self, line, ranges):
+    @staticmethod
+    def cut_line_with_ranges(line, ranges):
         output = ""
         for r in ranges:
             lower_bound, upper_bound = r
@@ -83,11 +87,11 @@ class Cut(Application):
     @staticmethod
     def to_int_ranges(ranges):
         new_ranges = []
-        for range in ranges:
-            if len(range) == 1:
-                new_ranges.append((int(range[0]), int(range[0])))
+        for r in ranges:
+            if len(r) == 1:
+                new_ranges.append((int(r[0]), int(r[0])))
                 continue
-            start, end = range[0], range[1]
+            start, end = r[0], r[1]
             if start == '':
                 new_start = 1
             else:

@@ -1,6 +1,7 @@
 from application import Application
 from exceptions.invalid_syntax_error import InvalidSyntaxError
 
+
 # head [file ...]
 
 class Head(Application):
@@ -21,16 +22,15 @@ class Head(Application):
         else:
             for line in inpt:
                 lines.append(line)
-        
+
         limit_option = int(options.get("-n")[0]) if options.get("-n") else None
         line_limit = self.line_limit_num(lines, limit_option)
         out.extend(lines[:line_limit])
 
-    def line_limit_num(self, lines, limit):
-        DEFAULT_LINE_LIMIT = 10
+    @staticmethod
+    def line_limit_num(lines, limit):
+        default_line_limit = 10
         if limit is None:
-            limit = DEFAULT_LINE_LIMIT
+            limit = default_line_limit
         limit = min(limit, len(lines))
         return limit
-        
-

@@ -77,7 +77,7 @@ class TestInstruction(TestCase):
         self.populated_instruction.add(self.example_command_three)
 
     def test_construct(self):
-        sut = Instruction()
+        Instruction()
 
     def test_empty_not_has_next(self):
         assert not self.empty_instruction.has_next()
@@ -86,14 +86,16 @@ class TestInstruction(TestCase):
         with self.assertRaises(InstructionConstructError) as err:
             self.empty_instruction.get_next_command()
 
-        assert str(err.exception) == 'Error while constructing command after parsing, No command in instruction'
+        assert str(err.exception) == 'Error while constructing command after ' \
+                                     'parsing, No command in instruction'
 
     def test_empty_throw_if_add_bad_obj(self):
         try:
+            # noinspection PyTypeChecker
             self.empty_instruction.add('hello')
         except InstructionConstructError as e:
-            assert str(e) == 'Error while constructing command after parsing, ' \
-                             'Expected command when adding to instruction'
+            assert str(e) == 'Error while constructing command after parsing,' \
+                             ' Expected command when adding to instruction'
 
     def test_add_to_empty_has_next(self):
         self.empty_instruction.add(self.example_command)
@@ -108,4 +110,5 @@ class TestInstruction(TestCase):
         while self.populated_instruction.has_next():
             commands.append(self.populated_instruction.get_next_command())
 
-        assert commands == [self.example_command, self.example_command_two, self.example_command_three]
+        assert commands == [self.example_command, self.example_command_two,
+                            self.example_command_three]
