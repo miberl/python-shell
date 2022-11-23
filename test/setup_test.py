@@ -64,8 +64,6 @@ class TestSetup(unittest.TestCase):
     def mock_write_lines(cls, file_path, lines):
         cls.lines_written = (file_path, lines)
 
-        return
-
     @classmethod
     def mock_display(cls, out):
         cls.stdout_mock = list(out)

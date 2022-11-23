@@ -9,7 +9,7 @@ class Application(ABC):
         self.options = dict()
 
     @abstractmethod
-    def run(self, args, inpt, out):
+    def run(self, args, inpt, out):  # pragma: no cover
         pass
 
     def run_unsafe(self, args, inpt, out):
@@ -24,13 +24,8 @@ class Application(ABC):
             return f.readlines()
 
     @classmethod
-    def read_file(cls, filename):
-        with open(filename) as f:
-            return f.read()
-
-    @classmethod
     def write_lines(cls, file, lines):
-        with open(file, 'w') as f:
+        with open(file, "w") as f:
             f.writelines(lines)
 
     @classmethod
@@ -54,7 +49,8 @@ class Application(ABC):
         while i < len(args):
             if args[i] in self.options:
                 options[args[i]] = Application.check_no_flags(
-                    args[i + 1:i + self.options[args[i]] + 1])
+                    args[i + 1 : i + self.options[args[i]] + 1]
+                )
                 i += self.options[args[i]] + 1
             elif self.is_option_flag(args[i]):
                 raise UnknownFlagError(args[i])
@@ -67,7 +63,7 @@ class Application(ABC):
 
     @classmethod
     def is_option_flag(cls, arg):
-        return arg[0] == '-'
+        return arg[0] == "-"
 
     @classmethod
     def check_no_flags(cls, args):
