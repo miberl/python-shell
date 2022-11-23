@@ -47,15 +47,22 @@ class TestSetup(unittest.TestCase):
         return [f"{line}\n" for line in lines]
 
     @classmethod
-    def fetch_file_from_fs(self, file_path):
+    def fetch_directory_from_fs(self, dir_path):
         curr_dir = TestSetup.mock_fs
 
-        file_directories = file_path.split("/")
-        file_name = file_directories.pop()
+        file_directories = filter(lambda x: x not in ["", "."], dir_path.split("/"))
         for path in file_directories:
             curr_dir = curr_dir[path]
+        return curr_dir
 
-        return curr_dir[file_name]
+    @classmethod
+    def fetch_file_from_fs(self, file_path):
+        file_directories = file_path.split("/")
+        file_name = file_directories.pop()
+        file_directory_path = "/".join(file_directories)
+
+        file_dir = self.fetch_directory_from_fs(file_directory_path)
+        return file_dir[file_name]
 
     @classmethod
     def mock_write_lines(cls, file_path, lines):
@@ -69,20 +76,25 @@ class TestSetup(unittest.TestCase):
 
     @classmethod
     def mock_os_walk(cls, top):
-        dirs = top.split('/')[1:-1]
-        pwd = cls.mock_fs
-        for dir_ in dirs:
-            pwd = pwd[dir_]
+        exploreQueue = [cls.explore_dir(top)]
 
-        files = []
-        dirs = []
-        for entry in pwd.keys():
-            if type(pwd[entry]) is str:
+        while exploreQueue:
+            path, dirs, files = exploreQueue.pop(0)
+            yield (path, dirs, files)
+            for dir in dirs:
+                exploreQueue.append(cls.explore_dir(path + "/" + dir))
+
+    @classmethod
+    def explore_dir(cls, dir_path):
+        directory = cls.fetch_directory_from_fs(dir_path)
+
+        files, dirs = [], []
+        for entry in directory.keys():
+            if type(directory[entry]) is str:
                 files.append(entry)
             else:
                 dirs.append(entry)
-
-        return top, dirs, files
+        return dir_path, dirs, files
 
     # Runs a test, patches function with mock function if supplied
     def run_test(
@@ -99,7 +111,7 @@ class TestSetup(unittest.TestCase):
         else:
             self.code_under_test(args)
         if unordered:
-            self.assertEqual(set(self.out), set(expected_output))
+            self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
             self.assertEqual(self.out, expected_output)
 

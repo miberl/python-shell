@@ -1,5 +1,3 @@
-import unittest
-
 from setup_test import TestSetup
 from shell import Shell
 
@@ -24,7 +22,3 @@ class TestShell(TestSetup):
     def test_quoted_name(self):
         self.run_test('"echo"', ['\n'],
                       'application.Application.get_dir_contents', TestSetup.mock_os_walk)
-
-
-if __name__ == "__main__":
-    unittest.main()
