@@ -67,7 +67,3 @@ class TestEcho(TestSetup):
         self.app.run(["foo bar", "bar  foo"], sys.stdin, self.out)
         self.assertEqual(self.out.popleft(), "foo bar bar  foo\n")
         self.assertEqual(len(self.out), 0)
-
-
-if __name__ == "__main__":
-    unittest.main()

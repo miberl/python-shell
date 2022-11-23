@@ -62,5 +62,37 @@ class TestGlobbing(TestSetup):
     def test_glob_not_show_hidden(self):
         self.run_test(
             "dir2/subdir/*",
-            ["dir2/subdir/file.txt", "dir2/subdir/normal"],
+            [
+                "dir2/subdir/file.txt",
+                "dir2/subdir/normal"
+            ]
+        )
+
+    def test_glob_absolute_path(self):
+        self.run_test(
+            '/*',
+            [
+                '/dir1',
+                '/dir2',
+                '/test.txt'
+            ]
+        )
+
+    def test_glob_only_dir(self):
+        self.run_test(
+            '/*/',
+            [
+                '/dir1/',
+                '/dir2/'
+            ]
+        )
+
+    def test_glop_prepend_dot(self):
+        self.run_test(
+            './*',
+            [
+                'dir1',
+                'dir2',
+                'test.txt'
+            ]
         )

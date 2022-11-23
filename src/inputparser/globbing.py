@@ -10,7 +10,7 @@ class Globbing:
     def glob(self, pattern: str) -> [str]:
         loc_patt, file_patt = self.get_file_and_location_pattern(pattern)
 
-        top = self.set_start_top(loc_patt)
+        loc_patt, top = self.set_start_top(loc_patt)
 
         self.set_poss_tops(loc_patt, top)
 
@@ -23,9 +23,9 @@ class Globbing:
 
         location_pattern = pattern_split[:-1]
         file_pattern = pattern_split[-1]
-        if location_pattern[0] == '.' or location_pattern[0] == '':
+        if location_pattern[0] == '.':
             location_pattern = location_pattern[1:]
-        return location_pattern, file_pattern[0]
+        return location_pattern, file_pattern
 
     def set_poss_tops(self, loc_pattern: [str], top: str) -> None:
         if not loc_pattern:
@@ -50,10 +50,10 @@ class Globbing:
             return string[i] == pattern[0] and self.match(pattern[1:], string, i + 1)
 
     @staticmethod
-    def set_start_top(loc_patt: [str]) -> str:
+    def set_start_top(loc_patt: [str]) -> (str, str):
         if len(loc_patt) > 0 and loc_patt[0] == '':
-            return '/'
-        return './'
+            return loc_patt[1:], '/'
+        return loc_patt, './'
 
     def get_matches(self, file_patt: str) -> [str]:
         if file_patt == '':

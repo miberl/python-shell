@@ -29,14 +29,13 @@ class TestSetup(unittest.TestCase):
         },
     }
 
+    lines_written = None
+    stdout_mock = None
+
     def __init__(self, methodName: str = ...):
         super().__init__(methodName)
         self.out = None
         self.app = None
-
-    @classmethod
-    def mock_read_file(self, file_path):
-        return TestSetup.fetch_file_from_fs(file_path)
 
     @classmethod
     def mock_read_lines(self, file_path):
@@ -60,6 +59,16 @@ class TestSetup(unittest.TestCase):
 
         file_dir = self.fetch_directory_from_fs(file_directory_path)
         return file_dir[file_name]
+
+    @classmethod
+    def mock_write_lines(cls, file_path, lines):
+        cls.lines_written = (file_path, lines)
+
+        return
+
+    @classmethod
+    def mock_display(cls, out):
+        cls.stdout_mock = list(out)
 
     @classmethod
     def mock_os_walk(cls, top):

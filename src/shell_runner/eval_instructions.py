@@ -8,6 +8,15 @@ from inputparser.command import Instruction
 
 
 class EvalInstructions:
+    """
+    NAME
+        EvalInstructions
+    DESCRIPTION
+        Takes a list of instructions and returns the string that those instructions evaluate to.
+    METHODS
+        EvalInstructions.eval()
+            Evaluates each of the provided instructions and returns a deque() object
+    """
     def __init__(self):
         self.appList = {
             "cat": cat.Cat(),
@@ -25,6 +34,13 @@ class EvalInstructions:
         }
 
     def eval(self, instructions: [Instruction]) -> deque:
+        """
+        Evaluates instructions to a string
+
+        :param instructions: List of instructions to be evaluated
+
+        :return: deque object representing result of execution of instructions
+        """
         if not instructions:
             return deque()
 
@@ -32,12 +48,14 @@ class EvalInstructions:
         for instruction in instructions:
             outp += self.run_one_instruction(instruction)
 
-        return self.get_return_val(outp)
+        return outp
 
-    def run_one_instruction(self, instruction):
+    def run_one_instruction(self, instruction: Instruction) -> deque:
         inp = sys.stdin
         while instruction.has_next():
             inp = self.run_command(inp, instruction)
+        if inp == sys.stdin:
+            return deque()
         return inp
 
     def run_command(self, inp, instruction):
@@ -62,12 +80,6 @@ class EvalInstructions:
         for r in r_out:
             Application.write_lines(r, list(outp))
             outp = deque()
-        return outp
-
-    @staticmethod
-    def get_return_val(outp):
-        if outp == sys.stdin:
-            return deque()
         return outp
 
     def eval_cmd(self, command, inp):

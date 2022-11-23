@@ -83,11 +83,10 @@ class TestInstruction(TestCase):
         assert not self.empty_instruction.has_next()
 
     def test_empty_if_get_will_throw(self):
-        try:
+        with self.assertRaises(InstructionConstructError) as err:
             self.empty_instruction.get_next_command()
-            assert False
-        except InstructionConstructError as e:
-            assert str(e) == 'Error while constructing command after parsing, No command in instruction'
+
+        assert str(err.exception) == 'Error while constructing command after parsing, No command in instruction'
 
     def test_empty_throw_if_add_bad_obj(self):
         try:
