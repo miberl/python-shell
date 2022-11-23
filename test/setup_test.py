@@ -83,6 +83,9 @@ class TestSetup(unittest.TestCase):
                 dirs.append(entry)
         return dir_path, dirs, files
 
+    def code_under_test(self, args):
+        self.app.run(args, sys.stdin, self.out)
+
     # Runs a test, patches function with mock function if supplied
     def run_test(
         self,
@@ -97,13 +100,8 @@ class TestSetup(unittest.TestCase):
                 self.code_under_test(args)
         else:
             self.code_under_test(args)
-        if unordered:
-            self.assertEqual(sorted(self.out), sorted(expected_output))
-        else:
-            self.assertEqual(self.out, expected_output)
 
-    def code_under_test(self, args):
-        self.app.run(args, sys.stdin, self.out)
+        self.assert_output(expected_output, unordered)
 
     # Runs a test, patches function with mock return value
     def run_test_patch_return(
@@ -111,6 +109,9 @@ class TestSetup(unittest.TestCase):
     ):
         with patch(ref_to_patch, return_value=patched_return):
             self.code_under_test(args)
+        self.assert_output(expected_output, unordered)
+
+    def assert_output(self, expected_output, unordered=False):
         if unordered:
             self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
