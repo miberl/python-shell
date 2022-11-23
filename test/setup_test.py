@@ -98,7 +98,7 @@ class TestSetup(unittest.TestCase):
         else:
             self.code_under_test(args)
         if unordered:
-            self.assertEqual(set(self.out), set(expected_output))
+            self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
             self.assertEqual(self.out, expected_output)
 
