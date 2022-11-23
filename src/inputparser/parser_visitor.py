@@ -16,7 +16,8 @@ class ParseVisitor(CommandsVisitor):
 
     def visitProg(self, ctx: CommandsParser.ProgContext):
         terminal = ctx.getChild(0, CommandsParser.TerminalContext)
-        self.instructions = self.get_terminal(terminal)
+        if terminal is not None:
+            self.instructions = self.get_terminal(terminal)
 
     def get_terminal(self, ctx):
         instructions = ctx.getTypedRuleContexts(CommandsParser.InstructionContext)

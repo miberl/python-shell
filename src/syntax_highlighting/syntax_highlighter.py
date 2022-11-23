@@ -1,3 +1,4 @@
+import sys
 from os import getcwd
 from os.path import exists
 from shell_runner.eval_instructions import EvalInstructions
@@ -22,7 +23,7 @@ class syntax_highlighter:
     def take_input(self):
         cwd = getcwd()
         print(cwd + "> ", end="")
-        code = input()
+        code = sys.stdin.read()
         print(shell_colours.LINE_UP, end=shell_colours.LINE_CLEAR)
         print(cwd + "> " + self.highlight_code(code))
         return code

@@ -29,6 +29,9 @@ class TestSetup(unittest.TestCase):
         },
     }
 
+    lines_written = None
+    stdout_mock = None
+
     def __init__(self, methodName: str = ...):
         super().__init__(methodName)
         self.out = None
@@ -53,6 +56,16 @@ class TestSetup(unittest.TestCase):
             curr_dir = curr_dir[path]
 
         return curr_dir[file_name]
+
+    @classmethod
+    def mock_write_lines(cls, file_path, lines):
+        cls.lines_written = (file_path, lines)
+
+        return
+
+    @classmethod
+    def mock_display(cls, out):
+        cls.stdout_mock = list(out)
 
     @classmethod
     def mock_os_walk(cls, top):
