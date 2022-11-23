@@ -5,14 +5,31 @@ from exceptions.unknown_option_error import UnknownFlagError
 
 
 class Application(ABC):
+    """
+    NAME
+        Application
+    DESCRIPTION
+        Encapsulate common application interface and provide common utility methods that engage with external components,
+        such as the file system.
+    """
+
     def __init__(self) -> None:
         self.options = dict()
 
     @abstractmethod
     def run(self, args, inpt, out):
+        """
+        Runs an app. Out parameter is overwritten, essentially acts as output.
+
+        :param args: string list of arguments provided to the application
+        :param inpt: queue drawn from stdin or from input redirection
+        :param out: output queue, populated in running of an app.
+        :return: None
+        """
         pass
 
     def run_unsafe(self, args, inpt, out):
+        """Runs the unsafe version of an app, see run()"""
         try:
             self.run(args, inpt, out)
         except Exception as e:
@@ -37,9 +54,11 @@ class Application(ABC):
     def get_dir_contents(cls, top: str):
         return next(os.walk(top))
 
-    # parses provided arguments, returns a tuple of (command_args, options)
-    # where command args is a list of leading and trailing arguments that are not options
     def parse_args(self, args):
+        """
+        parses provided arguments, returns a tuple of (command_args, options)
+        where command args is a list of leading and trailing arguments that are not options
+        """
         command_args = []
         options = dict()
         i = 0

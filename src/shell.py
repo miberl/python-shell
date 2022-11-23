@@ -25,6 +25,7 @@ class Shell:
     def main(self, argv: [str]) -> None:
         """
         Method used to run shell
+
         :param argv: Command line arguments, either empty (for REPL) or -c followed by a command string
         :return: Returns Noting, prints results
         """

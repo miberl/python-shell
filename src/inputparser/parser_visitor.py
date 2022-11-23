@@ -8,10 +8,27 @@ from inputparser.antlr.CommandsLexer import CommandsLexer
 
 
 class ParseVisitor(CommandsVisitor):
+    """
+        NAME
+            ParseVisitor
+        DESCRIPTION
+            Class used to traverse produced parse tree. Used in combination with ParseCommand.
+            Generates set of Instruction objects that can be gotten.
+        METHODS
+            get_instructions()
+                Returns list of instruction objects built from parse tree
+            internal visitor methods
+                Used to traverse tree
+    """
     def __init__(self):
         self.instructions = []
 
-    def get_instructions(self):
+    def get_instructions(self) -> [Instruction]:
+        """
+        Returns list of instruction objects built from parse tree, encoding information in command
+
+        :return: List of instruction objects
+        """
         return self.instructions
 
     def visitProg(self, ctx: CommandsParser.ProgContext):

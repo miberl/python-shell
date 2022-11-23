@@ -6,7 +6,7 @@ from syntax_highlighting.syntaxhighlighter import shell_colours
 class TestSyntaxhighlighting(unittest.TestCase):
     def run_test(self, command, expected_command):
         sh = SyntaxHighlighter()
-        actual_command = sh.highlight_code(command)
+        actual_command = sh._highlight_code(command)
         assert actual_command == expected_command
 
     def test_no_highlighting(self):

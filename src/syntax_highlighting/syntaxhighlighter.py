@@ -24,40 +24,44 @@ class SyntaxHighlighter:
         print(cwd + "> ", end="")
         code = input()
         print(shell_colours.LINE_UP, end=shell_colours.LINE_CLEAR)
-        print(cwd + "> " + self.highlight_code(code))
+        print(cwd + "> " + self._highlight_code(code))
         return code
 
-    def highlight_code(self, code) -> str:
+    def _highlight_code(self, code) -> str:
         has_space = code.endswith(" ")
-        apps = self.get_apps_from_eval(EvalInstructions())
+        apps = self._get_apps_from_eval(EvalInstructions())
         words = code.split()
         new_code = ""
         for word in words:
-            if word in apps:
-                new_code += self.highlight_app(word)
-            elif exists(word) and ("/" in word or "\\" in word or word == "."):
-                new_code += self.highlight_directory(word)
-            elif word.startswith("-"):
-                new_code += self.highlight_flag(word)
-            elif word.startswith("|"):
-                new_code += self.highlight_pipe(word)
-            elif word.startswith("<"):
-                new_code += self.highlight_redir_in(word)
-            elif word.startswith(">"):
-                new_code += self.highlight_redir_out(word)
-            else:
-                new_code += word + " "
+            new_code = self._highligh_words(apps, new_code, word)
         if new_code.endswith(" ") and not has_space:
             new_code = new_code[:-1]
         return new_code
 
-    def get_apps_from_eval(self, eval):
+    def _highligh_words(self, apps, new_code, word):
+        if word in apps:
+            new_code += self._highlight_app(word)
+        elif exists(word) and ("/" in word or "\\" in word or word == "."):
+            new_code += self._highlight_directory(word)
+        elif word.startswith("-"):
+            new_code += self._highlight_flag(word)
+        elif word.startswith("|"):
+            new_code += self._highlight_pipe(word)
+        elif word.startswith("<"):
+            new_code += self._highlight_redir_in(word)
+        elif word.startswith(">"):
+            new_code += self._highlight_redir_out(word)
+        else:
+            new_code += word + " "
+        return new_code
+
+    def _get_apps_from_eval(self, eval):
         return eval.appList.keys()
 
-    def highlight_app(self, word):
+    def _highlight_app(self, word):
         return shell_colours.APP + word + shell_colours.ENDC + " "
 
-    def highlight_directory(self, word):
+    def _highlight_directory(self, word):
         return (
             shell_colours.UNDERLINE
             + shell_colours.DIR
@@ -66,14 +70,14 @@ class SyntaxHighlighter:
             + " "
         )
 
-    def highlight_flag(self, word):
+    def _highlight_flag(self, word):
         return shell_colours.FLAG + word + shell_colours.ENDC + " "
 
-    def highlight_pipe(self, word):
+    def _highlight_pipe(self, word):
         return shell_colours.PIPE + word + shell_colours.ENDC + " "
 
-    def highlight_redir_in(self, word):
+    def _highlight_redir_in(self, word):
         return shell_colours.REDIR_IN + word + shell_colours.ENDC + " "
 
-    def highlight_redir_out(self, word):
+    def _highlight_redir_out(self, word):
         return shell_colours.REDIR_OUT + word + shell_colours.ENDC + " "
