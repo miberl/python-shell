@@ -1,6 +1,7 @@
 import sys
 
 from application import Application
+from exceptions.unknown_option_error import UnknownFlagError
 
 
 class Cut(Application):
@@ -26,6 +27,8 @@ class Cut(Application):
         # in our context -b and -c are the same thing so why not support both
         if flag_name == "-b" or flag_name == "-c":
             self.cut_by_chars(flag_arg, data, out)
+        else:
+            raise UnknownFlagError(flag_name)
 
     def cut_by_chars(self, flag_arg, lines, out):
         # split flag arguments into different ranges and then cut each line

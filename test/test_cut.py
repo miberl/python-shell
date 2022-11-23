@@ -1,3 +1,7 @@
+import sys
+from io import StringIO
+
+from exceptions.unknown_option_error import UnknownFlagError
 from setup_test import TestSetup
 from apps.cut import Cut
 
@@ -98,3 +102,36 @@ class TestCut(TestSetup):
                 "Chhattisgarh\n",
             ]
         )
+
+    def test_cut_too_few_args_no_args(self):
+        with self.assertRaises(ValueError) as err:
+            self.run_test([], [])
+        assert 'wrong number of command line arguments' in str(err.exception)
+
+    def test_cut_too_few_args_one_arg(self):
+        with self.assertRaises(ValueError) as err:
+            self.run_test(['hello'], [])
+        assert 'wrong number of command line arguments' in str(err.exception)
+
+    def test_cut_too_many_args(self):
+        with self.assertRaises(ValueError) as err:
+            self.run_test(['hello', 'there', 'many', 'args'], [])
+        assert 'wrong number of command line arguments' in str(err.exception)
+
+    def test_cut_bad_flag(self):
+        with self.assertRaises(UnknownFlagError) as err:
+            self.run_test(['-g', 'hello', 'dir1/cutTest.txt'], [])
+        assert 'Unknown option flag' in str(err.exception)
+
+    def test_cut_invalid_range(self):
+        with self.assertRaises(ValueError) as err:
+            self.run_test(['-b', '4-3', 'dir1/cutTest.txt'], [])
+        assert 'invalid range' in str(err.exception)
+
+    def test_cut_stdin_ok(self):
+        original_stdin = sys.stdin
+        sys.stdin = StringIO("AAA\nBBB\nAAA\n")
+
+        self.run_test(['-b', '1'], ['A\n', 'B\n', 'A\n'])
+
+        sys.stdin = original_stdin
