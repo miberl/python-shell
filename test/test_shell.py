@@ -10,7 +10,3 @@ class TestShell(unittest.TestCase):
         out = shell.eval("echo foo")
         self.assertEqual(out.popleft(), "foo\n")
         self.assertEqual(len(out), 0)
-
-
-if __name__ == "__main__":
-    unittest.main()
