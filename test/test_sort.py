@@ -10,7 +10,7 @@ class TestSort(TestSetup):
         super().setUp()
         self.out = []
         self.app = Sort()
-    
+
     def run_test(self, args, expected_output, **kwargs):
         super().run_test(args, expected_output,
                          "application.Application.read_lines",
@@ -31,7 +31,7 @@ class TestSort(TestSetup):
         self.run_test(["-r", "test.txt"], ["''\n"])
 
     def test_sort_2_reverse(self):
-        self.run_test(["-r", "dir1/file1.txt"], [ "BBB\n", "AAA\n", "AAA\n"])
+        self.run_test(["-r", "dir1/file1.txt"], ["BBB\n", "AAA\n", "AAA\n"])
 
     def test_sort_no_args(self):
         original_stdin = sys.stdin
@@ -40,5 +40,3 @@ class TestSort(TestSetup):
         self.run_test([], ["AAA\n", "AAA\n", "BBB\n"])
 
         sys.stdin = original_stdin
-
-

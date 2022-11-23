@@ -8,7 +8,7 @@ class TestCd(TestSetup):
         super().setUp()
         self.app = Cd()
 
-    def run_test(self, args, expected_output):
+    def run_test(self, args, expected_output, **kwargs):
         super().run_test(
             args,
             expected_output,
