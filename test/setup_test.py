@@ -38,10 +38,6 @@ class TestSetup(unittest.TestCase):
         self.app = None
 
     @classmethod
-    def mock_read_file(self, file_path):
-        return TestSetup.fetch_file_from_fs(file_path)
-
-    @classmethod
     def mock_read_lines(self, file_path):
         lines = TestSetup.fetch_file_from_fs(file_path).strip().split("\n")
         return [f"{line}\n" for line in lines]

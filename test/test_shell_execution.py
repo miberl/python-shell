@@ -1,5 +1,4 @@
 import sys
-from io import StringIO
 
 import shell
 from setup_test import TestSetup
@@ -41,7 +40,7 @@ class TestShellMainMethod(TestSetup):
         shell.main()
         self.out = TestSetup.stdout_mock
 
-    def run_test(self, args, expected):
+    def run_test(self, args, expected, **kwargs):
         super().run_test(args, expected,
                          'shell.Shell._display', TestSetup.mock_display)
 
@@ -50,5 +49,13 @@ class TestShellMainMethod(TestSetup):
         sys.argv = ['shell', '-c', 'echo hello']
 
         self.run_test(None, ['hello\n'])
+
+        sys.argv = old_args
+
+    def test_run_empty_ok(self):
+        old_args = sys.argv
+        sys.argv = ['shell', '-c', '']
+
+        self.run_test(None, [])
 
         sys.argv = old_args

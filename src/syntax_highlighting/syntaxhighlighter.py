@@ -19,7 +19,7 @@ class shell_colours:
 
 
 class SyntaxHighlighter:
-    def take_input(self):
+    def take_input(self): # pragma nocover
         cwd = getcwd()
         print(cwd + "> ", end="")
         code = input()
