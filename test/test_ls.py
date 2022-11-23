@@ -1,8 +1,6 @@
-from unittest.mock import patch
-
+from apps.ls import Ls
 from exceptions.invalid_syntax_error import InvalidSyntaxError
 from setup_test import TestSetup
-from apps.ls import Ls
 
 
 class TestLs(TestSetup):

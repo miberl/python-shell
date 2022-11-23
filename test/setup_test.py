@@ -38,12 +38,12 @@ class TestSetup(unittest.TestCase):
         self.app = None
 
     @classmethod
-    def mock_read_lines(self, file_path):
+    def mock_read_lines(cls, file_path):
         lines = TestSetup.fetch_file_from_fs(file_path).strip().split("\n")
         return [f"{line}\n" for line in lines]
 
     @classmethod
-    def fetch_directory_from_fs(self, dir_path):
+    def fetch_directory_from_fs(cls, dir_path):
         curr_dir = TestSetup.mock_fs
 
         file_directories = filter(lambda x: x not in ["", "."], dir_path.split("/"))
@@ -52,12 +52,12 @@ class TestSetup(unittest.TestCase):
         return curr_dir
 
     @classmethod
-    def fetch_file_from_fs(self, file_path):
+    def fetch_file_from_fs(cls, file_path):
         file_directories = file_path.split("/")
         file_name = file_directories.pop()
         file_directory_path = "/".join(file_directories)
 
-        file_dir = self.fetch_directory_from_fs(file_directory_path)
+        file_dir = cls.fetch_directory_from_fs(file_directory_path)
         return file_dir[file_name]
 
     @classmethod
@@ -70,13 +70,13 @@ class TestSetup(unittest.TestCase):
 
     @classmethod
     def mock_os_walk(cls, top):
-        exploreQueue = [cls.explore_dir(top)]
+        explore_queue = [cls.explore_dir(top)]
 
-        while exploreQueue:
-            path, dirs, files = exploreQueue.pop(0)
-            yield (path, dirs, files)
-            for dir in dirs:
-                exploreQueue.append(cls.explore_dir(path + "/" + dir))
+        while explore_queue:
+            path, dirs, files = explore_queue.pop(0)
+            yield path, dirs, files
+            for directory in dirs:
+                explore_queue.append(cls.explore_dir(path + "/" + directory))
 
     @classmethod
     def explore_dir(cls, dir_path):

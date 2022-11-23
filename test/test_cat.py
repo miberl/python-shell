@@ -8,7 +8,7 @@ class TestCat(TestSetup):
         self.out = []
         self.app = Cat()
 
-    def run_test(self, args, expected_output):
+    def run_test(self, args, expected_output, **kwargs):
         super().run_test(args, expected_output,
                          "application.Application.read_lines",
                          TestSetup.mock_read_lines)

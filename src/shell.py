@@ -1,9 +1,8 @@
 import sys
 from collections import deque
-from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
-from syntax_highlighting.syntaxhighlighter import SyntaxHighlighter
+from syntax_highlighting.eval_apps import SyntaxHighlighter
 
 
 class Shell:
@@ -25,6 +24,7 @@ class Shell:
     def main(self, argv: [str]) -> None:
         """
         Method used to run shell
+
         :param argv: Command line arguments, either empty (for REPL) or -c followed by a command string
         :return: Returns Noting, prints results
         """

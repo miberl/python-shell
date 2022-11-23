@@ -11,13 +11,8 @@ class TestHead(TestSetup):
         self.out = []
         self.app = Head()
 
-    def run_test(self, args, expected_output):
-        super().run_test(
-            args,
-            expected_output,
-            "application.Application.read_lines",
-            TestSetup.mock_read_lines,
-        )
+    def run_test(self, args, expected_output, **kwargs):
+        super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
 
     def test_head(self):
         self.run_test(["test.txt"], ["''\n"])
