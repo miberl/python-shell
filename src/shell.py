@@ -31,7 +31,7 @@ class Shell:
         args_num = len(argv) - 1
         if args_num > 0:
             self._execute_from_args(args_num, argv)
-        else:
+        else: # pragma: no cover
             self._repl()
 
     def _execute_from_args(self, args_num: int, argv: [str]) -> None:
@@ -48,20 +48,20 @@ class Shell:
         if argv[1] != "-c":
             raise ValueError(f"unexpected command line argument {argv[1]}")
 
-    def _repl(self) -> None:
+    def _repl(self) -> None: # pragma: no cover
         while True:
             cmdline = self._read()
             out = self._eval(cmdline)
             self._display(out)
 
     @staticmethod
-    def _read() -> str:
+    def _read() -> str: # pragma: no cover
         sh = SyntaxHighlighter()
         cmdline = sh.take_input()
         return cmdline
 
     @staticmethod
-    def _display(out: deque) -> None:
+    def _display(out: deque) -> None: # pragma: no cover
         while len(out) > 0:
             print(out.popleft(), end="")
 
@@ -71,5 +71,5 @@ def main():
     shell.main(sys.argv)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # pragma: no cover
     main()
