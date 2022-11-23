@@ -3,7 +3,7 @@ from collections import deque
 from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
-from syntax_highlighting.syntax_highlighter import syntax_highlighter
+from syntax_highlighting.syntaxhighlighter import SyntaxHighlighter
 
 
 class Shell:
@@ -56,7 +56,7 @@ class Shell:
 
     @staticmethod
     def _read() -> str:
-        sh = syntax_highlighter()
+        sh = SyntaxHighlighter()
         cmdline = sh.take_input()
         return cmdline
 

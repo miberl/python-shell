@@ -1,4 +1,3 @@
-import sys
 from os import getcwd
 from os.path import exists
 from shell_runner.eval_instructions import EvalInstructions
@@ -19,11 +18,11 @@ class shell_colours:
     LINE_UP = "\033[1A"
 
 
-class syntax_highlighter:
+class SyntaxHighlighter:
     def take_input(self):
         cwd = getcwd()
         print(cwd + "> ", end="")
-        code = sys.stdin.read()
+        code = input()
         print(shell_colours.LINE_UP, end=shell_colours.LINE_CLEAR)
         print(cwd + "> " + self.highlight_code(code))
         return code
