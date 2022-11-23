@@ -1,11 +1,11 @@
 import unittest
-from syntax_highlighting.syntax_highlighter import syntax_highlighter
-from syntax_highlighting.syntax_highlighter import shell_colours
+from syntax_highlighting.syntaxhighlighter import SyntaxHighlighter
+from syntax_highlighting.syntaxhighlighter import shell_colours
 
 
 class TestSyntaxhighlighting(unittest.TestCase):
     def run_test(self, command, expected_command):
-        sh = syntax_highlighter()
+        sh = SyntaxHighlighter()
         actual_command = sh.highlight_code(command)
         assert actual_command == expected_command
 

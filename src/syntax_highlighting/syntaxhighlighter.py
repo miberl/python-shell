@@ -18,8 +18,8 @@ class shell_colours:
     LINE_UP = "\033[1A"
 
 
-class syntax_highlighter:
-    def take_input(self):
+class SyntaxHighlighter:
+    def take_input(self): # pragma nocover
         cwd = getcwd()
         print(cwd + "> ", end="")
         code = input()

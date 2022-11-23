@@ -1,12 +1,24 @@
-import unittest
-
+from setup_test import TestSetup
 from shell import Shell
-from collections import deque
 
 
-class TestShell(unittest.TestCase):
+# This is fast approaching integration tests, but required to test some sections of code that are not run otherwise
+class TestShell(TestSetup):
+    def code_under_test(self, args):
+        self.out = list(Shell()._eval(args))
+
     def test_shell(self):
-        shell = Shell()
-        out = shell.eval("echo foo")
-        self.assertEqual(out.popleft(), "foo\n")
-        self.assertEqual(len(out), 0)
+        self.run_test('echo foo', ['foo\n'])
+
+    def test_globbing(self):
+        self.run_test('echo *', ['dir1 dir2 test.txt\n'],
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
+
+    def test_dir_globbing(self):
+        self.run_test('echo dir1/*', ['dir1/cutTest.txt dir1/file1.txt dir1/file2.txt dir1/file3.txt dir1/file4.txt '
+                                      'dir1/longfile.txt\n'],
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
+
+    def test_quoted_name(self):
+        self.run_test('"echo"', ['\n'],
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
