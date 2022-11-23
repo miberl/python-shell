@@ -12,13 +12,13 @@ class TestShell(TestSetup):
 
     def test_globbing(self):
         self.run_test('echo *', ['dir1 dir2 test.txt\n'],
-                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
 
     def test_dir_globbing(self):
         self.run_test('echo dir1/*', ['dir1/cutTest.txt dir1/file1.txt dir1/file2.txt dir1/file3.txt dir1/file4.txt '
                                       'dir1/longfile.txt\n'],
-                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
 
     def test_quoted_name(self):
         self.run_test('"echo"', ['\n'],
-                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+                      'application.Application.get_dir_contents', TestSetup.explore_dir)
