@@ -141,6 +141,9 @@ class TestParser(unittest.TestCase):
     def test_empty_ok(self):
         self.run_test("", "")
 
+    def test_empty_with_space_ok(self):
+        self.run_test("  ", "")
+
     def test_single_flag(self):
         self.run_test("cmd -a",
                       "instruction(command(arg(atom())arg(atom())))")

@@ -31,3 +31,15 @@ class TestGlobbing(TestSetup):
     def test_glob_not_show_hidden(self):
         self.run_test('dir2/subdir/*', ['dir2/subdir/file.txt', 'dir2/subdir/normal'],
                       'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+
+    def test_glob_absolute_path(self):
+        self.run_test('/*', ['/dir1', '/dir2', '/test.txt'],
+                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+
+    def test_glob_only_dir(self):
+        self.run_test('/*/', ['/dir1/', '/dir2/'],
+                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
+
+    def test_glop_prepend_dot(self):
+        self.run_test('./*', ['dir1', 'dir2', 'test.txt'],
+                      'application.Application.get_dir_contents', TestSetup.mock_os_walk)
