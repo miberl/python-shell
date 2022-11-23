@@ -7,7 +7,7 @@ from shell import Shell
 # This is fast approaching integration tests, but required to test some sections of code that are not run otherwise
 class TestShell(TestSetup):
     def code_under_test(self, args):
-        self.out = list(Shell().eval(args))
+        self.out = list(Shell()._eval(args))
 
     def test_shell(self):
         self.run_test('echo foo', ['foo\n'])
