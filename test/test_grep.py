@@ -1,17 +1,5 @@
-from unittest.mock import patch
 from setup_test import TestSetup
 from apps.grep import Grep
-
-
-def mock_read_lines(filename):
-    return {
-        "dir1/dirfile.txt": ["AAA\n", "BBB\n", "CCC\n"],
-        "dir1/subdir/subdirfile.txt": "subdirfile",
-        "file1.txt": "file1",
-        "file2.txt": "file2",
-        "file3.txt": "file3",
-        ".hidden": "hidden",
-    }.get(filename)
 
 
 class TestGrep(TestSetup):
@@ -21,7 +9,12 @@ class TestGrep(TestSetup):
         self.app = Grep()
 
     def run_test(self, args, expected_output):
-        super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
+        super().run_test(
+            args,
+            expected_output,
+            "application.Application.read_lines",
+            TestSetup.mock_read_lines,
+        )
 
     # HAPPY PATHS
 
