@@ -3,6 +3,8 @@ from collections import deque
 from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
+from syntax_highlighting.syntax_highlighter import syntax_highlighter
+
 
 class Shell:
     def __init__(self) -> None:
@@ -24,8 +26,8 @@ class Shell:
                 print(out.popleft(), end="")
         else:
             while True:
-                print(getcwd() + "> ", end="")
-                cmdline = input()
+                sh = syntax_highlighter()
+                cmdline = sh.take_input()
                 out = self.eval(cmdline)
                 while len(out) > 0:
                     print(out.popleft(), end="")
@@ -34,4 +36,3 @@ class Shell:
 if __name__ == "__main__":
     shell = Shell()
     shell.main(sys.argv)
-
