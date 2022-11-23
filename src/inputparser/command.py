@@ -22,7 +22,8 @@ class Command:
 
     def add_arg(self, arg: str) -> None:
         """
-        Adds an arg (or flag) to the command object, must be added in correct order
+        Adds an arg (or flag) to the command object, must be added in correct
+        order
 
         :param arg: String of the argument, either a flag or an argument
         :return: None
@@ -31,25 +32,30 @@ class Command:
 
     def add_redir_in(self, file: str) -> None:
         """
-        Add a file for input redirection. May add multiple, but must be done in order.
+        Add a file for input redirection. May add multiple, but must be done
+        in order.
 
-        :param file: String defining the name/path of the file to be used as input
+        :param file: String defining the name/path of the file to be used as
+        input
         :return: None
         """
         self.redir_in.append(file)
 
     def add_redir_out(self, file: str) -> None:
         """
-        Add a file for output redirection. May add multiple. Output is not written to stdout if one or more included
+        Add a file for output redirection. May add multiple. Output is not
+        written to stdout if one or more included
 
-        :param file: String defining the name/path of the file to be used as output
+        :param file: String defining the name/path of the file to be used as
+        output
         :return: None
         """
         self.redir_out.append(file)
 
     def get_args(self) -> [str]:
         """
-        Gives the ordered array of arguments. Note no distinction between flags and args is made here.
+        Gives the ordered array of arguments. Note no distinction between
+        flags and args is made here.
 
         :return: List of string arguments
         """
@@ -57,9 +63,11 @@ class Command:
 
     def get_redirs(self) -> ([str], [str]):
         """
-        Gives a tuple of a list file paths provided for input and output redirections.
+        Gives a tuple of a list file paths provided for input and output
+        redirections.
 
-        :return: Pair; First element -> list of input redirections, Second element -> list of output redirections
+        :return: Pair; First element -> list of input redirections, Second
+        element -> list of output redirections
         """
         return self.redir_in, self.redir_out
 
@@ -74,10 +82,8 @@ class Command:
 
 class Instruction:
     """
-    NAME
-        Instruction
-    DESCRIPTION
-        Holds one or more commands in an object, that are intended to be piped together.
+    NAME Instruction DESCRIPTION Holds one or more commands in an object,
+    that are intended to be piped together.
     """
     def __init__(self):
         self.commands = []
@@ -90,7 +96,8 @@ class Instruction:
         :return: None
         """
         if type(command) is not Command:
-            raise InstructionConstructError("Expected command when adding to instruction")
+            raise InstructionConstructError("Expected command when adding to "
+                                            "instruction")
 
         self.commands.append(command)
 
@@ -106,7 +113,8 @@ class Instruction:
 
     def has_next(self) -> bool:
         """
-        Returns true if the internal list has more command objects, false otherwise.
+        Returns true if the internal list has more command objects,
+        false otherwise.
 
         :return: Boolean value indicating if more commands can be gotten
         """

@@ -1,8 +1,7 @@
 # Test Tail
 
-from unittest.mock import patch
-from setup_test import TestSetup
 from apps.tail import Tail
+from setup_test import TestSetup
 
 
 class TestTail(TestSetup):
@@ -11,7 +10,7 @@ class TestTail(TestSetup):
         self.out = []
         self.app = Tail()
 
-    def run_test(self, args, expected_output):
+    def run_test(self, args, expected_output, **kwargs):
         super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
 
     # HAPPY PATHS
@@ -20,7 +19,7 @@ class TestTail(TestSetup):
         self.run_test(["test.txt"], ["''\n"])
 
     def test_tail_2(self):
-        self.run_test(["dir1/file1.txt"],  ["AAA\n", "BBB\n", "AAA\n"])
+        self.run_test(["dir1/file1.txt"], ["AAA\n", "BBB\n", "AAA\n"])
 
     # Expects last 10 lines of file as return
     def test_tail_longfile(self):

@@ -1,5 +1,3 @@
-import os
-
 from application import Application
 
 
@@ -28,7 +26,8 @@ class Globbing:
 
         return self._get_matches(file_patt)
 
-    def _get_file_and_location_pattern(self, pattern) -> ([str], str):
+    @staticmethod
+    def _get_file_and_location_pattern(pattern) -> ([str], str):
         pattern_split = pattern.split('/')
         if len(pattern_split) == 1:
             return [], pattern_split[0]

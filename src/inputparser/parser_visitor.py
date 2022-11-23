@@ -12,7 +12,8 @@ class ParseVisitor(CommandsVisitor):
         NAME
             ParseVisitor
         DESCRIPTION
-            Class used to traverse produced parse tree. Used in combination with ParseCommand.
+            Class used to traverse produced parse tree. Used in combination
+            with ParseCommand.
             Generates set of Instruction objects that can be gotten.
         METHODS
             get_instructions()
@@ -25,7 +26,8 @@ class ParseVisitor(CommandsVisitor):
 
     def get_instructions(self) -> [Instruction]:
         """
-        Returns list of instruction objects built from parse tree, encoding information in command
+        Returns list of instruction objects built from parse tree, encoding
+        information in command
 
         :return: List of instruction objects
         """
@@ -118,7 +120,8 @@ class ParseVisitor(CommandsVisitor):
         instructions = self.get_terminal(terminal)
         return self.eval_substituted(instructions)
 
-    def eval_substituted(self, instructions):
+    @staticmethod
+    def eval_substituted(instructions):
         out = ''
         for line in EvalInstructions().eval(instructions):
             out += line

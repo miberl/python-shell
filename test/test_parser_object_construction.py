@@ -18,7 +18,8 @@ class TestParserObjectConstruction(TestCase):
         self.assert_test_valid(instrs)
         return instrs[0].get_next_command()
 
-    def assert_test_valid(self, instrs): # pragma notest
+    @staticmethod
+    def assert_test_valid(instrs): # pragma notest
         assert len(instrs) == 1
         assert instrs[0].has_next()
 
@@ -110,7 +111,8 @@ class TestParserObjectConstruction(TestCase):
 
         self.make_assertions(right_command)
 
-    def get_piped_commands(self, instruction):
+    @staticmethod
+    def get_piped_commands(instruction):
         piped_commands = []
         while instruction.has_next():
             piped_commands.append(instruction.get_next_command())

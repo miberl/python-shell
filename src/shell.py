@@ -1,9 +1,8 @@
 import sys
 from collections import deque
-from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
-from syntax_highlighting.syntaxhighlighter import SyntaxHighlighter
+from syntax_highlighting.eval_apps import SyntaxHighlighter
 
 
 class Shell:

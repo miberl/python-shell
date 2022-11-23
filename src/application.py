@@ -6,11 +6,9 @@ from exceptions.unknown_option_error import UnknownFlagError
 
 class Application(ABC):
     """
-    NAME
-        Application
-    DESCRIPTION
-        Encapsulate common application interface and provide common utility methods that engage with external components,
-        such as the file system.
+    NAME Application DESCRIPTION Encapsulate common application interface and
+    provide common utility methods that engage with external components,
+    such as the file system.
     """
 
     def __init__(self) -> None:
@@ -57,7 +55,8 @@ class Application(ABC):
     def parse_args(self, args):
         """
         parses provided arguments, returns a tuple of (command_args, options)
-        where command args is a list of leading and trailing arguments that are not options
+        where command args is a list of leading and trailing arguments that
+        are not options
         """
         command_args = []
         options = dict()

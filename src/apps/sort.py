@@ -1,5 +1,5 @@
 from application import Application
-from exceptions.invalid_syntax_error import InvalidSyntaxError
+
 
 class Sort(Application):
     def __init__(self):
@@ -7,8 +7,8 @@ class Sort(Application):
         self.options = {
             "-r": 0
         }
-    
-    def run(self, args, inpt, out)-> None:    
+
+    def run(self, args, inpt, out) -> None:
         command_args, options = self.parse_args(args)
         is_reversed = options.get("-r") is not None
 
@@ -19,6 +19,6 @@ class Sort(Application):
         else:
             for line in inpt:
                 lines.append(line)
-        
+
         lines.sort(reverse=is_reversed)
         out.extend(lines)

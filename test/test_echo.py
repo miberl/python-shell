@@ -1,6 +1,6 @@
 import sys
-import unittest
 from collections import deque
+
 from apps.echo import Echo
 from setup_test import TestSetup
 
