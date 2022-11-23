@@ -1,5 +1,8 @@
+import sys
+from io import StringIO
 from setup_test import TestSetup
 from apps.grep import Grep
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 
 
 class TestGrep(TestSetup):
@@ -43,3 +46,14 @@ class TestGrep(TestSetup):
     def test_no_match(self):
         args = ["DDD", "dir1/file1.txt", "dir1/file2.txt"]
         self.run_test(args, [])
+
+    def test_no_args(self):
+        with self.assertRaises(InvalidSyntaxError):
+            self.run_test([], None)
+
+    def test_stdin(self):
+        original_stdin = sys.stdin
+        sys.stdin = StringIO("AAA\nBBB\nAAA\n")
+
+        self.run_test(["AAA"], ["AAA\n", "AAA\n"])
+        sys.stdin = original_stdin
