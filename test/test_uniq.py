@@ -1,3 +1,7 @@
+import sys
+from io import StringIO
+
+from exceptions.invalid_syntax_error import InvalidSyntaxError
 from setup_test import TestSetup
 from apps.uniq import Uniq
 
@@ -47,3 +51,17 @@ class TestUniq(TestSetup):
             ["-i", "dir2/subdir/file.txt"],
             ["AAA\n"]
         )
+
+    def test_too_many_args(self):
+        with self.assertRaises(InvalidSyntaxError) as err:
+            self.run_test(['hello', 'there', 'sir'], [])
+
+        assert 'multiple arguments provided, expected 1' in str(err.exception)
+
+    def test_no_args_fine(self):
+        original_stdin = sys.stdin
+        sys.stdin = StringIO("AAA\nBBB\nAAA\n")
+
+        self.run_test([], ['AAA\n', 'BBB\n', 'AAA\n'])
+
+        sys.stdin = original_stdin
