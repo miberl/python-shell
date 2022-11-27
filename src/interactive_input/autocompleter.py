@@ -1,9 +1,16 @@
-import readline
 from os import getcwd
 from os import listdir
 from os.path import isdir
 import platform
 from shell_runner.eval_instructions import EvalInstructions
+
+successfull_import = True
+
+if platform.system() == "Darwin" or platform.system() == "Linux":
+    try:
+        import readline
+    except ImportError:
+        successfull_import = False
 
 complete_options = []
 
@@ -96,7 +103,9 @@ def completer(text, state):
 
 def take_input():
     # does not work on windows
-    if platform.system() != "Windows":
+    if successfull_import and (
+        platform.system() == "Darwin" or platform.system() == "Linux"
+    ):
         global complete_options
         readline.set_completer(completer)
         readline.parse_and_bind("tab: complete")

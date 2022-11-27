@@ -1,6 +1,7 @@
 from os import getcwd
 from os.path import exists
 from shell_runner.eval_instructions import EvalInstructions
+from re import findall
 
 
 class shell_colours:
@@ -29,7 +30,14 @@ class syntax_highlighter:
         apps = self.get_apps_from_eval(EvalInstructions())
         words = code.split()
         new_code = ""
+        word_num = 0
+        tokens = findall("\s+", code)
+        spaces = [0]
+        for token in tokens:
+            spaces.append(len(token))
         for word in words:
+            new_code += spaces[word_num] * " "
+            word_num += 1
             if word in apps:
                 new_code += self.highlight_app(word)
             elif exists(word) and ("/" in word or "\\" in word or word == "."):
