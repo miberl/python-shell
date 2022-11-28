@@ -25,7 +25,6 @@ class SyntaxHighlighter:
         print(getcwd() + "> " + self._highlight_code(code))
 
     def _highlight_code(self, code) -> str:
-        has_space = code.endswith(" ")
         apps = self._get_apps_from_eval(EvalInstructions())
         words = code.split()
         new_code = ""
@@ -38,8 +37,6 @@ class SyntaxHighlighter:
             new_code += spaces[word_num] * " "
             word_num += 1
             new_code = self._highligh_words(apps, new_code, word)
-        if new_code.endswith(" ") and not has_space:
-            new_code = new_code[:-1]
         return new_code
 
     def _highligh_words(self, apps, new_code, word):
