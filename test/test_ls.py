@@ -1,6 +1,6 @@
-from unittest.mock import patch
-from setup_test import TestSetup
 from apps.ls import Ls
+from exceptions.invalid_syntax_error import InvalidSyntaxError
+from setup_test import TestSetup
 
 
 class TestLs(TestSetup):
@@ -45,3 +45,10 @@ class TestLs(TestSetup):
     def test_ls_subdirectory_with_hidden(self):
         self.run_test_patch_return(["dir1/subdir"], ["text.txt\n"],
                                    "apps.ls.listdir", ["text.txt", ".hidden"], unordered=True)
+
+    def test_ls_too_many_dirs(self):
+        with self.assertRaises(InvalidSyntaxError) as err:
+            self.run_test_patch_return(['dir1', 'hello'],
+                                       ["text.txt\n"], "apps.ls.listdir", ["text.txt"], unordered=True)
+
+        assert 'multiple arguments provided, expected 0 or 1' in str(err.exception)

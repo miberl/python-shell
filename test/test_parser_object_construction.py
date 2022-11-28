@@ -15,11 +15,13 @@ class TestParserObjectConstruction(TestCase):
 
     def run_single_command(self, cmd) -> Command:
         instrs = self.run_parser(cmd)
+        self.assert_test_valid(instrs)
+        return instrs[0].get_next_command()
+
+    @staticmethod
+    def assert_test_valid(instrs): # pragma notest
         assert len(instrs) == 1
-        if instrs[0].has_next():
-            return instrs[0].get_next_command()
-        else:
-            self.assertFalse(True)
+        assert instrs[0].has_next()
 
     def make_assertions(self, command, name='ls', args=None, redir=([], [])):
         if args is None:
@@ -109,7 +111,8 @@ class TestParserObjectConstruction(TestCase):
 
         self.make_assertions(right_command)
 
-    def get_piped_commands(self, instruction):
+    @staticmethod
+    def get_piped_commands(instruction):
         piped_commands = []
         while instruction.has_next():
             piped_commands.append(instruction.get_next_command())

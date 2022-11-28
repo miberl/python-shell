@@ -1,68 +1,69 @@
 import unittest
-from syntax_highlighting.syntax_highlighter import syntax_highlighter
-from syntax_highlighting.syntax_highlighter import shell_colours
+from syntax_highlighting.eval_apps import SyntaxHighlighter
+from syntax_highlighting.eval_apps import ShellColours
 
 
 class TestSyntaxhighlighting(unittest.TestCase):
-    def run_test(self, command, expected_command):
-        sh = syntax_highlighter()
-        actual_command = sh.highlight_code(command)
+    @staticmethod
+    def run_test(command, expected_command):
+        sh = SyntaxHighlighter()
+        actual_command = sh._highlight_code(command)
         assert actual_command == expected_command
 
     def test_no_highlighting(self):
         self.run_test("test", "test")
 
     def test_app_highlighting(self):
-        self.run_test("ls", shell_colours.APP + "ls" + shell_colours.ENDC)
+        self.run_test("ls", ShellColours.APP + "ls" + ShellColours.ENDC)
 
     def test_directory_highlighting(self):
         self.run_test(
             "./",
-            shell_colours.UNDERLINE + shell_colours.DIR + "./" + shell_colours.ENDC,
+            ShellColours.UNDERLINE + ShellColours.DIR + "./" + ShellColours.ENDC,
         )
 
     def test_flag_highlighting(self):
         self.run_test(
             "-l ",
-            shell_colours.FLAG + "-l" + shell_colours.ENDC + " ",
+            ShellColours.FLAG + "-l" + ShellColours.ENDC + " ",
         )
 
     def test_pipe_highlighting(self):
         self.run_test(
             "|",
-            shell_colours.PIPE + "|" + shell_colours.ENDC,
+            ShellColours.PIPE + "|" + ShellColours.ENDC,
         )
 
     def test_redir_in_highlighting(self):
         self.run_test(
             "<",
-            shell_colours.REDIR_IN + "<" + shell_colours.ENDC,
+            ShellColours.REDIR_IN + "<" + ShellColours.ENDC,
         )
 
     def test_redir_out_highlighting(self):
         self.run_test(
             ">",
-            shell_colours.REDIR_OUT + ">" + shell_colours.ENDC,
+            ShellColours.REDIR_OUT + ">" + ShellColours.ENDC,
         )
 
     def test_multiple_highlighting(self):
         self.run_test(
             "ls -l | grep test",
-            shell_colours.APP
+            ShellColours.APP
             + "ls"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test",
         )
@@ -70,22 +71,22 @@ class TestSyntaxhighlighting(unittest.TestCase):
     def test_multiple_highlighting_with_directory(self):
         self.run_test(
             "./ -l | grep test",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test",
         )
@@ -93,28 +94,28 @@ class TestSyntaxhighlighting(unittest.TestCase):
     def test_multiple_highlighting_with_redir(self):
         self.run_test(
             "./ -l | grep test > test.txt",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test"
             + " "
-            + shell_colours.REDIR_OUT
+            + ShellColours.REDIR_OUT
             + ">"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test.txt",
         )
@@ -122,28 +123,28 @@ class TestSyntaxhighlighting(unittest.TestCase):
     def test_multiple_highlighting_with_redir_and_dir(self):
         self.run_test(
             "./ -l | grep test > ./test.txt",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test"
             + " "
-            + shell_colours.REDIR_OUT
+            + ShellColours.REDIR_OUT
             + ">"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "./test.txt",
         )
@@ -151,116 +152,116 @@ class TestSyntaxhighlighting(unittest.TestCase):
     def test_multiple_highlighting_with_redir_and_dir_and_flag(self):
         self.run_test(
             "./ -l | grep test > ./test.txt -l",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test"
             + " "
-            + shell_colours.REDIR_OUT
+            + ShellColours.REDIR_OUT
             + ">"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "./test.txt"
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC,
+            + ShellColours.ENDC,
         )
 
     def test_multiple_highlighting_with_redir_and_dir_and_flag_and_app(self):
         self.run_test(
             "./ -l | grep test > ./test.txt -l ls",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test"
             + " "
-            + shell_colours.REDIR_OUT
+            + ShellColours.REDIR_OUT
             + ">"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "./test.txt"
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "ls"
-            + shell_colours.ENDC,
+            + ShellColours.ENDC,
         )
 
     def test_multiple_highlighting_with_redir_and_dir_and_flag_and_app_and_pipe(self):
         self.run_test(
             "./ -l | grep test > ./test.txt -l ls | grep test",
-            shell_colours.UNDERLINE
-            + shell_colours.DIR
+            ShellColours.UNDERLINE
+            + ShellColours.DIR
             + "./"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test"
             + " "
-            + shell_colours.REDIR_OUT
+            + ShellColours.REDIR_OUT
             + ">"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "./test.txt"
             + " "
-            + shell_colours.FLAG
+            + ShellColours.FLAG
             + "-l"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "ls"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.PIPE
+            + ShellColours.PIPE
             + "|"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
-            + shell_colours.APP
+            + ShellColours.APP
             + "grep"
-            + shell_colours.ENDC
+            + ShellColours.ENDC
             + " "
             + "test",
         )

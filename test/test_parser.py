@@ -22,7 +22,8 @@ class TestParser(unittest.TestCase):
 
     def test_command_many_args(self):
         self.run_test("cmd one two three",
-                      "instruction(command(arg(atom())arg(atom())arg(atom())arg(atom())))")
+                      "instruction(command(arg(atom())arg(atom())"
+                      "arg(atom())arg(atom())))")
 
     def test_command_whitespace_before(self):
         self.run_test("   cmd one",
@@ -95,7 +96,8 @@ class TestParser(unittest.TestCase):
 
     def test_both_redir(self):
         self.run_test("cmd < file1 > file2",
-                      "instruction(command(arg(atom())file_in(atom())file_out(atom())))")
+                      "instruction(command(arg(atom())file_in(atom())"
+                      "file_out(atom())))")
 
     def test_whitespace_after_redir(self):
         self.run_test("cmd > file       ",
@@ -141,6 +143,12 @@ class TestParser(unittest.TestCase):
     def test_empty_ok(self):
         self.run_test("", "")
 
+    def test_empty_with_space_ok(self):
+        self.run_test("  ", "")
+
+    def test_empty_with_newline_ok(self):
+        self.run_test("\n", "")
+
     def test_single_flag(self):
         self.run_test("cmd -a",
                       "instruction(command(arg(atom())arg(atom())))")
@@ -151,21 +159,26 @@ class TestParser(unittest.TestCase):
 
     def test_one_flag_many_arg(self):
         self.run_test("cmd -a one two three",
-                      "instruction(command(arg(atom())arg(atom())arg(atom())arg(atom())arg(atom())))")
+                      "instruction(command(arg(atom())arg(atom())arg(atom())arg"
+                      "(atom())arg(atom())))")
 
     def test_two_flag_no_arg(self):
         self.run_test("cmd -a -b",
                       "instruction(command(arg(atom())arg(atom())arg(atom())))")
 
     def test_can_use_double_dash(self):
-        self.run_test("cmd --hello-there", "instruction(command(arg(atom())arg(atom())))")
+        self.run_test("cmd --hello-there", "instruction(command(arg(atom())arg"
+                                           "(atom())))")
 
     def test_redir_at_front(self):
-        self.run_test("< file.txt cmd", "instruction(command(file_in(atom())arg(atom())))")
+        self.run_test("< file.txt cmd", "instruction(command(file_in(atom())arg"
+                                        "(atom())))")
 
     def test_many_redir(self):
-        self.run_test("cmd < file1 < file2", "instruction(command(arg(atom())file_in(atom())file_in(atom())))")
+        self.run_test("cmd < file1 < file2", "instruction(command(arg(atom())"
+                                             "file_in(atom())file_in(atom())))")
 
     def test_redir_between_args(self):
         self.run_test("cmd < file1 arg < file2 arg",
-                      "instruction(command(arg(atom())file_in(atom())arg(atom())file_in(atom())arg(atom())))")
+                      "instruction(command(arg(atom())file_in(atom())"
+                      "arg(atom())file_in(atom())arg(atom())))")

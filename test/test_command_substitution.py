@@ -4,8 +4,9 @@ from shell_runner.shell_exec import ShellExec
 
 
 class TestCommandSubstitution(unittest.TestCase):
-    def run_test(self, cmdline, app, args):
-        instrs = ShellExec().get_instructions_object_from_string(cmdline)
+    @staticmethod
+    def run_test(cmdline, app, args):
+        instrs = ShellExec()._get_instructions_object_from_string(cmdline)
         instr = instrs[0]
         cmd = instr.get_next_command()
         assert cmd.get_app() == app
@@ -27,9 +28,8 @@ class TestCommandSubstitution(unittest.TestCase):
         self.run_test('e`echo ch`o', 'echo', [])
 
     def test_bad_substitution(self):
-        try:
+        with self.assertRaises(ValueError) as err:
             self.run_test('`nonsense`', 'echo', [])
-            assert False
-        except ValueError as e:
-            assert True
+
+        assert 'unsupported application nonsense' in str(err.exception)
 

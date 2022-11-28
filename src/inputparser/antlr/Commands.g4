@@ -1,7 +1,7 @@
 grammar Commands ;
 
 // PARSER RULES
-prog        : terminal? ('\n' | EOF);
+prog        : terminal? WHITESPACE? ('\n' | EOF);
 
 // combine commands with ';'
 terminal    : WHITESPACE? (instruction WHITESPACE? ';' WHITESPACE?)* instruction WHITESPACE?;

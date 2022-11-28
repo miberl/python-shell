@@ -1,12 +1,12 @@
 import unittest
 
-from setup_test import TestSetup
 from shell_runner.shell_exec import ShellExec
 
 
 class TestQuoting(unittest.TestCase):
-    def run_test(self, cmdline, app, args):
-        instrs = ShellExec().get_instructions_object_from_string(cmdline)
+    @staticmethod
+    def run_test(cmdline, app, args):
+        instrs = ShellExec()._get_instructions_object_from_string(cmdline)
         instr = instrs[0]
         cmd = instr.get_next_command()
         assert cmd.get_app() == app

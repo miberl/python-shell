@@ -41,7 +41,7 @@ jobs:
           docker build -t $DOCKER_CUSTOM_TEST_IMAGE_TAG .
       - name: Run unit tests & get coverage
         run: |
-          coverage run --branch -m pytest test/
+          coverage run --branch --omit="*inputparser/antlr/*" -m pytest test/
           coverage report
       - name: Run custom system integration tests
         run: |

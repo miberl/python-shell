@@ -8,6 +8,15 @@ from inputparser.command import Instruction
 
 
 class EvalInstructions:
+    """
+    NAME
+        EvalInstructions
+    DESCRIPTION
+        Takes a list of instructions and returns the string that those instructions evaluate to.
+    METHODS
+        EvalInstructions.eval()
+            Evaluates each of the provided instructions and returns a deque() object
+    """
     def __init__(self):
         self.appList = {
             "cat": cat.Cat(),
@@ -25,31 +34,39 @@ class EvalInstructions:
         }
 
     def eval(self, instructions: [Instruction]) -> deque:
+        """
+        Evaluates instructions to a string
+
+        :param instructions: List of instructions to be evaluated
+        :return: deque object representing result of execution of instructions
+        """
         if not instructions:
             return deque()
 
         outp = deque()
         for instruction in instructions:
-            outp += self.run_one_instruction(instruction)
+            outp += self._run_one_instruction(instruction)
 
-        return self.get_return_val(outp)
+        return outp
 
-    def run_one_instruction(self, instruction):
+    def _run_one_instruction(self, instruction: Instruction) -> deque:
         inp = sys.stdin
         while instruction.has_next():
-            inp = self.run_command(inp, instruction)
+            inp = self._run_command(inp, instruction)
+        if inp == sys.stdin:
+            return deque()
         return inp
 
-    def run_command(self, inp, instruction):
+    def _run_command(self, inp, instruction):
         command = instruction.get_next_command()
         r_in, r_out = command.get_redirs()
-        inp = self.handle_input_redirection(inp, r_in)
-        outp = self.eval_cmd(command, inp)
-        outp = self.handle_output_redirection(outp, r_out)
+        inp = self._handle_input_redirection(inp, r_in)
+        outp = self._eval_cmd(command, inp)
+        outp = self._handle_output_redirection(outp, r_out)
         return outp
 
     @staticmethod
-    def handle_input_redirection(inp, r_in):
+    def _handle_input_redirection(inp, r_in):
         for r in r_in:
             if inp == sys.stdin:
                 inp = Application.read_lines(r)
@@ -58,19 +75,13 @@ class EvalInstructions:
         return inp
 
     @staticmethod
-    def handle_output_redirection(outp, r_out):
+    def _handle_output_redirection(outp, r_out):
         for r in r_out:
             Application.write_lines(r, list(outp))
             outp = deque()
         return outp
 
-    @staticmethod
-    def get_return_val(outp):
-        if outp == sys.stdin:
-            return deque()
-        return outp
-
-    def eval_cmd(self, command, inp):
+    def _eval_cmd(self, command, inp):
         app = command.get_app()
         args = command.get_args()
         outp = deque()

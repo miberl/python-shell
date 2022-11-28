@@ -8,8 +8,10 @@ class TestCat(TestSetup):
         self.out = []
         self.app = Cat()
 
-    def run_test(self, args, expected_output):
-        super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
+    def run_test(self, args, expected_output, **kwargs):
+        super().run_test(args, expected_output,
+                         "application.Application.read_lines",
+                         TestSetup.mock_read_lines)
 
     # HAPPY PATHS
     def test_cat(self):
@@ -30,5 +32,5 @@ class TestCat(TestSetup):
 
     def test_hidden_2(self):
         args = ["dir2/subdir/.hidden", "dir1/file1.txt"]
-        expected_output = ["secret\n", "AAA\n","BBB\n","AAA\n"]
+        expected_output = ["secret\n", "AAA\n", "BBB\n", "AAA\n"]
         self.run_test(args, expected_output)

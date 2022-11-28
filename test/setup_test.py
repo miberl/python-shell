@@ -29,47 +29,69 @@ class TestSetup(unittest.TestCase):
         },
     }
 
+    lines_written = None
+    stdout_mock = None
+
     def __init__(self, methodName: str = ...):
         super().__init__(methodName)
         self.out = None
         self.app = None
 
     @classmethod
-    def mock_read_file(self, file_path):
-        return TestSetup.fetch_file_from_fs(file_path)
-
-    @classmethod
-    def mock_read_lines(self, file_path):
+    def mock_read_lines(cls, file_path):
         lines = TestSetup.fetch_file_from_fs(file_path).strip().split("\n")
         return [f"{line}\n" for line in lines]
 
     @classmethod
-    def fetch_file_from_fs(self, file_path):
+    def fetch_directory_from_fs(cls, dir_path):
         curr_dir = TestSetup.mock_fs
 
-        file_directories = file_path.split("/")
-        file_name = file_directories.pop()
+        file_directories = filter(lambda x: x not in ["", "."], dir_path.split("/"))
         for path in file_directories:
             curr_dir = curr_dir[path]
+        return curr_dir
 
-        return curr_dir[file_name]
+    @classmethod
+    def fetch_file_from_fs(cls, file_path):
+        file_directories = file_path.split("/")
+        file_name = file_directories.pop()
+        file_directory_path = "/".join(file_directories)
+
+        file_dir = cls.fetch_directory_from_fs(file_directory_path)
+        return file_dir[file_name]
+
+    @classmethod
+    def mock_write_lines(cls, file_path, lines):
+        cls.lines_written = (file_path, lines)
+
+    @classmethod
+    def mock_display(cls, out):
+        cls.stdout_mock = list(out)
 
     @classmethod
     def mock_os_walk(cls, top):
-        dirs = top.split('/')[1:-1]
-        pwd = cls.mock_fs
-        for dir_ in dirs:
-            pwd = pwd[dir_]
+        explore_queue = [cls.explore_dir(top)]
 
-        files = []
-        dirs = []
-        for entry in pwd.keys():
-            if type(pwd[entry]) is str:
+        while explore_queue:
+            path, dirs, files = explore_queue.pop(0)
+            yield path, dirs, files
+            for directory in dirs:
+                explore_queue.append(cls.explore_dir(path + "/" + directory))
+
+    @classmethod
+    def explore_dir(cls, dir_path):
+        directory = cls.fetch_directory_from_fs(dir_path)
+
+        files, dirs = [], []
+        for entry in directory.keys():
+            if type(directory[entry]) is str:
                 files.append(entry)
             else:
                 dirs.append(entry)
+        return dir_path, dirs, files
 
-        return top, dirs, files
+    def code_under_test(self, args):
+        self.app.run(args, sys.stdin, self.out)
 
     # Runs a test, patches function with mock function if supplied
     def run_test(
@@ -85,13 +107,8 @@ class TestSetup(unittest.TestCase):
                 self.code_under_test(args)
         else:
             self.code_under_test(args)
-        if unordered:
-            self.assertEqual(set(self.out), set(expected_output))
-        else:
-            self.assertEqual(self.out, expected_output)
 
-    def code_under_test(self, args):
-        self.app.run(args, sys.stdin, self.out)
+        self.assert_output(expected_output, unordered)
 
     # Runs a test, patches function with mock return value
     def run_test_patch_return(
@@ -99,6 +116,9 @@ class TestSetup(unittest.TestCase):
     ):
         with patch(ref_to_patch, return_value=patched_return):
             self.code_under_test(args)
+        self.assert_output(expected_output, unordered)
+
+    def assert_output(self, expected_output, unordered=False):
         if unordered:
             self.assertEqual(sorted(self.out), sorted(expected_output))
         else:
