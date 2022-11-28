@@ -19,10 +19,6 @@ def get_apps_from_eval():
     return EvalInstructions().appList.keys()
 
 
-def get_files_and_directories():
-    return listdir()
-
-
 def get_path_with_no_last_word(path):
     if "/" in path:
         dirs = path.split("/")
@@ -32,10 +28,6 @@ def get_path_with_no_last_word(path):
         return complete_dir
     else:
         return path
-
-
-def get_files_and_directories_from_path(path):
-    return listdir(get_path_with_no_last_word(path))
 
 
 def is_unfinished_path(path):
@@ -60,7 +52,7 @@ def get_complete_options(code):
     # try to add files and directories
     if last_word_is_path(code):
         last_word = code.split()[-1]
-        for file in get_files_and_directories_from_path(last_word):
+        for file in listdir(get_path_with_no_last_word(last_word)):
             if isdir(get_path_with_no_last_word(last_word) + file):
                 complete_options.append(file + "/")
             else:
@@ -70,7 +62,7 @@ def get_complete_options(code):
         for app in get_apps_from_eval():
             complete_options.append(app)
 
-        for file in get_files_and_directories():
+        for file in listdir():
             if isdir(file):
                 complete_options.append(file + "/")
             else:
