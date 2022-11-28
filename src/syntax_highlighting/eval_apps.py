@@ -20,12 +20,9 @@ class ShellColours:
 
 
 class SyntaxHighlighter:
-    def take_input(self):  # pragma nocover
-        cwd = getcwd()
-        code = input(cwd + "> ")
+    def highlight_input(self, code):  # pragma nocover
         print(ShellColours.LINE_UP, end=ShellColours.LINE_CLEAR)
-        print(cwd + "> " + self._highlight_code(code))
-        return code
+        print(getcwd() + "> " + self._highlight_code(code))
 
     def _highlight_code(self, code) -> str:
         has_space = code.endswith(" ")
