@@ -1,6 +1,7 @@
 from os import getcwd
 from os.path import exists
 from shell_runner.eval_instructions import EvalInstructions
+from re import findall
 
 
 class ShellColours:
@@ -19,10 +20,9 @@ class ShellColours:
 
 
 class SyntaxHighlighter:
-    def take_input(self): # pragma nocover
+    def take_input(self):  # pragma nocover
         cwd = getcwd()
-        print(cwd + "> ", end="")
-        code = input()
+        code = input(cwd + "> ")
         print(ShellColours.LINE_UP, end=ShellColours.LINE_CLEAR)
         print(cwd + "> " + self._highlight_code(code))
         return code
@@ -32,7 +32,14 @@ class SyntaxHighlighter:
         apps = self._get_apps_from_eval(EvalInstructions())
         words = code.split()
         new_code = ""
+        word_num = 0
+        tokens = findall("\s+", code)
+        spaces = [0]
+        for token in tokens:
+            spaces.append(len(token))
         for word in words:
+            new_code += spaces[word_num] * " "
+            word_num += 1
             new_code = self._highligh_words(apps, new_code, word)
         if new_code.endswith(" ") and not has_space:
             new_code = new_code[:-1]
@@ -52,7 +59,7 @@ class SyntaxHighlighter:
         elif word.startswith(">"):
             new_code += self._highlight_redir_out(word)
         else:
-            new_code += word + " "
+            new_code += word
         return new_code
 
     @staticmethod
@@ -61,30 +68,24 @@ class SyntaxHighlighter:
 
     @staticmethod
     def _highlight_app(word):
-        return ShellColours.APP + word + ShellColours.ENDC + " "
+        return ShellColours.APP + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_directory(word):
-        return (
-                ShellColours.UNDERLINE
-                + ShellColours.DIR
-                + word
-                + ShellColours.ENDC
-                + " "
-        )
+        return ShellColours.UNDERLINE + ShellColours.DIR + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_flag(word):
-        return ShellColours.FLAG + word + ShellColours.ENDC + " "
+        return ShellColours.FLAG + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_pipe(word):
-        return ShellColours.PIPE + word + ShellColours.ENDC + " "
+        return ShellColours.PIPE + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_redir_in(word):
-        return ShellColours.REDIR_IN + word + ShellColours.ENDC + " "
+        return ShellColours.REDIR_IN + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_redir_out(word):
-        return ShellColours.REDIR_OUT + word + ShellColours.ENDC + " "
+        return ShellColours.REDIR_OUT + word + ShellColours.ENDC
