@@ -25,7 +25,7 @@ class TestSyntaxhighlighting(unittest.TestCase):
     def test_flag_highlighting(self):
         self.run_test(
             "-l ",
-            ShellColours.FLAG + "-l" + ShellColours.ENDC + " ",
+            ShellColours.FLAG + "-l" + ShellColours.ENDC,
         )
 
     def test_pipe_highlighting(self):
