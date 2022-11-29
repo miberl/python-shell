@@ -2,7 +2,7 @@ import sys
 from collections import deque
 
 from application import Application
-from apps import cat, cd, echo, grep, head, ls, pwd, tail, uniq, cut, sort, find
+from apps import cat, cd, echo, grep, head, ls, pwd, tail, uniq, cut, sort, find, wc
 
 from inputparser.command import Instruction
 
@@ -31,6 +31,7 @@ class EvalInstructions:
             "cut": cut.Cut(),
             "sort": sort.Sort(),
             "find": find.Find(),
+            "wc": wc.Wc()
         }
 
     def eval(self, instructions: [Instruction]) -> deque:
