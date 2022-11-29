@@ -33,6 +33,7 @@ class TestAutocompleter(unittest.TestCase):
                 "cut",
                 "sort",
                 "find",
+                "wc",
                 "file1.txt",
                 "file2.txt",
                 "file3.txt",
@@ -41,6 +42,7 @@ class TestAutocompleter(unittest.TestCase):
             False,
         )
 
+    def test_complete_options_7(self):
         self.run_test(
             "f",
             ["find", "file1.txt", "file2.txt", "file3.txt"],
@@ -48,6 +50,7 @@ class TestAutocompleter(unittest.TestCase):
             False,
         )
 
+    def test_complete_options_6(self):
         self.run_test(
             "cd ./",
             ["dir1/", "dir2/", "dir3/"],
@@ -55,10 +58,12 @@ class TestAutocompleter(unittest.TestCase):
             True,
         )
 
+    def test_complete_options_5(self):
         self.run_test(
             "cd ./file2", ["file2.txt"], ["file1.txt", "file2.txt", "file3.txt"], False
         )
 
+    def test_complete_options_4(self):
         self.run_test(
             "cd ",
             [
@@ -79,6 +84,7 @@ class TestAutocompleter(unittest.TestCase):
             False,
         )
 
+    def test_complete_options_3(self):
         self.run_test(
             "cd ./dir1/f",
             ["file1.txt", "file2.txt", "file3.txt", "find"],
@@ -86,6 +92,7 @@ class TestAutocompleter(unittest.TestCase):
             False,
         )
 
+    def test_complete_options_2(self):
         self.run_test(
             "cd ",
             [
@@ -102,11 +109,13 @@ class TestAutocompleter(unittest.TestCase):
                 "cut",
                 "sort",
                 "find",
+                "wc",
             ],
             ["dir1"],
             True,
         )
 
+    def test_complete_options_1(self):
         self.run_test(
             "cd dir",
             [

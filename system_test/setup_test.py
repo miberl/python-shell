@@ -89,7 +89,7 @@ class TestSetup(unittest.TestCase):
 
     def run_test(self, cmd, result):
         stdout = self.eval(cmd)
-        res = stdout.strip().split("\n")
+        res = stdout.rstrip().split("\n")
         self.assertEqual(res, result)
 
     def run_test_expect_exception(self, cmd, exception=RuntimeError):
@@ -97,5 +97,5 @@ class TestSetup(unittest.TestCase):
 
     def run_test_no_order(self, cmd, result):
         stdout = self.eval(cmd)
-        res = stdout.strip().split("\n")
+        res = stdout.rstrip().split("\n")
         self.assertEqual(sorted(res), sorted(result))
