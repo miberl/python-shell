@@ -9,4 +9,5 @@ class TestInvalidSyntax(TestSetup):
         try:
             raise InvalidSyntaxError("ls -a `a'")
         except InvalidSyntaxError as e:
-            self.assertEqual(str(e), "Invalid syntax, see 'ls -a `a\'', stopping!")
+            msg = "Invalid syntax, see 'ls -a `a\'', stopping!"
+            self.assertEqual(str(e), msg)

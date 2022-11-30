@@ -17,9 +17,10 @@ class TestSyntaxhighlighting(unittest.TestCase):
         self.run_test("ls", ShellColours.APP + "ls" + ShellColours.ENDC)
 
     def test_directory_highlighting(self):
+        underline_dir = ShellColours.UNDERLINE + ShellColours.DIR
         self.run_test(
             "./",
-            ShellColours.UNDERLINE + ShellColours.DIR + "./" + ShellColours.ENDC,
+            underline_dir + "./" + ShellColours.ENDC,
         )
 
     def test_flag_highlighting(self):
@@ -219,7 +220,7 @@ class TestSyntaxhighlighting(unittest.TestCase):
             + ShellColours.ENDC,
         )
 
-    def test_multiple_highlighting_with_redir_and_dir_and_flag_and_app_and_pipe(self):
+    def test_multiple_highlighting_with_redir_dir_and_pipe(self):
         self.run_test(
             "./ -l | grep test > ./test.txt -l ls | grep test",
             ShellColours.UNDERLINE

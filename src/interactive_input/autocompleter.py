@@ -5,12 +5,18 @@ import os
 import platform
 from shell_runner.eval_instructions import EvalInstructions
 
-successfull_import = True
-if platform.system() == "Darwin" or platform.system() == "Linux":  # pragma: no cover
+successful_import = True
+
+
+def supported_platform():
+    return platform.system() == "Darwin" or platform.system() == "Linux"
+
+
+if supported_platform():  # pragma: no cover
     try:
         import readline
     except ImportError:
-        successfull_import = False
+        successful_import = False
 
 complete_options = []
 
@@ -99,7 +105,7 @@ def completer(text, state):
 
 def take_input():  # pragma: no cover
     # does not work on windows
-    if successfull_import and (
+    if successful_import and (
         platform.system() == "Darwin" or platform.system() == "Linux"
     ):
         global complete_options

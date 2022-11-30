@@ -29,7 +29,7 @@ class SyntaxHighlighter:
         words = code.split()
         new_code = ""
         word_num = 0
-        tokens = findall("\s+", code)
+        tokens = findall("\\s+", code)
         spaces = [0]
         for token in tokens:
             spaces.append(len(token))
@@ -66,7 +66,8 @@ class SyntaxHighlighter:
 
     @staticmethod
     def _highlight_directory(word):
-        return ShellColours.UNDERLINE + ShellColours.DIR + word + ShellColours.ENDC
+        dir_and_uline = ShellColours.UNDERLINE + ShellColours.DIR
+        return dir_and_uline + word + ShellColours.ENDC
 
     @staticmethod
     def _highlight_flag(word):

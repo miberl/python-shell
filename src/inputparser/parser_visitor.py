@@ -9,18 +9,19 @@ from inputparser.antlr.CommandsLexer import CommandsLexer
 
 class ParseVisitor(CommandsVisitor):
     """
-        NAME
-            ParseVisitor
-        DESCRIPTION
-            Class used to traverse produced parse tree. Used in combination
-            with ParseCommand.
-            Generates set of Instruction objects that can be gotten.
-        METHODS
-            get_instructions()
-                Returns list of instruction objects built from parse tree
-            internal visitor methods
-                Used to traverse tree
+    NAME
+        ParseVisitor
+    DESCRIPTION
+        Class used to traverse produced parse tree. Used in combination
+        with ParseCommand.
+        Generates set of Instruction objects that can be gotten.
+    METHODS
+        get_instructions()
+            Returns list of instruction objects built from parse tree
+        internal visitor methods
+            Used to traverse tree
     """
+
     def __init__(self):
         self.instructions = []
 
@@ -39,40 +40,42 @@ class ParseVisitor(CommandsVisitor):
             self.instructions = self.get_terminal(terminal)
 
     def get_terminal(self, ctx):
-        instructions = ctx.getTypedRuleContexts(CommandsParser.InstructionContext)
+        instructs = ctx.getTypedRuleContexts(CommandsParser.InstructionContext)
         instruction_objs = []
-        for instruction in instructions:
+        for instruction in instructs:
             instruction_objs.append(self.get_instruction(instruction))
 
         return instruction_objs
 
     def get_instruction(self, instruction):
-        commands = instruction.getTypedRuleContexts(CommandsParser.CommandContext)
+        cmds = instruction.getTypedRuleContexts(CommandsParser.CommandContext)
         instr = Instruction()
 
-        for command in commands:
-            instr.add(self.get_command(command))
+        for cmd in cmds:
+            instr.add(self.get_command(cmd))
 
         return instr
 
-    def get_command(self, command: CommandsParser.CommandContext):
-        cmd_args = self.get_command_args(command)
-        cmd = Command(cmd_args[0])
+    def get_command(self, cmd: CommandsParser.CommandContext):
+        cmd_args = self.get_command_args(cmd)
+        command = Command(cmd_args[0])
         for arg in cmd_args[1:]:
-            cmd.add_arg(arg)
+            command.add_arg(arg)
 
-        self.get_command_redirs(cmd, command)
-        return cmd
+        self.get_command_redirs(command, cmd)
+        return command
 
-    def get_command_args(self, command: CommandsParser.CommandContext) -> [str]:
-        args = command.getTypedRuleContexts(CommandsParser.ArgContext)
+    def get_command_args(self, cmd: CommandsParser.CommandContext) -> [str]:
+        args = cmd.getTypedRuleContexts(CommandsParser.ArgContext)
         arg_list = []
         for arg in args:
             arg_text = self.eval_atom(arg)
             arg_list += arg_text
         return arg_list
 
-    def get_command_redirs(self, cmd: Command, command: CommandsParser.CommandContext) -> (str, str):
+    def get_command_redirs(
+        self, cmd: Command, command: CommandsParser.CommandContext
+    ) -> (str, str):
         file_in = command.getChild(0, CommandsParser.Redir_inContext)
         i = 1
         while file_in is not None:
@@ -91,29 +94,36 @@ class ParseVisitor(CommandsVisitor):
     def eval_atom(self, atom_container) -> [str]:
         atom = atom_container.getChild(0, CommandsParser.AtomContext)
         assert atom is not None
-        out = ''
+        out = ""
         needs_glob = False
 
         for child in atom.getChildren():
             if isinstance(child, CommandsParser.SubstitutedContext):
                 out += self.process_substituted(child)
             elif isinstance(child, CommandsParser.GlobbedContext):
-                out += '*'
+                out += "*"
                 needs_glob = True
             elif isinstance(child, CommandsParser.Quoted_textContext):
-                for quote_child in child.children[1:-1]:
-                    if isinstance(quote_child, CommandsParser.SubstitutedContext):
-                        out += self.process_substituted(quote_child)
-                    else:
-                        out += quote_child.symbol.text
+                out = self._eval_quoted_text(child, out)
             else:
-                assert isinstance(child, TerminalNode) and child.symbol.type == CommandsLexer.WORD
+                assert (
+                    isinstance(child, TerminalNode)
+                    and child.symbol.type == CommandsLexer.WORD
+                )
                 out += child.symbol.text
 
         if needs_glob:
             return Globbing().glob(out)
 
         return [out]
+
+    def _eval_quoted_text(self, child, out):
+        for quote_node in child.children[1:-1]:
+            if isinstance(quote_node, CommandsParser.SubstitutedContext):
+                out += self.process_substituted(quote_node)
+            else:
+                out += quote_node.symbol.text
+        return out
 
     def process_substituted(self, child):
         terminal = child.getChild(0, CommandsParser.TerminalContext)
@@ -122,7 +132,7 @@ class ParseVisitor(CommandsVisitor):
 
     @staticmethod
     def eval_substituted(instructions):
-        out = ''
+        out = ""
         for line in EvalInstructions().eval(instructions):
             out += line
-        return out.strip('\n').replace('\n', ' ')
+        return out.strip("\n").replace("\n", " ")

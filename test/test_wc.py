@@ -14,7 +14,9 @@ class TestWc(TestSetup):
 
     def run_test(self, args, expected_output, **kwargs):
         expected_output += ['\n']
-        super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
+        app_mock = "application.Application.read_lines"
+        mock_method = TestSetup.mock_read_lines
+        super().run_test(args, expected_output, app_mock, mock_method)
 
     def test_reads_from_file(self):
         self.run_test(['dir1/file1.txt'],

@@ -53,9 +53,8 @@ class TestCommand(TestCase):
     def test_add_redir_in_and_out(self):
         self.app_only.add_redir_in('file_one.txt')
         self.app_only.add_redir_out('file_two.txt')
-
-        self.assertEqual(self.app_only.get_redirs()
-                         , (['file_one.txt'], ['file_two.txt']))
+        res = (['file_one.txt'], ['file_two.txt'])
+        self.assertEqual(self.app_only.get_redirs(), res)
 
     def test_add_multiple_redir_in(self):
         self.app_only.add_redir_in('file_one.txt')
@@ -85,17 +84,18 @@ class TestInstruction(TestCase):
     def test_empty_if_get_will_throw(self):
         with self.assertRaises(InstructionConstructError) as err:
             self.empty_instruction.get_next_command()
-
-        assert str(err.exception) == 'Error while constructing command after ' \
-                                     'parsing, No command in instruction'
+        exception = 'Error while constructing command after '\
+                    'parsing, No command in instruction'
+        assert str(err.exception) == exception
 
     def test_empty_throw_if_add_bad_obj(self):
         try:
             # noinspection PyTypeChecker
             self.empty_instruction.add('hello')
         except InstructionConstructError as e:
-            assert str(e) == 'Error while constructing command after parsing,' \
-                             ' Expected command when adding to instruction'
+            exception = 'Error while constructing command after parsing,'\
+                ' Expected command when adding to instruction'
+            assert str(e) == exception
 
     def test_add_to_empty_has_next(self):
         self.empty_instruction.add(self.example_command)
@@ -103,7 +103,8 @@ class TestInstruction(TestCase):
 
     def test_add_to_empty_get_next(self):
         self.empty_instruction.add(self.example_command)
-        assert self.example_command == self.empty_instruction.get_next_command()
+        next_command = self.empty_instruction.get_next_command()
+        assert self.example_command == next_command
 
     def test_get_many_commands(self):
         commands = []

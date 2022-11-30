@@ -15,7 +15,8 @@ class TestSetup(unittest.TestCase):
         "dir1": {
             "file1.txt": "AAA\nBBB\nAAA\n",
             "file2.txt": "CCC\n",
-            "cutTest.txt": "Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\nChhattisgarh\n",
+            "cutTest.txt": "Andhra Pradesh\nArunachal Pradesh\nAssam\nBihar\n"
+                           "Chhattisgarh\n",
             "file3.txt": "AAA\nAAA\nBBB\nCCC\nCCC\nCCC\n",
             "file4.txt": "AAA\nAAA\n",
             "longfile.txt": "\n".join([str(i) for i in range(1, 21)]) + "\n",
@@ -46,10 +47,14 @@ class TestSetup(unittest.TestCase):
     def fetch_directory_from_fs(cls, dir_path):
         curr_dir = TestSetup.mock_fs
 
-        file_directories = filter(lambda x: x not in ["", "."], dir_path.split("/"))
+        file_directories = TestSetup._filter(dir_path)
         for path in file_directories:
             curr_dir = curr_dir[path]
         return curr_dir
+
+    @classmethod
+    def _filter(cls, dir_path):
+        return filter(lambda x: x not in ["", "."], dir_path.split("/"))
 
     @classmethod
     def fetch_file_from_fs(cls, file_path):
@@ -112,7 +117,8 @@ class TestSetup(unittest.TestCase):
 
     # Runs a test, patches function with mock return value
     def run_test_patch_return(
-        self, args, expected_output, ref_to_patch, patched_return, unordered=False
+        self, args, expected_output, ref_to_patch,
+            patched_return, unordered=False
     ):
         with patch(ref_to_patch, return_value=patched_return):
             self.code_under_test(args)

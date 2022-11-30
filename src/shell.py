@@ -1,6 +1,5 @@
 import sys
 from collections import deque
-from os import getcwd
 
 from shell_runner.shell_exec import ShellExec
 from syntax_highlighting.eval_apps import SyntaxHighlighter
@@ -28,7 +27,7 @@ class Shell:
         """
         Method used to run shell
 
-        :param argv: Command line arguments, either empty (for REPL) or -c followed by a command string
+        :param argv: arguments either empty or -c followed by a command string
         :return: Returns Noting, prints results
         """
         args_num = len(argv) - 1

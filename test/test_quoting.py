@@ -13,23 +13,22 @@ class TestQuoting(unittest.TestCase):
         assert cmd.get_args() == args
 
     def test_single_quote_arg(self):
-        self.run_test('echo \'hello\'', 'echo', ['hello'])
+        self.run_test("echo 'hello'", "echo", ["hello"])
 
     def test_double_quote_arg(self):
-        self.run_test('echo \"hello\"', 'echo', ['hello'])
+        self.run_test('echo "hello"', "echo", ["hello"])
 
     def test_quote_app(self):
-        self.run_test('"echo"', 'echo', [])
+        self.run_test('"echo"', "echo", [])
 
     def test_quote_with_quote_inside(self):
-        self.run_test('"echo\'\'"', 'echo\'\'', [])
+        self.run_test("\"echo''\"", "echo''", [])
 
     def test_quote_with_before(self):
-        self.run_test('ec"ho"', 'echo', [])
+        self.run_test('ec"ho"', "echo", [])
 
     def test_quote_with_asterisk(self):
-        self.run_test('"ec*ho"', 'ec*ho', [])
+        self.run_test('"ec*ho"', "ec*ho", [])
 
     def test_quote_with_command_substitution(self):
-        self.run_test('echo "echo `echo hello`"', 'echo', ['echo hello'])
-
+        self.run_test('echo "echo `echo hello`"', "echo", ["echo hello"])

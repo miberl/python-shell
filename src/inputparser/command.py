@@ -103,7 +103,7 @@ class Instruction:
 
     def get_next_command(self) -> Command:
         """
-        Gets the next command in the internal list and removes it from that list
+        Gets the next command in the internal list and removes it
 
         :return: Command object, removed from list
         :raises InstructionConstructError: If internal command list is empty
