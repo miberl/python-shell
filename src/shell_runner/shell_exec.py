@@ -11,14 +11,15 @@ class ShellExec:
     NAME
         ShellExec
     DESCRIPTION
-        Runs parser on provided command string and calls evaluation methods on generated objects
+        Runs parser on provided cli and evaluates generated objects
     METHODS
         ShellExec().run_instructions(cmdline)
-        Takes a cli string and runs the parser on them, calls evaluation methods to get a result
+        Takes a cli and runs the parser on it, calls evaluation methods
     """
+
     def run_instructions(self, cmdline: str):
         """
-        Takes a cli string and runs the parser on them, calls evaluation methods to get a result
+        Takes a cli string and runs the parser, calls evaluation methods
 
         :param cmdline: Command line as a string (eg. 'ls -a dir1/')
         :return: type(deque) - Result of evaluation of command line objects
