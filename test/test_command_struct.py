@@ -85,7 +85,7 @@ class TestInstruction(TestCase):
         with self.assertRaises(InstructionConstructError) as err:
             self.empty_instruction.get_next_command()
         exception = 'Error while constructing command after '\
-                    'parsing, No more commands to get'
+                    'parsing, No command in instruction'
         assert str(err.exception) == exception
 
     def test_empty_throw_if_add_bad_obj(self):
@@ -93,7 +93,7 @@ class TestInstruction(TestCase):
             # noinspection PyTypeChecker
             self.empty_instruction.add('hello')
         except InstructionConstructError as e:
-            exception = 'Error while constructing command after '\
+            exception = 'Error while constructing command after parsing,'\
                 ' Expected command when adding to instruction'
             assert str(e) == exception
 
