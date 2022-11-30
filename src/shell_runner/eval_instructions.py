@@ -26,11 +26,15 @@ class EvalInstructions:
     """
     NAME
         EvalInstructions
+
     DESCRIPTION
-        Takes a list of instructions and returns the string that those instructions evaluate to.
+        Takes a list of instructions and returns the string that those
+        instructions evaluate to.
+
     METHODS
         EvalInstructions.eval()
-            Evaluates each of the provided instructions and returns a deque() object
+            Evaluates each of the provided instructions and returns a deque()
+            object
     """
 
     def __init__(self):

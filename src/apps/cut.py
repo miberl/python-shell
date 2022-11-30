@@ -72,17 +72,26 @@ class Cut(Application):
         change_made = True
 
         while change_made:
-            new_ranges_list = list(new_ranges)
+            nr_list = list(new_ranges)
             change_made = False
-            for i, r_1 in enumerate(new_ranges_list):
-                for r_2 in new_ranges_list[i + 1:]:
-                    if (r_1[0] <= r_2[1] and r_1[1] >= r_2[0]) or (r_1[1] <= r_2[0] and r_1[0] >= r_2[1]):
-                        change_made = True
-                        new_ranges.remove(r_1)
-                        new_ranges.remove(r_2)
-                        new_ranges.add((min(r_1[0], r_2[0]), min(r_1[1], r_2[1])))
+            change_made = self._for_all_r(change_made, new_ranges, nr_list)
 
         return sorted(list(new_ranges))
+
+    def _for_all_r(self, made, new_ranges, new_ranges_list):
+        for i, r_1 in enumerate(new_ranges_list):
+            for r_2 in new_ranges_list[i + 1:]:
+                made = self._update_new_ranges(made, new_ranges, r_1, r_2)
+        return made
+
+    def _update_new_ranges(self, change_made, new_ranges, r_1, r_2):
+        if (r_1[0] <= r_2[1] and r_1[1] >= r_2[0]) or (
+                r_1[1] <= r_2[0] and r_1[0] >= r_2[1]):
+            change_made = True
+            new_ranges.remove(r_1)
+            new_ranges.remove(r_2)
+            new_ranges.add((min(r_1[0], r_2[0]), min(r_1[1], r_2[1])))
+        return change_made
 
     @staticmethod
     def to_int_ranges(ranges):

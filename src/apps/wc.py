@@ -60,10 +60,12 @@ class Wc(Application):
         output = []
 
         for file, file_name in self.files:
-            output.append(self._produce_output_for(file, file_name, total, options))
+            out = self._produce_output_for(file, file_name, total, options)
+            output.append(out)
 
         if len(self.files) > 1:
-            output.append(self._produce_output_for(total, "total", total, options))
+            out = self._produce_output_for(total, "total", total, options)
+            output.append(out)
 
         output.append("\n")
         return output

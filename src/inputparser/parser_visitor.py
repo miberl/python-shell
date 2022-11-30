@@ -104,7 +104,7 @@ class ParseVisitor(CommandsVisitor):
                 out += "*"
                 needs_glob = True
             elif isinstance(child, CommandsParser.Quoted_textContext):
-                self._eval_quoted_text(child, out)
+                out = self._eval_quoted_text(child, out)
             else:
                 assert (
                     isinstance(child, TerminalNode)
@@ -123,6 +123,7 @@ class ParseVisitor(CommandsVisitor):
                 out += self.process_substituted(quote_node)
             else:
                 out += quote_node.symbol.text
+        return out
 
     def process_substituted(self, child):
         terminal = child.getChild(0, CommandsParser.TerminalContext)

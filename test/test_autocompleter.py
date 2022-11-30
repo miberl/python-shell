@@ -61,7 +61,7 @@ class TestAutocompleter(unittest.TestCase):
 
     def test_complete_options_5(self):
         self.run_test(
-            "cd ./file2", ["file2.txt"], 
+            "cd ./file2", ["file2.txt"],
             ["file1.txt", "file2.txt", "file3.txt"],
             False
         )

@@ -74,7 +74,7 @@ class TestParserObjectConstruction(TestCase):
     def test_command_flag_with_args(self):
         command = self.run_single_command("ls -a hello -b there you")
         args = ["-a", "hello", "-b", "there", "you"]
-        self.make_assertions(command, args)
+        self.make_assertions(command, args=args)
 
     def test_file_redir_in(self):
         command = self.run_single_command("ls < hello.txt")
