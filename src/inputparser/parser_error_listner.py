@@ -12,11 +12,11 @@ class ParserErrorListener(ErrorListener):
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
         raise InvalidSyntaxError(msg)
 
-    def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
+    def reportAmbiguity(self, *kwargs):
         return
 
-    def reportAttemptingFullContext(self, recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs):
+    def reportAttemptingFullContext(self, *kwargs):
         return
 
-    def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
+    def reportContextSensitivity(self, *kwargs):
         return

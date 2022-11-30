@@ -160,19 +160,20 @@ class TestParser(unittest.TestCase):
     def test_one_flag_many_arg(self):
         self.run_test(
                       "cmd -a one two three",
-                      "instruction(command(arg(atom())arg(atom())arg(atom())arg"
-                      "(atom())arg(atom())))")
+                      "instruction(command(arg(atom())arg(atom())arg"
+                      "(atom())arg(atom())arg(atom())))")
 
     def test_two_flag_no_arg(self):
         self.run_test("cmd -a -b",
-                      "instruction(command(arg(atom())arg(atom())arg(atom())))")
+                      "instruction(command(arg(atom())arg(atom())"
+                      "arg(atom())))")
 
     def test_can_use_double_dash(self):
         self.run_test("cmd --hello-there", "instruction(command(arg(atom())arg"
                                            "(atom())))")
 
     def test_redir_at_front(self):
-        self.run_test("< file.txt cmd", 
+        self.run_test("< file.txt cmd",
                       "instruction(command(file_in(atom())arg"
                       "(atom())))")
 
