@@ -27,7 +27,7 @@ class Shell:
         """
         Method used to run shell
 
-        :param argv: CL arguments either empty or -c followed by a command string
+        :param argv: arguments either empty or -c followed by a command string
         :return: Returns Noting, prints results
         """
         args_num = len(argv) - 1

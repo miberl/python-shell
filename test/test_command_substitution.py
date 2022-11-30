@@ -32,4 +32,3 @@ class TestCommandSubstitution(unittest.TestCase):
             self.run_test('`nonsense`', 'echo', [])
 
         assert 'unsupported application nonsense' in str(err.exception)
-

@@ -9,4 +9,6 @@ class TestInvalidSyntax(TestSetup):
         try:
             raise InstructionConstructError("Bad Symbol with pipe")
         except InstructionConstructError as e:
-            self.assertEqual(str(e), "Error while constructing command after parsing, Bad Symbol with pipe")
+            msg = "Error while constructing command after parsing"
+            arg = "Bad Symbol with pipe"
+            assert msg in str(e) and arg in str(e)

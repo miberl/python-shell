@@ -9,11 +9,11 @@ class Find(Application):
         self.options = {"-name": 1}
 
     def run(self, args, inpt, out) -> None:
-        command_args, options = self.parse_args(args)
+        command_args, opts = self.parse_args(args)
 
         directory = command_args[0] if len(command_args) > 0 else "."
         file_name_pattern = (
-            options.get("-name")[0] if options.get("-name") is not None else None
+            opts.get("-name")[0] if opts.get("-name") is not None else None
         )
 
         self.find(directory, file_name_pattern, out)
