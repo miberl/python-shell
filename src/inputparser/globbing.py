@@ -13,7 +13,7 @@ class Globbing:
 
     def glob(self, pattern: str) -> [str]:
         """
-        Returns a list of the files/directories that match the provided pattern from the pwd.
+        Returns a list of files/directories matching the pattern from pwd.
 
         :param pattern: String, including *, to be matched
         :return: String list of matches
@@ -55,10 +55,12 @@ class Globbing:
             return False
 
         if pattern[0] == '*':
-            return self._match(pattern[1:], string, i) or self._match(pattern, string, i + 1) \
-                   or self._match(pattern[1:], string, i + 1)
+            return self._match(pattern[1:], string, i) or \
+                   self._match(pattern, string, i + 1) or \
+                   self._match(pattern[1:], string, i + 1)
         else:
-            return string[i] == pattern[0] and self._match(pattern[1:], string, i + 1)
+            return string[i] == pattern[0] and \
+                   self._match(pattern[1:], string, i + 1)
 
     @staticmethod
     def _set_start_top(loc_patt: [str]) -> (str, str):
@@ -73,7 +75,9 @@ class Globbing:
         matches = []
 
         for top in self.poss_tops:
-            for file in Application.get_dir_contents(top)[1] + Application.get_dir_contents(top)[2]:
+            files1 = Application.get_dir_contents(top)[1]
+            files2 = Application.get_dir_contents(top)[2]
+            for file in files1+files2:
                 if self._match(file_patt, file) and file[0] != '.':
                     if top[0:2] == './':
                         matches.append(top[2:] + file)
