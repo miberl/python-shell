@@ -8,9 +8,9 @@ class TestAutocompleter(unittest.TestCase):
     def run_test(code, expected_options, file_system, isDir_side_effect):
         with mock.patch("os.listdir") as mocked_listdir:
             with mock.patch("os.path.isdir") as mocked_isdir:
-                with mock.patch("readline.get_line_buffer") as mocked_get_line_buffer:
+                with mock.patch("readline.get_line_buffer") as mocked_get_line:
                     mocked_listdir.return_value = file_system
-                    mocked_get_line_buffer.return_value = code
+                    mocked_get_line.return_value = code
                     mocked_isdir.return_value = isDir_side_effect
                     options = []
                     for i in range(len(expected_options)):
@@ -61,7 +61,9 @@ class TestAutocompleter(unittest.TestCase):
 
     def test_complete_options_5(self):
         self.run_test(
-            "cd ./file2", ["file2.txt"], ["file1.txt", "file2.txt", "file3.txt"], False
+            "cd ./file2", ["file2.txt"], 
+            ["file1.txt", "file2.txt", "file3.txt"],
+            False
         )
 
     def test_complete_options_4(self):

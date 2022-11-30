@@ -12,7 +12,7 @@ class ParseCommands:
         Parses a string and processes it using a listener object.
 
         :param cmd: String to be parsed
-        :param listener: Listener object that listens to the produced parse tree
+        :param listener: Listener - listens to the produced parse tree
         :return: None
         """
         tree = self._get_tree(cmd)
@@ -24,7 +24,7 @@ class ParseCommands:
         Parses a string and processes it using a visitor object.
 
         :param cmd: String to be parsed
-        :param visitor: Listener object that visits nodes in the produced parse tree
+        :param visitor: Listener - visits nodes in the produced parse tree
         :return: None
         """
         tree = self._get_tree(cmd)
