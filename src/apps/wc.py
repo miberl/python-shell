@@ -1,5 +1,3 @@
-from collections import deque
-
 from application import Application
 
 
@@ -12,7 +10,7 @@ class WordObject:
 
     @staticmethod
     def _get_lc(inpt: str) -> int:
-        return inpt.count('\n')
+        return inpt.count("\n")
 
     @staticmethod
     def _get_wc(inpt: str) -> int:
@@ -23,7 +21,7 @@ class WordObject:
 
     @staticmethod
     def _get_bc(inpt: str) -> int:
-        return len(inpt.encode('utf-8'))
+        return len(inpt.encode("utf-8"))
 
     @staticmethod
     def _get_cc(inpt: str) -> int:
@@ -33,12 +31,7 @@ class WordObject:
 class Wc(Application):
     def __init__(self):
         super().__init__()
-        self.options = {
-            '-w': 0,
-            '-l': 0,
-            '-m': 0,
-            '-c': 0
-        }
+        self.options = {"-w": 0, "-l": 0, "-m": 0, "-c": 0}
         self.files = []
 
     def run(self, args, inpt, out):
@@ -56,7 +49,7 @@ class Wc(Application):
             self._process_file(inpt)
 
     def _process_file(self, inpt, file_name=None):
-        concated_input = ''
+        concated_input = ""
         for line in inpt:
             concated_input += line
         file = WordObject(concated_input)
@@ -70,30 +63,35 @@ class Wc(Application):
             output.append(self._produce_output_for(file, file_name, total, options))
 
         if len(self.files) > 1:
-            output.append(self._produce_output_for(total, 'total', total, options))
+            output.append(self._produce_output_for(total, "total", total, options))
 
-        output.append('\n')
+        output.append("\n")
         return output
 
     def _produce_output_for(self, file: WordObject, file_name, total, options):
-        output = ''
-        if len(options) == 0 or options.get('-l') is not None:
-            output += f'    {self._space_offset(file.line_count, total.line_count)}{file.line_count}'
-        if len(options) == 0 or options.get('-w') is not None:
-            output += f'    {self._space_offset(file.word_count, total.word_count)}{file.word_count}'
-        if len(options) == 0 or options.get('-m') is not None:
-            output += f'    {self._space_offset(file.byte_count, total.byte_count)}{file.byte_count}'
-        if options.get('-c') is not None:
-            output += f'    {self._space_offset(file.char_count, total.char_count)}{file.char_count}'
+        output = ""
+        no_options = len(options) == 0
+        if no_options or options.get("-l") is not None:
+            offset = self._space_offset(file.line_count, total.line_count)
+            output += f"    {offset}{file.line_count}"
+        if no_options or options.get("-w") is not None:
+            offset = self._space_offset(file.word_count, total.word_count)
+            output += f"    {offset}{file.word_count}"
+        if no_options or options.get("-m") is not None:
+            offset = self._space_offset(file.byte_count, total.byte_count)
+            output += f"    {offset}{file.byte_count}"
+        if options.get("-c") is not None:
+            offset = self._space_offset(file.char_count, total.char_count)
+            output += f"    {offset}{file.char_count}"
         if file_name is not None:
-            output += f' {file_name}'
-        return output + '\n'
+            output += f" {file_name}"
+        return output + "\n"
 
     def _space_offset(self, file: int, total: int):
         return " " * (len(str(total)) - len(str(file)))
 
     def _get_total(self):
-        total = WordObject('')
+        total = WordObject("")
         for file, _ in self.files:
             self.update_total(file, total)
         return total

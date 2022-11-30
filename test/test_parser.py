@@ -158,7 +158,8 @@ class TestParser(unittest.TestCase):
                       "instruction(command(arg(atom())arg(atom())arg(atom())))")
 
     def test_one_flag_many_arg(self):
-        self.run_test("cmd -a one two three",
+        self.run_test(
+                      "cmd -a one two three",
                       "instruction(command(arg(atom())arg(atom())arg(atom())arg"
                       "(atom())arg(atom())))")
 

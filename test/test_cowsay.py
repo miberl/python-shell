@@ -4,9 +4,9 @@ from setup_test import TestSetup
 from apps.cowsay import Cowsay
 
 COW = [
-    "        \   ^__^\n",
-    "         \  (oo)\_______\n",
-    "            (__)\       )\/\\\n",
+    "        \\   ^__^\n",
+    "         \\  (oo)\\_______\n",
+    "            (__)\\       )\\/\\\n",
     "                ||----w |\n",
     "                ||     ||\n",
 ]
@@ -23,8 +23,8 @@ class TestCowsay(TestSetup):
         self.run_test(["hello"], bubble + COW)
 
     def test_cowsay_single_word_wrapping(self):
-        MAX_LINE_LENGTH = 39
-        very_long_string = "a" * MAX_LINE_LENGTH * 3
+        MAX_LINE_LEN = 39
+        very_long_string = "a" * MAX_LINE_LEN * 3
         bubble = [
             f" {'-'*41}\n",
             f"/ {'a'*39} \\\n",
@@ -40,7 +40,7 @@ class TestCowsay(TestSetup):
         bubble = [
             f" {'-'*32}\n",
             f"/ {'a'*20}{' '*10} \\\n",
-            f"\ {'b'*30} /\n",
+            f"\\ {'b'*30} /\n",
             f" {'-'*32}\n",
         ]
         self.run_test([first_word, second_word], bubble + COW)
