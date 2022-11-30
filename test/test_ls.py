@@ -27,16 +27,16 @@ class TestLs(TestSetup):
 
     def test_ls_directory(self):
         return_value = ["longfile.txt", "file1.txt", "file2.txt", "subdir"]
-        expected_output = ["longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"]
+        expected = ["longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"]
         self.run_test_patch_return(
-            ["dir1"], expected_output, "apps.ls.listdir", return_value, True
+            ["dir1"], expected, "apps.ls.listdir", return_value, True
         )
 
     def test_ls_directory_with_hidden(self):
-        return_value = ["longfile.txt", "file1.txt", "file2.txt", "subdir", ".hidden"]
-        expected_output = ["longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"]
+        ret = ["longfile.txt", "file1.txt", "file2.txt", "subdir", ".hidden"]
+        exp = ["longfile.txt\n", "file2.txt\n", "file1.txt\n", "subdir\n"]
         self.run_test_patch_return(
-            ["dir1"], expected_output, "apps.ls.listdir", return_value, True
+            ["dir1"], exp, "apps.ls.listdir", ret, True
         )
 
     def test_ls_subdirectory(self):

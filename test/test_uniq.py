@@ -13,7 +13,9 @@ class TestUniq(TestSetup):
         self.app = Uniq()
 
     def run_test(self, args, expected_output, **kwargs):
-        super().run_test(args, expected_output, "application.Application.read_lines", TestSetup.mock_read_lines)
+        app_to_mock = "application.Application.read_lines"
+        mock_func = TestSetup.mock_read_lines
+        super().run_test(args, expected_output, app_to_mock, mock_func)
 
     def test_uniq(self):
         self.run_test(["test.txt"], ["''\n"])
@@ -23,7 +25,6 @@ class TestUniq(TestSetup):
 
     def test_uniq_3(self):
         self.run_test(["dir1/file2.txt"], ["CCC\n"])
-    
 
     def test_uniq_repeated(self):
         self.run_test(["dir1/file3.txt"], ["AAA\n", "BBB\n", "CCC\n"])
