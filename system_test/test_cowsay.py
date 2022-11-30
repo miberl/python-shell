@@ -1,11 +1,11 @@
 from setup_test import TestSetup
 
 COW = [
-    "        \\   ^__^\n",
-    "         \\  (oo)\\_______\n",
-    "            (__)\\       )\\/\\\n",
-    "                ||----w |\n",
-    "                ||     ||\n",
+    "        \   ^__^",
+    "         \  (oo)\_______",
+    "            (__)\       )\/\\",
+    "                ||----w |",
+    "                ||     ||",
 ]
 
 
@@ -17,8 +17,8 @@ class TestCowsay(TestSetup):
         self.run_test("cowsay hello", bubble + COW)
 
     def test_cowsay_single_word_wrapping(self):
-        MAX_LINE_LEN = 39
-        very_long_string = "a" * MAX_LINE_LEN * 3
+        MAX_LINE_LENGTH = 39
+        very_long_string = "a" * MAX_LINE_LENGTH * 3
         bubble = [
             f" {'-'*41}",
             f"/ {'a'*39} \\",
